@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Exams</string>
+    <string name="welcomeText">Приветствуем на экзаменах!</string>
+    <string name="startButtonText">Приступить!</string>
+
+    <string name="loginText">Логин</string>
+    <string name="passwordText">Пароль</string>
+    <string name="loginButtonText">Войти</string>
+    <string name="createAccount">Еще нет аккаунта?</string>
+    <string name="registerButton">Создать</string>
+</resources>
