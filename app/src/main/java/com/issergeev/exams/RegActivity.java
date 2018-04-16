@@ -1,19 +1,22 @@
 package com.issergeev.exams;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.method.KeyListener;
+import android.support.v7.view.ActionMode;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-public class RegActivity extends AppCompatActivity {
+public class RegActivity extends AppCompatActivity implements View.OnLongClickListener {
     final int animationDuration = 2000;
     boolean isDeleted = false;
 
@@ -21,6 +24,7 @@ public class RegActivity extends AppCompatActivity {
     Button createButton;
 
     DisplayMetrics metrics;
+    TextMask mask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +34,11 @@ public class RegActivity extends AppCompatActivity {
         metrics = getResources().getDisplayMetrics();
 
         SIDInput = (EditText) findViewById(R.id.SIDInput);
+        SIDInput.setOnLongClickListener(this);
         loginInput = (EditText) findViewById(R.id.loginInput);
+        loginInput.setOnLongClickListener(this);
         passwordInput = (EditText) findViewById(R.id.passwordInput);
+        passwordInput.setOnLongClickListener(this);
         createButton = (Button) findViewById(R.id.regButton);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,5 +66,15 @@ public class RegActivity extends AppCompatActivity {
                 }).start();
             }
         });
+
+        mask = new TextMask(SIDInput, "###-##/##");
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(SIDInput.getWindowToken(), 0);
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        Toast.makeText(this, "LongClick", Toast.LENGTH_SHORT).show();
+        return true;
     }
 }
