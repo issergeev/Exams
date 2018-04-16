@@ -9,4 +9,6 @@
     <string name="loginButtonText">Войти</string>
     <string name="createAccount">Еще нет аккаунта?</string>
     <string name="registerButton">Создать</string>
+    <string name="IDNumber">Номер студенческого билета</string>
+    <string name="regButtonText">Создать аккаунт</string>
 </resources>

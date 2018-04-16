@@ -8,4 +8,6 @@
     <string name="loginButtonText">Log In</string>
     <string name="createAccount">Do not have account?</string>
     <string name="registerButton">Create</string>
+    <string name="IDNumber">Student ID</string>
+    <string name="regButtonText">Create an account</string>
 </resources>
