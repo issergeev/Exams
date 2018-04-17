@@ -1,8 +1,12 @@
 package com.issergeev.exams;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -13,14 +17,29 @@ import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
     final int animationDuration = 2000;
+    static final String dataPrefsName = "Data";
     String[] data = new String[] {"", ""};
+    String loginText = "", passwordText = "";
 
     Listener listener = new Listener();
 
     Button createButton, loginButton;
-    EditText login, password;
+    EditText login;
+    TextInputEditText password;
     DisplayMetrics metrics;
     Intent dataIntent;
+    static SharedPreferences examsData;
+    static SharedPreferences.Editor editor;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        loginText = examsData.getString("Login", "Login");
+        passwordText = examsData.getString("Password", "Password");
+        login.setText(loginText);
+        password.setText(passwordText);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,13 +48,15 @@ public class LoginActivity extends AppCompatActivity {
 
         metrics = getResources().getDisplayMetrics();
         dataIntent = getIntent();
+        examsData = getApplicationContext().getSharedPreferences(dataPrefsName, Context.MODE_PRIVATE);
+        editor = examsData.edit();
 
         createButton = (Button) findViewById(R.id.createButton);
         createButton.setOnClickListener(listener);
         loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(listener);
         login = (EditText) findViewById(R.id.login);
-        password = (EditText) findViewById(R.id.password);
+        password = (TextInputEditText) findViewById(R.id.password);
 
         if (dataIntent.hasExtra("LoginData")) {
             dataIntent = getIntent();
@@ -75,5 +96,17 @@ public class LoginActivity extends AppCompatActivity {
                      }).start();
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        loginText = login.getText().toString();
+        passwordText = password.getText().toString();
+
+        editor.putString("Login", loginText);
+        editor.putString("Password", passwordText);
+        editor.apply();
     }
 }

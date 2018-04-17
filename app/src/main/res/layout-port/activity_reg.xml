@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".RegActivity"
     android:background="@color/colorMain">
 
@@ -17,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/loginInput"
-            android:gravity="center"
+            android:gravity="start"
             android:hint="@string/IDNumber"
             android:inputType="numberDecimal"
             android:maxLength="9"/>
@@ -27,25 +28,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:gravity="center"
+            android:gravity="start"
             android:hint="@string/loginText"
             android:inputType="text"/>
 
-        <EditText
-            android:id="@+id/passwordInput"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/passwordContainrt_RA_Port"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/loginInput"
+            android:layout_below="@id/loginInput"
             android:gravity="center"
-            android:hint="@string/passwordText"
-            android:inputType="textPassword"/>
+            android:layout_marginBottom="@dimen/buttonBottomMargin"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleDrawable="@android:drawable/ic_lock_lock">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/passwordInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="@string/passwordText"
+                android:gravity="start"/>
+
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/regButton"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/buttonBottomMargin"
+            android:layout_margin="@dimen/buttonBottomMargin"
             android:text="@string/regButtonText"
             android:textStyle="italic"
             android:textSize="@dimen/textSize"

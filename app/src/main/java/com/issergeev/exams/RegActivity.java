@@ -2,22 +2,21 @@ package com.issergeev.exams;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.ActionMode;
 import android.util.DisplayMetrics;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class RegActivity extends AppCompatActivity implements View.OnLongClickListener {
     final int animationDuration = 2000;
+    String loginText = "", passwordText = "";
     boolean isDeleted = false;
 
     EditText SIDInput, loginInput, passwordInput;
@@ -25,6 +24,19 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
 
     DisplayMetrics metrics;
     TextMask mask;
+    Animation shakeAnimation;
+    SharedPreferences examsData = LoginActivity.examsData;
+    SharedPreferences.Editor editor = LoginActivity.editor;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        loginText = examsData.getString("Login", "Login");
+        passwordText = examsData.getString("Password", "Password");
+        loginInput.setText(loginText);
+        passwordInput.setText(passwordText);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +82,25 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         mask = new TextMask(SIDInput, "###-##/##");
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(SIDInput.getWindowToken(), 0);
+
+        shakeAnimation = AnimationUtils.loadAnimation(this, R.anim.forbid_anim);
     }
 
     @Override
     public boolean onLongClick(View view) {
-        Toast.makeText(this, "LongClick", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "LongClick", Toast.LENGTH_SHORT).show();
+        view.startAnimation(shakeAnimation);
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        loginText = loginInput.getText().toString();
+        passwordText = passwordInput.getText().toString();
+
+        editor.putString("Login", loginText);
+        editor.putString("Password", passwordText);
     }
 }
