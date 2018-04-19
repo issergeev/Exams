@@ -11,8 +11,8 @@ public class TextMask implements View.OnKeyListener, TextWatcher {
     EditText text;
     String mask;
 
-    int length;
-    boolean isDeletePressed = false;
+    private int length;
+    private boolean isDeletePressed = false;
 
     public TextMask(EditText text, String mask) {
         this.text = text;

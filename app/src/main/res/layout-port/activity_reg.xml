@@ -61,6 +61,7 @@
             android:text="@string/regButtonText"
             android:textStyle="italic"
             android:textSize="@dimen/textSize"
+            android:foreground="@drawable/ripple_effect"
             android:background="@drawable/button_shape_standart"/>
 
     </RelativeLayout>

@@ -12,7 +12,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 
 public class WelcomeActivity extends AppCompatActivity {
-    final int animationDuration = 2000;
+    final int ANIMATION_DURATION = 2000;
 
     DisplayMetrics metrics;
     Handler handler;
@@ -31,19 +31,18 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Animation anim = new ScaleAnimation(
-                        1f, metrics.xdpi / 2, // Start and end values for the X axis scaling
-                        1f, metrics.ydpi / 2, // Start and end values for the Y axis scaling
-                        Animation.RELATIVE_TO_SELF, 0.5f, // Pivot point of X scaling
-                        Animation.RELATIVE_TO_SELF, 0.5f); // Pivot point of Y scaling
-                anim.setFillAfter(false); // Needed to keep the result of the animation
-                anim.setDuration(animationDuration);
-                //startButton.startAnimation(anim);
+                        1f, metrics.xdpi / 2,
+                        1f, metrics.ydpi / 2,
+                        Animation.RELATIVE_TO_SELF, 0.5f,
+                        Animation.RELATIVE_TO_SELF, 0.5f);
+                anim.setFillAfter(false);
+                anim.setDuration(ANIMATION_DURATION);
 
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            Thread.sleep(animationDuration-300);
+                            Thread.sleep(ANIMATION_DURATION -300);
                             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                         } catch (InterruptedException e) {
                             e.printStackTrace();

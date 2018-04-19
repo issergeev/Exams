@@ -49,6 +49,7 @@
             android:text="@string/loginButtonText"
             android:textSize="@dimen/textSize"
             android:textStyle="italic"
+            android:foreground="@drawable/ripple_effect"
             android:background="@drawable/button_shape_standart"/>
 
         <LinearLayout

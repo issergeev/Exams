@@ -1,9 +1,12 @@
 package com.issergeev.exams;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.inputmethodservice.KeyboardView;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -16,12 +19,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
-    final int animationDuration = 2000;
-    static final String dataPrefsName = "Data";
-    String[] data = new String[] {"", ""};
+    final int ANIMATION_DURATION = 2000;
+    static final String DATA_PREFS_NAME = "Data";
+    private String[] data = new String[] {"", ""};
     String loginText = "", passwordText = "";
 
-    Listener listener = new Listener();
+    Listener listener;
 
     Button createButton, loginButton;
     EditText login;
@@ -46,9 +49,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        listener = new Listener();
+
         metrics = getResources().getDisplayMetrics();
         dataIntent = getIntent();
-        examsData = getApplicationContext().getSharedPreferences(dataPrefsName, Context.MODE_PRIVATE);
+        examsData = getApplicationContext().getSharedPreferences(DATA_PREFS_NAME, Context.MODE_PRIVATE);
         editor = examsData.edit();
 
         createButton = (Button) findViewById(R.id.createButton);
@@ -80,14 +85,14 @@ public class LoginActivity extends AppCompatActivity {
                              Animation.RELATIVE_TO_SELF, 0.5f, // Pivot point of X scaling
                              Animation.RELATIVE_TO_SELF, 0.5f); // Pivot point of Y scaling
                      anim.setFillAfter(false); // Needed to keep the result of the animation
-                     anim.setDuration(animationDuration);
+                     anim.setDuration(ANIMATION_DURATION);
                      //startButton.startAnimation(anim);
 
                      new Thread(new Runnable() {
                          @Override
                          public void run() {
                              try {
-                                 Thread.sleep(animationDuration-300);
+                                 Thread.sleep(ANIMATION_DURATION -300);
                                  startActivity(new Intent(getApplicationContext(), RegActivity.class));
                              } catch (InterruptedException e) {
                                  e.printStackTrace();
