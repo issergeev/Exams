@@ -3,6 +3,8 @@
     <string name="welcomeText">Welcome to Exams!</string>
     <string name="startButtonText">Get started!</string>
 
+    <string name="unknownError">An unknown error occurred!</string>
+
     <string name="loginText">Login</string>
     <string name="passwordText">Password</string>
     <string name="loginButtonText">Log In</string>

@@ -1,5 +1,6 @@
 package com.issergeev.exams;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.view.animation.ScaleAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class RegActivity extends AppCompatActivity implements View.OnLongClickListener {
     final int ANIMATION_DURATION = 2000;
@@ -21,6 +23,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
     EditText SIDInput, loginInput, passwordInput;
     Button createButton;
 
+    InputMethodManager imm;
     DisplayMetrics metrics;
     TextMask mask;
     Animation shakeAnimation;
@@ -78,8 +81,13 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         });
 
         mask = new TextMask(SIDInput, "###-##/##");
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(SIDInput.getWindowToken(), 0);
+        try {
+            imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(SIDInput.getWindowToken(), 0);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            Toast.makeText(this, R.string.unknownError, Toast.LENGTH_SHORT).show();
+        }
 
         shakeAnimation = AnimationUtils.loadAnimation(this, R.anim.forbid_anim);
     }

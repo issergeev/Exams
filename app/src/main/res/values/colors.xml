@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#ffa347</color>
     <color name="colorPrimaryDark">#ffa347</color>
+    <color name="ic_launcher_background">#A6754B</color>
     <color name="colorMain">#ffbe7e</color>
     <color name="colorRipple">#ff8005</color>
     <color name="colorAccent">#ff7f00</color>
