@@ -10,6 +10,14 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/buttonBottomMargin">
 
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/helloText"
+            android:foregroundGravity="center"
+            android:src="@drawable/main_theme_background"/>
+
         <TextView
             android:id="@+id/helloText"
             android:layout_width="match_parent"

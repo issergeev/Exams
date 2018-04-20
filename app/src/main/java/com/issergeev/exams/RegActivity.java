@@ -10,6 +10,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.Interpolator;
 import android.view.animation.ScaleAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -34,10 +35,17 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
     protected void onResume() {
         super.onResume();
 
-        loginText = examsData.getString("Login", "Login");
-        passwordText = examsData.getString("Password", "Password");
+        loginText = examsData.getString("Login", "");
+        passwordText = examsData.getString("Password", "");
         loginInput.setText(loginText);
         passwordInput.setText(passwordText);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        overridePendingTransition(R.anim.reversed_activity_appear_anim, R.anim.reversed_activity_diapear_anim);
     }
 
     @Override
