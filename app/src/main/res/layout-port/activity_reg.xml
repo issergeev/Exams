@@ -13,6 +13,13 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/buttonBottomMargin">
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+
         <ImageView
             android:id="@+id/logo"
             android:layout_width="match_parent"

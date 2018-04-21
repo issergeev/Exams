@@ -5,6 +5,7 @@
     <string name="startButtonText">Приступить!</string>
 
     <string name="unknownError">Произошла неизвестная ошибка!</string>
+    <string name="networkError">Невозможно выполнить ваш запрос. Произошла неизвестная сетевая ошибка</string>
 
     <string name="loginText">Логин</string>
     <string name="passwordText">Пароль</string>

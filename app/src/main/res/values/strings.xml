@@ -4,6 +4,7 @@
     <string name="startButtonText">Get started!</string>
 
     <string name="unknownError">An unknown error occurred!</string>
+    <string name="networkError">Unable to execute your query. An unknown network error occurred</string>
 
     <string name="loginText">Login</string>
     <string name="passwordText">Password</string>

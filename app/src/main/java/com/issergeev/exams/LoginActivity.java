@@ -7,23 +7,19 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
     static final String DATA_PREFS_NAME = "Data";
-    private String[] data = new String[] {"", ""};
-    String loginText = "", passwordText = "";
+    private String loginText = "", passwordText = "";
 
     Listener listener;
 
     Button createButton, loginButton;
     EditText login;
     TextInputEditText password;
-    DisplayMetrics metrics;
-    Intent dataIntent;
     static SharedPreferences examsData;
     static SharedPreferences.Editor editor;
 
@@ -44,8 +40,6 @@ public class LoginActivity extends AppCompatActivity {
 
         listener = new Listener();
 
-        metrics = getResources().getDisplayMetrics();
-        dataIntent = getIntent();
         examsData = getApplicationContext().getSharedPreferences(DATA_PREFS_NAME, Context.MODE_PRIVATE);
         editor = examsData.edit();
 
@@ -55,13 +49,6 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(listener);
         login = (EditText) findViewById(R.id.login);
         password = (TextInputEditText) findViewById(R.id.password);
-
-        if (dataIntent.hasExtra("LoginData")) {
-            dataIntent = getIntent();
-            data = dataIntent.getStringArrayExtra("LoginData");
-            login.setText(data[0]);
-            password.setText(data[1]);
-        }
     }
 
     class Listener implements View.OnClickListener {
@@ -74,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                  case R.id.createButton :
                      startActivity(new Intent(getApplicationContext(), RegActivity.class));
                      overridePendingTransition(R.anim.activity_appear_anim, R.anim.activity_disappear_anim);
+                     break;
             }
         }
     }

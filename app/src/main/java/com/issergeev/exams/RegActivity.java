@@ -1,31 +1,37 @@
 package com.issergeev.exams;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.Interpolator;
-import android.view.animation.ScaleAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class RegActivity extends AppCompatActivity implements View.OnLongClickListener {
-    final int ANIMATION_DURATION = 2000;
-    String loginText = "", passwordText = "";
+    private String loginText = "", passwordText = "";
+    private int progressBarVisibility = View.GONE;
 
     EditText SIDInput, loginInput, passwordInput;
     Button createButton;
+    ProgressBar progressBar;
 
     InputMethodManager imm;
-    DisplayMetrics metrics;
     TextMask mask;
     Animation shakeAnimation;
     SharedPreferences examsData = LoginActivity.examsData;
@@ -37,8 +43,10 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
 
         loginText = examsData.getString("Login", "");
         passwordText = examsData.getString("Password", "");
+        progressBarVisibility = examsData.getInt("progressBarVisibility", View.GONE);
         loginInput.setText(loginText);
         passwordInput.setText(passwordText);
+        progressBar.setVisibility(progressBarVisibility);
     }
 
     @Override
@@ -53,7 +61,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
 
-        metrics = getResources().getDisplayMetrics();
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         SIDInput = (EditText) findViewById(R.id.SIDInput);
         SIDInput.setOnLongClickListener(this);
@@ -65,26 +73,8 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Animation anim = new ScaleAnimation(
-                        1f, metrics.xdpi / 2,
-                        1f, metrics.ydpi / 2,
-                        Animation.RELATIVE_TO_SELF, 0.5f,
-                        Animation.RELATIVE_TO_SELF, 0.5f);
-                anim.setFillAfter(false);
-                anim.setDuration(ANIMATION_DURATION);
-
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(ANIMATION_DURATION - 300);
-                            startActivity(new Intent(getApplicationContext(), LoginActivity.class).putExtra("LoginData",
-                                    new String[]{loginInput.getText().toString(), passwordInput.getText().toString()}));
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
+                progressBar.setVisibility(View.VISIBLE);
+                createUser();
             }
         });
 
@@ -100,9 +90,54 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         shakeAnimation = AnimationUtils.loadAnimation(this, R.anim.forbid_anim);
     }
 
+    private void createUser() {
+        final String createURL = "http://exams-online.000webhostapp.com/add_new_user.php";
+
+        final RequestQueue request = Volley.newRequestQueue(RegActivity.this);
+        StringRequest query = new StringRequest(Request.Method.POST, createURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                switch (response) {
+                    case "Success" :
+                        Toast.makeText(RegActivity.this, "Account created successfully", Toast.LENGTH_SHORT).show();
+
+                        loginText = loginInput.getText().toString();
+                        passwordText = passwordInput.getText().toString();
+
+                        editor.putString("Login", loginText);
+                        editor.putString("Password", passwordText);
+                        editor.putInt("progressBarVisibility", progressBar.getVisibility());
+                        editor.apply();
+                        break;
+                    default :
+                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(RegActivity.this, "An error occurred", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                HashMap<String, String> data = new HashMap<>();
+                data.put("studentid_number", SIDInput.getText().toString());
+                data.put("student_verif", loginInput.getText().toString());
+                data.put("student_auth", passwordInput.getText().toString());
+
+                return data;
+            }
+        };
+
+        progressBar.setVisibility(View.GONE);
+
+        request.add(query);
+    }
+
     @Override
     public boolean onLongClick(View view) {
-        //Toast.makeText(this, "LongClick", Toast.LENGTH_SHORT).show();
         view.startAnimation(shakeAnimation);
         return true;
     }
@@ -111,10 +146,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
     protected void onDestroy() {
         super.onDestroy();
 
-        loginText = loginInput.getText().toString();
-        passwordText = passwordInput.getText().toString();
-
-        editor.putString("Login", loginText);
-        editor.putString("Password", passwordText);
+        editor.putInt("progressBarVisibility", progressBar.getVisibility());
+        editor.apply();
     }
 }
