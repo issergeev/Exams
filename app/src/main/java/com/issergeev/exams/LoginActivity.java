@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
-    static final String DATA_PREFS_NAME = "Data";
+    public static final String DATA_PREFS_NAME = "Data";
     private String loginText = "", passwordText = "";
 
     Listener listener;
@@ -20,8 +20,8 @@ public class LoginActivity extends AppCompatActivity {
     Button createButton, loginButton;
     EditText login;
     TextInputEditText password;
-    static SharedPreferences examsData;
-    static SharedPreferences.Editor editor;
+    public static SharedPreferences examsData;
+    public static SharedPreferences.Editor editor;
 
     @Override
     protected void onResume() {

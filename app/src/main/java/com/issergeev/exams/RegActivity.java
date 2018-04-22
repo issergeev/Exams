@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -24,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegActivity extends AppCompatActivity implements View.OnLongClickListener {
-    private String loginText = "", passwordText = "";
+    private String SIDText = "", loginText = "", passwordText = "";
     private int progressBarVisibility = View.GONE;
 
     EditText SIDInput, loginInput, passwordInput;
@@ -100,17 +101,13 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                 switch (response) {
                     case "Success" :
                         Toast.makeText(RegActivity.this, "Account created successfully", Toast.LENGTH_SHORT).show();
-
-                        loginText = loginInput.getText().toString();
-                        passwordText = passwordInput.getText().toString();
-
-                        editor.putString("Login", loginText);
-                        editor.putString("Password", passwordText);
-                        editor.putInt("progressBarVisibility", progressBar.getVisibility());
-                        editor.apply();
+                        saveData();
                         break;
+                    case "User exists" :
+                        Toast.makeText(RegActivity.this, "User exists", Toast.LENGTH_SHORT).show();
                     default :
                         Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
+                        Log.i("net", response);
                         break;
                 }
             }
@@ -123,9 +120,15 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
             @Override
             protected Map<String, String> getParams() {
                 HashMap<String, String> data = new HashMap<>();
-                data.put("studentid_number", SIDInput.getText().toString());
-                data.put("student_verif", loginInput.getText().toString());
-                data.put("student_auth", passwordInput.getText().toString());
+
+                loginText = loginInput.getText().toString();
+                passwordText = passwordInput.getText().toString();
+                SIDText = SIDInput.getText().toString().replace("-", "")
+                        .replace("/", "");
+
+                data.put("studentid_number", SIDText);
+                data.put("student_verif", loginText);
+                data.put("student_auth", passwordText);
 
                 return data;
             }
@@ -136,9 +139,22 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         request.add(query);
     }
 
+    private void saveData() {
+        loginText = loginInput.getText().toString();
+        passwordText = passwordInput.getText().toString();
+
+        editor.putString("Login", loginText);
+        editor.putString("Password", passwordText);
+        editor.putInt("progressBarVisibility", progressBar.getVisibility());
+        editor.apply();
+    }
+
     @Override
     public boolean onLongClick(View view) {
         view.startAnimation(shakeAnimation);
+
+        SIDText = SIDInput.getText().toString();
+        Toast.makeText(getApplicationContext(), SIDText, Toast.LENGTH_SHORT).show();
         return true;
     }
 
