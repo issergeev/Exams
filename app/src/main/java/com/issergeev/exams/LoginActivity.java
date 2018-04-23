@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -20,6 +21,10 @@ public class LoginActivity extends AppCompatActivity {
     Button createButton, loginButton;
     EditText login;
     TextInputEditText password;
+
+    InputMethodManager inputMethodManager;
+    View view;
+
     public static SharedPreferences examsData;
     public static SharedPreferences.Editor editor;
 
@@ -49,6 +54,12 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(listener);
         login = (EditText) findViewById(R.id.login);
         password = (TextInputEditText) findViewById(R.id.password);
+
+        inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        view = this.getCurrentFocus();
+        if (view != null) {
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     class Listener implements View.OnClickListener {
@@ -58,10 +69,10 @@ public class LoginActivity extends AppCompatActivity {
                 case R.id.loginButton :
                     //Login procedure
                     break;
-                 case R.id.createButton :
-                     startActivity(new Intent(getApplicationContext(), RegActivity.class));
-                     overridePendingTransition(R.anim.activity_appear_anim, R.anim.activity_disappear_anim);
-                     break;
+                case R.id.createButton :
+                    startActivity(new Intent(getApplicationContext(), RegActivity.class));
+                    overridePendingTransition(R.anim.activity_appear_anim, R.anim.activity_disappear_anim);
+                    break;
             }
         }
     }
@@ -75,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
 
         editor.putString("Login", loginText);
         editor.putString("Password", passwordText);
+        editor.putInt("progressBarVisibility", View.GONE);
         editor.apply();
     }
 }

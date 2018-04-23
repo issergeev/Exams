@@ -1,10 +1,12 @@
 package com.issergeev.exams;
 
-import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Surface;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -12,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -28,6 +31,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
     private String SIDText = "", loginText = "", passwordText = "";
     private int progressBarVisibility = View.GONE;
 
+    RelativeLayout rootLayout;
     EditText SIDInput, loginInput, passwordInput;
     Button createButton;
     ProgressBar progressBar;
@@ -62,6 +66,8 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
 
+        rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
+
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         SIDInput = (EditText) findViewById(R.id.SIDInput);
@@ -71,22 +77,25 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         passwordInput = (EditText) findViewById(R.id.passwordInput);
         passwordInput.setOnLongClickListener(this);
         createButton = (Button) findViewById(R.id.regButton);
+
+
+
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
+                lockScreenOrientation();
                 createUser();
             }
         });
 
         mask = new TextMask(SIDInput, "###-##/##");
-        try {
-            imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(SIDInput.getWindowToken(), 0);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            Toast.makeText(this, R.string.unknownError, Toast.LENGTH_SHORT).show();
-        }
+//        try {
+//            imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//            imm.hideSoftInputFromWindow(SIDInput.getWindowToken(), 0);
+//        } catch (NullPointerException e) {
+//            e.printStackTrace();
+//        }
 
         shakeAnimation = AnimationUtils.loadAnimation(this, R.anim.forbid_anim);
     }
@@ -94,19 +103,30 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
     private void createUser() {
         final String createURL = "http://exams-online.000webhostapp.com/add_new_user.php";
 
-        final RequestQueue request = Volley.newRequestQueue(RegActivity.this);
+        RequestQueue request = Volley.newRequestQueue(RegActivity.this);
         StringRequest query = new StringRequest(Request.Method.POST, createURL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                if (response != null) {
+                    progressBar.setVisibility(View.GONE);
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+                }
+
                 switch (response) {
                     case "Success" :
-                        Toast.makeText(RegActivity.this, "Account created successfully", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(rootLayout, R.string.createText, Snackbar.LENGTH_SHORT).show();
                         saveData();
                         break;
+                    case "Login exists" :
+                        Snackbar.make(rootLayout, R.string.userExistsText, Snackbar.LENGTH_LONG).show();
+                        break;
                     case "User exists" :
-                        Toast.makeText(RegActivity.this, "User exists", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(rootLayout, R.string.studentIDExistsText, Snackbar.LENGTH_LONG).show();
+                        break;
+                    case "No such user" :
+                        Snackbar.make(rootLayout, R.string.notSuchUser, Snackbar.LENGTH_LONG).show();
+                        break;
                     default :
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                         Log.i("net", response);
                         break;
                 }
@@ -114,7 +134,19 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(RegActivity.this, "An error occurred", Toast.LENGTH_SHORT).show();
+                if (error.networkResponse != null) {
+                    int errorCode = error.networkResponse.statusCode;
+
+                    progressBar.setVisibility(View.GONE);
+
+                    if (errorCode == 423) {
+                        Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
+                    } else {
+                        Snackbar.make(rootLayout, R.string.unknownErrorText, Snackbar.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Snackbar.make(rootLayout, R.string.connectionErrorText, Snackbar.LENGTH_LONG).show();
+                }
             }
         }) {
             @Override
@@ -122,7 +154,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                 HashMap<String, String> data = new HashMap<>();
 
                 loginText = loginInput.getText().toString();
-                passwordText = passwordInput.getText().toString();
+                passwordText = Encryption.Encrypt(passwordInput.getText().toString());
                 SIDText = SIDInput.getText().toString().replace("-", "")
                         .replace("/", "");
 
@@ -133,8 +165,6 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                 return data;
             }
         };
-
-        progressBar.setVisibility(View.GONE);
 
         request.add(query);
     }
@@ -156,6 +186,25 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         SIDText = SIDInput.getText().toString();
         Toast.makeText(getApplicationContext(), SIDText, Toast.LENGTH_SHORT).show();
         return true;
+    }
+
+    private void lockScreenOrientation() {
+        int rotation = getWindowManager().getDefaultDisplay().getRotation();
+
+        switch (rotation) {
+            case Surface.ROTATION_0 :
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                break;
+            case Surface.ROTATION_90 :
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
+                break;
+            case Surface.ROTATION_180 :
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+                break;
+            case Surface.ROTATION_270 :
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                break;
+        }
     }
 
     @Override

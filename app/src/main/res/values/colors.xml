@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
     <color name="colorPrimary">#ffa347</color>
-    <color name="colorPrimaryDark">#ffa347</color>
+    <color name="colorPrimaryDark">#b65b00</color>
     <color name="ic_launcher_background">#A6754B</color>
     <color name="colorMain">#ffbe7e</color>
     <color name="colorRipple">#ff8005</color>
@@ -9,4 +10,8 @@
     <color name="colorButton">#ffea00</color>
     <color name="colorBlack">#000000</color>
     <color name="colorOpacue">#00000000</color>
+    <color name="colorProgressbar">#e3a43c00</color>
+    <color name="colorSnackbar">@android:color/darker_gray</color>
+
+    <color name="design_snackbar_background_color" tools:override="true">@color/colorSnackbar</color>
 </resources>

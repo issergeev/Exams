@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Exams</string>
     <string name="welcomeText">Welcome to Exams!</string>
-    <string name="startButtonText">Get started!</string>
 
     <string name="unknownError">An unknown error occurred!</string>
     <string name="networkError">Unable to execute your query. An unknown network error occurred</string>
@@ -13,4 +12,16 @@
     <string name="registerButton">Create</string>
     <string name="IDNumber">Student ID</string>
     <string name="regButtonText">Create an account</string>
+    <string name="createText">Account successfully created</string>
+    <string name="userExistsText">Such login has already created</string>
+    <string name="warningTitleText">Warning!</string>
+    <string name="warningMessageText">An unknown response has been received from server! Please, report to the administrator</string>
+    <string name="acceptText">Continue</string>
+    <string name="connectionErrorText">Unable to establish connection with server. Check you internet connection</string>
+    <string name="serverSleepingText">The Server is temporarily unavailable. Please, try to reconnect again later</string>
+    <string name="unknownErrorText">An unknown error occured</string>
+    <string name="notSuchUser">User with such Student ID number is not allowed to register</string>
+    <string name="startButtonStudentText">Sign In as Student</string>
+    <string name="startButtonTeacherText">Sign In as Teacher</string>
+    <string name="studentIDExistsText">User with such Student ID number has already created</string>
 </resources>

@@ -53,9 +53,9 @@
             android:background="@drawable/button_shape_standart"/>
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/loginButton"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
             android:gravity="center">

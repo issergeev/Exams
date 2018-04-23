@@ -6,12 +6,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:background">@color/colorMain</item>
+        <!--<item name="android:background">@color/colorMain</item>-->
         <item name="android:windowActivityTransitions">true</item>
     </style>
 
     <style name="LoadingTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/loading_background</item>
+    </style>
+
+    <style name="AppTheme.ProgressBar">
+        <item name="colorAccent">@color/colorProgressbar</item>
     </style>
 
 </resources>

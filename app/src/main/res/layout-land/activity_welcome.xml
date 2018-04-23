@@ -30,14 +30,29 @@
             android:textSize="@dimen/heddingsSize"/>
 
         <Button
-            android:id="@+id/startButton"
+            android:id="@+id/startButtonStudent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/buttonMargin"
             android:layout_marginEnd="@dimen/buttonMargin"
-            android:layout_marginBottom="@dimen/buttonBottomMargin"
+            android:layout_marginBottom="@dimen/minMargin"
+            android:layout_above="@+id/startButtonTeacher"
+            android:text="@string/startButtonStudentText"
+            android:textSize="@dimen/textSize"
+            android:textStyle="italic"
+            android:textColor="@color/colorBlack"
+            android:foreground="@drawable/ripple_effect"
+            android:background="@drawable/button_shape_standart"/>
+
+        <Button
+            android:id="@id/startButtonTeacher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/buttonMargin"
+            android:layout_marginEnd="@dimen/buttonMargin"
+            android:layout_marginBottom="@dimen/minMargin"
             android:layout_alignParentBottom="true"
-            android:text="@string/startButtonText"
+            android:text="@string/startButtonTeacherText"
             android:textSize="@dimen/textSize"
             android:textStyle="italic"
             android:textColor="@color/colorBlack"

@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">Exams</string>
     <string name="welcomeText">Приветствуем на экзаменах!</string>
-    <string name="startButtonText">Приступить!</string>
 
     <string name="unknownError">Произошла неизвестная ошибка!</string>
     <string name="networkError">Невозможно выполнить ваш запрос. Произошла неизвестная сетевая ошибка</string>
@@ -14,4 +13,14 @@
     <string name="registerButton">Создать</string>
     <string name="IDNumber">Номер студенческого билета</string>
     <string name="regButtonText">Создать аккаунт</string>
+    <string name="createText">Регистрация прошла успешно</string>
+    <string name="userExistsText">Пользователь с таким логином уже существует</string>
+    <string name="warningTitleText">Внимание!</string>
+    <string name="warningMessageText">От сервера получен недействительный ответ! Пожалуйста, обратитесь к системному администратору</string>
+    <string name="acceptText">Продолжить</string>
+    <string name="serverSleepingText">Сервер временно недоступен. Попробуйте повторить попытку позднее</string>
+    <string name="notSuchUser">Пользователю с указанным номером студенческого билета не разрешено регистрироваться в системе</string>
+    <string name="startButtonStudentText">Вход для студентов</string>
+    <string name="startButtonTeacherText">Вход для преподавателей</string>
+    <string name="studentIDExistsText">Пользователь с указанным номером студенческого билета уже зарегистрирован</string>
 </resources>
