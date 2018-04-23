@@ -19,34 +19,35 @@
             android:text="@string/welcomeText"
             android:textStyle="bold"
             android:gravity="center"
-            android:textSize="@dimen/heddingsSize"/>
+            android:textSize="30sp"/>
 
         <Button
             android:id="@+id/startButtonStudent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="@dimen/elevation"
             android:layout_marginStart="@dimen/buttonMargin"
             android:layout_marginEnd="@dimen/buttonMargin"
-            android:layout_marginBottom="@dimen/minMargin"
-            android:layout_above="@+id/startButtonTeacher"
+            android:layout_marginBottom="@dimen/buttonBottomMargin"
+            android:layout_centerInParent="true"
             android:text="@string/startButtonStudentText"
-            android:textSize="@dimen/textSize"
             android:textStyle="italic"
+            android:textSize="@dimen/textSizeMin"
             android:textColor="@color/colorBlack"
             android:foreground="@drawable/ripple_effect"
             android:background="@drawable/button_shape_standart"/>
 
         <Button
-            android:id="@id/startButtonTeacher"
+            android:id="@+id/startButtonTeacher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="@dimen/elevation"
             android:layout_marginStart="@dimen/buttonMargin"
             android:layout_marginEnd="@dimen/buttonMargin"
-            android:layout_marginBottom="@dimen/minMargin"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@id/startButtonStudent"
             android:text="@string/startButtonTeacherText"
-            android:textSize="@dimen/textSize"
             android:textStyle="italic"
+            android:textSize="@dimen/textSizeMin"
             android:textColor="@color/colorBlack"
             android:foreground="@drawable/ripple_effect"
             android:background="@drawable/button_shape_standart"/>

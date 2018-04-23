@@ -21,13 +21,21 @@
             android:gravity="center"
             android:textSize="@dimen/heddingsSize"/>
 
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:foregroundGravity="center"
+            android:src="@drawable/main_theme_background"/>
+
         <Button
             android:id="@+id/startButtonStudent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/buttonMargin"
             android:layout_marginEnd="@dimen/buttonMargin"
-            android:layout_marginBottom="@dimen/minMargin"
+            android:layout_marginBottom="@dimen/topMargin"
             android:layout_above="@+id/startButtonTeacher"
             android:text="@string/startButtonStudentText"
             android:textSize="@dimen/textSize"

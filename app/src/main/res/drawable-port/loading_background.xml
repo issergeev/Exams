@@ -3,6 +3,6 @@
     <item android:drawable="@color/colorMain"/>
 
     <item
-        android:drawable="@mipmap/exams_icon"
+        android:drawable="@drawable/loading_icon"
         android:gravity="center"/>
 </layer-list>

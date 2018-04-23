@@ -20,7 +20,6 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
                 overridePendingTransition(R.anim.activity_appear_anim, R.anim.activity_disappear_anim);
             }
         });
