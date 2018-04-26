@@ -1,8 +1,11 @@
 package com.issergeev.exams;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +13,6 @@ import android.view.Surface;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -36,7 +38,8 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
     Button createButton;
     ProgressBar progressBar;
 
-    InputMethodManager imm;
+    AlertDialog.Builder alert;
+
     TextMask mask;
     Animation shakeAnimation;
     SharedPreferences examsData = LoginActivity.examsData;
@@ -83,9 +86,19 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
-                lockScreenOrientation();
-                createUser();
+                //createButton.setEnabled(false);
+
+                loginText = loginInput.getText().toString();
+                passwordText = passwordInput.getText().toString();
+                SIDText = SIDInput.getText().toString().replace("-", "")
+                        .replace("/", "");
+
+                if (userDataChecker(SIDText, loginText, passwordText)) {
+                    createButton.setEnabled(false);
+                    progressBar.setVisibility(View.VISIBLE);
+                    lockScreenOrientation();
+                    createUser();
+                }
             }
         });
 
@@ -108,13 +121,20 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
             @Override
             public void onResponse(String response) {
                 if (response != null) {
+                    createButton.setEnabled(true);
+
                     progressBar.setVisibility(View.GONE);
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
                 }
 
                 switch (response) {
                     case "Success" :
-                        Snackbar.make(rootLayout, R.string.createText, Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(rootLayout, R.string.createText, Snackbar.LENGTH_SHORT).setAction("Sign In now", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                onBackPressed();
+                            }
+                        }).show();
                         saveData();
                         break;
                     case "Login exists" :
@@ -135,9 +155,9 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error.networkResponse != null) {
-                    int errorCode = error.networkResponse.statusCode;
+                    createButton.setEnabled(true);
 
-                    progressBar.setVisibility(View.GONE);
+                    int errorCode = error.networkResponse.statusCode;
 
                     if (errorCode == 423) {
                         Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
@@ -145,18 +165,30 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                         Snackbar.make(rootLayout, R.string.unknownErrorText, Snackbar.LENGTH_SHORT).show();
                     }
                 } else {
-                    Snackbar.make(rootLayout, R.string.connectionErrorText, Snackbar.LENGTH_LONG).show();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        alert = new AlertDialog.Builder(RegActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                    } else {
+                        alert = new AlertDialog.Builder(RegActivity.this);
+                    }
+                    alert.setCancelable(true)
+                        .setTitle(R.string.warningTitleText)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setMessage(R.string.connectionErrorText)
+                        .setPositiveButton(R.string.acceptText, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        }).show();
                 }
+
+                progressBar.setVisibility(View.GONE);
             }
         }) {
             @Override
             protected Map<String, String> getParams() {
                 HashMap<String, String> data = new HashMap<>();
-
-                loginText = loginInput.getText().toString();
-                passwordText = Encryption.Encrypt(passwordInput.getText().toString());
-                SIDText = SIDInput.getText().toString().replace("-", "")
-                        .replace("/", "");
+                passwordText = Encryption.Encrypt(passwordText);
 
                 data.put("studentid_number", SIDText);
                 data.put("student_verif", loginText);
@@ -183,8 +215,6 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
     public boolean onLongClick(View view) {
         view.startAnimation(shakeAnimation);
 
-        SIDText = SIDInput.getText().toString();
-        Toast.makeText(getApplicationContext(), SIDText, Toast.LENGTH_SHORT).show();
         return true;
     }
 
@@ -205,6 +235,67 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 break;
         }
+    }
+
+    private boolean userDataChecker(String SIDText ,String loginText, String passwordText) {
+        final String[] UNAVALIABLE_LOGINS = new String[] {"administrator", "admin", "webmaster", "login"};
+        final String[] UNSAFE_PASSWORDS = new String[] {"qwerty", "password", "p@ssw0rd", "12345"};
+        final boolean[] r = {false};
+
+        if (SIDText.length() != 7) {
+            Toast.makeText(this, R.string.SIDLength, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!Character.isLetter(loginText.charAt(0))) {
+            Toast.makeText(this, R.string.loginBeginningInvalid, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (loginText.length() < 4) {
+            Toast.makeText(this, "Login is too short", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        for (String s : UNAVALIABLE_LOGINS) {
+            if (loginText.contains(s)) {
+                Toast.makeText(this, R.string.unavaliableLogin, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+
+        if (passwordText.length() < 5) {
+            Toast.makeText(this, R.string.passwordShort, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        for (String s : UNSAFE_PASSWORDS) {
+            if (passwordText.equals(s)) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    alert = new AlertDialog.Builder(RegActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                } else {
+                    alert = new AlertDialog.Builder(RegActivity.this);
+                }
+                alert.setCancelable(true)
+                        .setTitle(R.string.warningTitleText)
+                        .setMessage(R.string.passwordUnsafeMessage)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                progressBar.setVisibility(View.VISIBLE);
+                                lockScreenOrientation();
+                                createUser();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {}
+                        }).show();
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override

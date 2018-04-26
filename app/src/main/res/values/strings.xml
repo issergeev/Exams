@@ -11,17 +11,24 @@
     <string name="createAccount">Do not have account?</string>
     <string name="registerButton">Create</string>
     <string name="IDNumber">Student ID</string>
-    <string name="regButtonText">Create an account</string>
+    <string name="regButtonText">Sing Up</string>
     <string name="createText">Account successfully created</string>
     <string name="userExistsText">Such login has already created</string>
     <string name="warningTitleText">Warning!</string>
     <string name="warningMessageText">An unknown response has been received from server! Please, report to the administrator</string>
-    <string name="acceptText">Continue</string>
+    <string name="acceptText">OK</string>
     <string name="connectionErrorText">Unable to establish connection with server. Check you internet connection</string>
     <string name="serverSleepingText">The Server is temporarily unavailable. Please, try to reconnect again later</string>
-    <string name="unknownErrorText">An unknown error occured</string>
+    <string name="unknownErrorText">An unknown error occurred</string>
     <string name="notSuchUser">User with such Student ID number is not allowed to register</string>
     <string name="startButtonStudentText">Sign In as Student</string>
     <string name="startButtonTeacherText">Sign In as Teacher</string>
     <string name="studentIDExistsText">User with such Student ID number has already created</string>
+    <string name="SIDLength">Student ID number is invalid</string>
+    <string name="loginBeginningInvalid">Login starts with invalid symbol</string>
+    <string name="unavaliableLogin">Input login is forbidden</string>
+    <string name="passwordShort">Input password is too short</string>
+    <string name="passwordUnsafeMessage">Input password in very widespread. It may decrease the safety level of your account.
+        We strongly recommend you to use at least one digit, one special symbol and one capital letter in your password.
+        Would you like to change the password?</string>
 </resources>

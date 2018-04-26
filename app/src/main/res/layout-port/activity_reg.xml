@@ -38,6 +38,7 @@
             android:gravity="start"
             android:hint="@string/IDNumber"
             android:inputType="numberDecimal"
+            android:digits="1234567890"
             android:maxLength="9"/>
 
         <EditText
@@ -47,7 +48,8 @@
             android:layout_centerInParent="true"
             android:gravity="start"
             android:hint="@string/loginText"
-            android:inputType="text"/>
+            android:inputType="text"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"/>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/passwordContainrt_RA_Port"
@@ -64,6 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
                 android:hint="@string/passwordText"
                 android:gravity="start"/>
 

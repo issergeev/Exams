@@ -17,10 +17,15 @@
     <string name="userExistsText">Пользователь с таким логином уже существует</string>
     <string name="warningTitleText">Внимание!</string>
     <string name="warningMessageText">От сервера получен недействительный ответ! Пожалуйста, обратитесь к системному администратору</string>
-    <string name="acceptText">Продолжить</string>
+    <string name="acceptText">OK</string>
+    <string name="connectionErrorText">Невозможно установить соединение с сервером. Возможно, отсутствует подкючение к интернету</string>
     <string name="serverSleepingText">Сервер временно недоступен. Попробуйте повторить попытку позднее</string>
     <string name="notSuchUser">Пользователю с указанным номером студенческого билета не разрешено регистрироваться в системе</string>
     <string name="startButtonStudentText">Вход для студентов</string>
     <string name="startButtonTeacherText">Вход для преподавателей</string>
     <string name="studentIDExistsText">Пользователь с указанным номером студенческого билета уже зарегистрирован</string>
+    <string name="SIDLength">Недействительный номер студенческого билета</string>string>
+    <string name="loginBeginningInvalid">Логин начинается с запрещенного символа</string>
+    <string name="unavaliableLogin">Введенный логин недоступен</string>
+    <string name="passwordShort">Введенный пароль недостаточно длинный</string>
 </resources>
