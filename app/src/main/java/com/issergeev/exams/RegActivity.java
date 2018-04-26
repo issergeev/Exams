@@ -30,8 +30,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegActivity extends AppCompatActivity implements View.OnLongClickListener {
-    private String SIDText = "", loginText = "", passwordText = "";
+    private String SIDText = "", loginText = "", passwordText = "", appendixText = "";
     private int progressBarVisibility = View.GONE;
+
+    static String[] passData = new String[2];
 
     RelativeLayout rootLayout;
     EditText SIDInput, loginInput, passwordInput;
@@ -42,8 +44,8 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
 
     TextMask mask;
     Animation shakeAnimation;
-    SharedPreferences examsData = LoginActivity.examsData;
-    SharedPreferences.Editor editor = LoginActivity.editor;
+    SharedPreferences examsData = LoginStudentActivity.examsData;
+    SharedPreferences.Editor editor = LoginStudentActivity.editor;
 
     @Override
     protected void onResume() {
@@ -81,13 +83,9 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         passwordInput.setOnLongClickListener(this);
         createButton = (Button) findViewById(R.id.regButton);
 
-
-
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //createButton.setEnabled(false);
-
                 loginText = loginInput.getText().toString();
                 passwordText = passwordInput.getText().toString();
                 SIDText = SIDInput.getText().toString().replace("-", "")
@@ -103,13 +101,6 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         });
 
         mask = new TextMask(SIDInput, "###-##/##");
-//        try {
-//            imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//            imm.hideSoftInputFromWindow(SIDInput.getWindowToken(), 0);
-//        } catch (NullPointerException e) {
-//            e.printStackTrace();
-//        }
-
         shakeAnimation = AnimationUtils.loadAnimation(this, R.anim.forbid_anim);
     }
 
@@ -188,11 +179,14 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
             @Override
             protected Map<String, String> getParams() {
                 HashMap<String, String> data = new HashMap<>();
-                passwordText = Encryption.Encrypt(passwordText);
+                passData = Encryption.Encrypt(passwordText).split("[\\ ]");
+                appendixText = passData[0];
+                passwordText = passData[1];
 
                 data.put("studentid_number", SIDText);
                 data.put("student_verif", loginText);
                 data.put("student_auth", passwordText);
+                data.put("student_appendix", appendixText);
 
                 return data;
             }
@@ -243,30 +237,38 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         final boolean[] r = {false};
 
         if (SIDText.length() != 7) {
-            Toast.makeText(this, R.string.SIDLength, Toast.LENGTH_SHORT).show();
+            Snackbar.make(rootLayout, R.string.SIDLength, Snackbar.LENGTH_LONG).show();
             return false;
         }
 
         if (!Character.isLetter(loginText.charAt(0))) {
-            Toast.makeText(this, R.string.loginBeginningInvalid, Toast.LENGTH_SHORT).show();
+            Snackbar.make(rootLayout, R.string.loginBeginningInvalid, Snackbar.LENGTH_LONG).show();
             return false;
         }
 
         if (loginText.length() < 4) {
-            Toast.makeText(this, "Login is too short", Toast.LENGTH_SHORT).show();
+            Snackbar.make(rootLayout, R.string.loginShort, Toast.LENGTH_LONG).show();
             return false;
+        }
+
+        if (loginText.length() > 32) {
+            Snackbar.make(rootLayout, R.string.loginLong, Snackbar.LENGTH_LONG).show();
         }
 
         for (String s : UNAVALIABLE_LOGINS) {
             if (loginText.contains(s)) {
-                Toast.makeText(this, R.string.unavaliableLogin, Toast.LENGTH_SHORT).show();
+                Snackbar.make(rootLayout, R.string.unavaliableLogin, Snackbar.LENGTH_LONG).show();
                 return false;
             }
         }
 
         if (passwordText.length() < 5) {
-            Toast.makeText(this, R.string.passwordShort, Toast.LENGTH_SHORT).show();
+            Snackbar.make(rootLayout, R.string.passwordShort, Toast.LENGTH_LONG).show();
             return false;
+        }
+
+        if (passwordText.length() > 64) {
+            Snackbar.make(rootLayout, R.string.passwordLong, Snackbar.LENGTH_LONG).show();
         }
 
         for (String s : UNSAFE_PASSWORDS) {

@@ -31,4 +31,7 @@
     <string name="passwordUnsafeMessage">Input password in very widespread. It may decrease the safety level of your account.
         We strongly recommend you to use at least one digit, one special symbol and one capital letter in your password.
         Would you like to change the password?</string>
+    <string name="loginShort">Input login is too short</string>
+    <string name="loginLong">Input login is too long. Please, reduce it to 32 symbols</string>
+    <string name="passwordLong">Input password is too long. Please, reduce it to 64 symbols</string>
 </resources>

@@ -23,7 +23,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="813b18" />
+                                                <entry key="color" value="395f81" />
                                                 <entry key="scalingPercent" value="99" />
                                               </map>
                                             </option>
@@ -46,12 +46,12 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="a6754b" />
-                                      <entry key="backgroundLayerName" value="ic_launcher_background" />
+                                      <entry key="backgroundColor" value="559aa6" />
+                                      <entry key="backgroundLayerName" value="ic_launcher_background_advanced" />
                                       <entry key="foregroundAssetType" value="CLIP_ART" />
-                                      <entry key="foregroundLayerName" value="ic_launcher_foreground" />
+                                      <entry key="foregroundLayerName" value="ic_launcher_foreground_advanced" />
                                       <entry key="legacyIconShape" value="CIRCLE" />
-                                      <entry key="outputName" value="exams_icon" />
+                                      <entry key="outputName" value="exams_icon_advanced" />
                                       <entry key="webIconShape" value="CIRCLE" />
                                     </map>
                                   </option>

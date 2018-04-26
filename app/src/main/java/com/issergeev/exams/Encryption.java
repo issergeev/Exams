@@ -1,30 +1,39 @@
 package com.issergeev.exams;
 
-import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 public class Encryption {
-    public static String Encrypt(String string) {
-        MessageDigest messageDigest = null;
-        byte[] digest = new byte[0];
+    private static final String alphabet = "ABCDEFGHIGKLMNOPQRSTUVWXYZabcdefghigklmnopqrstuvwxyz1234567890!@#$%^&*()_";
+    private static SecureRandom random = new SecureRandom();
+
+    public static String Encrypt(String password) {
+        String generatedPassword = "";
+        String salt = generateSalt();
 
         try {
-            messageDigest = MessageDigest.getInstance("MD5");
-            messageDigest.reset();
-            messageDigest.update(string.getBytes());
-            digest = messageDigest.digest();
-        } catch (NoSuchAlgorithmException e) {
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update(salt.getBytes());
+            byte[] bytes = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte aByte : bytes) {
+                sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
+            }
+            generatedPassword = sb.toString();
+        }
+        catch (NoSuchAlgorithmException e){
             e.printStackTrace();
         }
+        return salt + " " + generatedPassword;
+    }
 
-        BigInteger bigInt = new BigInteger(1, digest);
-        String encryptedString = bigInt.toString(16);
-
-        while (encryptedString.length() < 32) {
-            encryptedString = "0" + encryptedString;
+    private static String generateSalt() {
+        StringBuilder salt = new StringBuilder("");
+        for (int i = 0; i < 10; i++) {
+            salt.append(alphabet.charAt(random.nextInt(alphabet.length() - 1)));
         }
 
-        return encryptedString;
+        return salt.toString();
     }
 }

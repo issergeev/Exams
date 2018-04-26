@@ -5,6 +5,7 @@
     <color name="colorPrimaryDark">#b65b00</color>
     <color name="ic_launcher_background">#A6754B</color>
     <color name="colorMain">#ffbe7e</color>
+    <color name="colorMainDark">#ffb061</color>
     <color name="colorRipple">#ff8005</color>
     <color name="colorAccent">#ff7f00</color>
     <color name="colorButton">#ffea00</color>
@@ -14,4 +15,8 @@
     <color name="colorSnackbar">@android:color/darker_gray</color>
 
     <color name="design_snackbar_background_color" tools:override="true">@color/colorSnackbar</color>
+
+    <color name="colorMainNew">#559AA6</color>
+    <color name="colorMainNewDark">#407680</color>
+    <color name="colorMainNewAccent">#ab7cf7</color>
 </resources>
