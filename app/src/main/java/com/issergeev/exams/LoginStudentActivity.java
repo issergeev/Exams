@@ -10,11 +10,21 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.lang.reflect.Method;
 
 public class LoginStudentActivity extends AppCompatActivity {
     public static final String DATA_PREFS_NAME = "Data";
@@ -71,7 +81,7 @@ public class LoginStudentActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.loginButton :
-                    //Login procedure
+                    signIn();
                     break;
                 case R.id.createButton :
                     startActivity(new Intent(getApplicationContext(), RegActivity.class));
@@ -79,6 +89,32 @@ public class LoginStudentActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    private void signIn() {
+        final String loginURL = "http://exams-online.000webhostapp.com/sign_in.php";
+        final RequestQueue request = Volley.newRequestQueue(LoginStudentActivity.this);
+        StringRequest query = new StringRequest(Request.Method.POST, loginURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response != null) {
+                    switch (response) {
+                        case "Success" :
+                            startActivity(new Intent(LoginStudentActivity.this, LoginSplash.class));
+                            break;
+                        case "User not found" :
+                            break;
+                        default :
+                            Log.i("net", response);
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
     }
 
     @Override

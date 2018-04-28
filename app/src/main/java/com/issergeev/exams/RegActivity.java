@@ -116,35 +116,37 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
 
                     progressBar.setVisibility(View.GONE);
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
-                }
 
-                switch (response) {
-                    case "Success" :
-                        Snackbar.make(rootLayout, R.string.createText, Snackbar.LENGTH_SHORT).setAction("Sign In now", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                onBackPressed();
-                            }
-                        }).show();
-                        saveData();
-                        break;
-                    case "Login exists" :
-                        Snackbar.make(rootLayout, R.string.userExistsText, Snackbar.LENGTH_LONG).show();
-                        break;
-                    case "User exists" :
-                        Snackbar.make(rootLayout, R.string.studentIDExistsText, Snackbar.LENGTH_LONG).show();
-                        break;
-                    case "No such user" :
-                        Snackbar.make(rootLayout, R.string.notSuchUser, Snackbar.LENGTH_LONG).show();
-                        break;
-                    default :
-                        Log.i("net", response);
-                        break;
+                    switch (response) {
+                        case "Success":
+                            Snackbar.make(rootLayout, R.string.createText, Snackbar.LENGTH_SHORT).setAction("Sign In now", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    onBackPressed();
+                                }
+                            }).show();
+                            saveData();
+                            break;
+                        case "Login exists":
+                            Snackbar.make(rootLayout, R.string.userExistsText, Snackbar.LENGTH_LONG).show();
+                            break;
+                        case "User exists":
+                            Snackbar.make(rootLayout, R.string.studentIDExistsText, Snackbar.LENGTH_LONG).show();
+                            break;
+                        case "No such user":
+                            Snackbar.make(rootLayout, R.string.notSuchUser, Snackbar.LENGTH_LONG).show();
+                            break;
+                        default:
+                            Log.i("net", response);
+                            break;
+                    }
                 }
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+        }, new Response.ErrorListener()
+
+            {
+                @Override
+                public void onErrorResponse (VolleyError error){
                 if (error.networkResponse != null) {
                     createButton.setEnabled(true);
 
@@ -162,15 +164,15 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                         alert = new AlertDialog.Builder(RegActivity.this);
                     }
                     alert.setCancelable(true)
-                        .setTitle(R.string.warningTitleText)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setMessage(R.string.connectionErrorText)
-                        .setPositiveButton(R.string.acceptText, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                            .setTitle(R.string.warningTitleText)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setMessage(R.string.connectionErrorText)
+                            .setPositiveButton(R.string.acceptText, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
-                            }
-                        }).show();
+                                }
+                            }).show();
                 }
 
                 progressBar.setVisibility(View.GONE);
@@ -234,7 +236,6 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
     private boolean userDataChecker(String SIDText ,String loginText, String passwordText) {
         final String[] UNAVALIABLE_LOGINS = new String[] {"administrator", "admin", "webmaster", "login"};
         final String[] UNSAFE_PASSWORDS = new String[] {"qwerty", "password", "p@ssw0rd", "12345"};
-        final boolean[] r = {false};
 
         if (SIDText.length() != 7) {
             Snackbar.make(rootLayout, R.string.SIDLength, Snackbar.LENGTH_LONG).show();

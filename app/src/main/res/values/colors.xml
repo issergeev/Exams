@@ -17,6 +17,7 @@
     <color name="design_snackbar_background_color" tools:override="true">@color/colorSnackbar</color>
 
     <color name="colorMainNew">#559AA6</color>
+    <color name="ic_launcher_background_advanced">#559AA6</color>
     <color name="colorMainNewDark">#407680</color>
     <color name="colorMainNewAccent">#ab7cf7</color>
 </resources>

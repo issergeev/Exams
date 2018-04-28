@@ -37,6 +37,9 @@
         <activity
             android:name=".RegActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".LoginSplash"/>
+        <activity android:name=".HomeActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>
