@@ -14,14 +14,14 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.activity_home);
 
-        listener = new Listener();
-
-        startButtonStudent = (Button) findViewById(R.id.startButtonStudent);
-        startButtonTeacher = (Button) findViewById(R.id.startButtonTeacher);
-        startButtonStudent.setOnClickListener(listener);
-        startButtonTeacher.setOnClickListener(listener);
+//        listener = new Listener();
+//
+//        startButtonStudent = (Button) findViewById(R.id.startButtonStudent);
+//        startButtonTeacher = (Button) findViewById(R.id.startButtonTeacher);
+//        startButtonStudent.setOnClickListener(listener);
+//        startButtonTeacher.setOnClickListener(listener);
     }
 
     class Listener implements View.OnClickListener {

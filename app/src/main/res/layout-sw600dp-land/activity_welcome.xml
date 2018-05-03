@@ -8,13 +8,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/buttonBottomMargin">
+        android:layout_margin="@dimen/bottomMargin">
 
         <TextView
             android:id="@+id/helloText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/topMargin"
+            android:layout_marginTop="@dimen/averageMargin"
             android:layout_alignParentTop="true"
             android:text="@string/welcomeText"
             android:textStyle="bold"
@@ -35,14 +35,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/buttonMargin"
             android:layout_marginEnd="@dimen/buttonMargin"
-            android:layout_marginBottom="@dimen/topMargin"
+            android:layout_marginBottom="@dimen/averageMargin"
             android:layout_above="@+id/startButtonTeacher"
             android:text="@string/startButtonStudentText"
             android:textSize="@dimen/textSize"
             android:textStyle="italic"
             android:textColor="@color/colorBlack"
             android:foreground="@drawable/ripple_effect"
-            android:background="@drawable/button_shape_standart"/>
+            android:background="@drawable/button_shape_standard"/>
 
         <Button
             android:id="@id/startButtonTeacher"
@@ -57,7 +57,7 @@
             android:textStyle="italic"
             android:textColor="@color/colorBlack"
             android:foreground="@drawable/ripple_effect"
-            android:background="@drawable/button_shape_standart"/>
+            android:background="@drawable/button_shape_standard"/>
 
     </RelativeLayout>
 

@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/buttonBottomMargin">
+        android:layout_margin="@dimen/bottomMargin">
 
         <ImageView
             android:id="@+id/logo"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:layout_marginBottom="@dimen/buttonBottomMargin"
+            android:layout_marginBottom="@dimen/bottomMargin"
             app:passwordToggleEnabled="true"
             app:passwordToggleDrawable="@android:drawable/ic_lock_lock">
 
@@ -51,13 +51,13 @@
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/buttonBottomMargin"
+            android:layout_margin="@dimen/bottomMargin"
             android:layout_below="@id/passwordContainrt_LA"
             android:text="@string/loginButtonText"
             android:textSize="@dimen/textSize"
             android:textStyle="italic"
             android:foreground="@drawable/ripple_effect"
-            android:background="@drawable/button_shape_standart_new"/>
+            android:background="@drawable/button_shape_standard_new"/>
 
     </RelativeLayout>
 

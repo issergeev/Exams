@@ -34,4 +34,9 @@
     <string name="loginShort">Input login is too short</string>
     <string name="loginLong">Input login is too long. Please, reduce it to 32 symbols</string>
     <string name="passwordLong">Input password is too long. Please, reduce it to 64 symbols</string>
+    <string name="signoutText">Sign Out</string>
+    <string name="resultCardText">View results</string>
+    <string name="pass_examsText">Pass exams</string>
+    <string name="todo">TODO</string>
+    <string name="studentText">Student</string>
 </resources>

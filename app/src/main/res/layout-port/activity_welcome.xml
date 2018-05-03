@@ -8,13 +8,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/buttonBottomMargin">
+        android:layout_margin="@dimen/bottomMargin">
 
         <TextView
             android:id="@+id/helloText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/topMargin"
+            android:layout_marginTop="@dimen/averageMargin"
             android:layout_alignParentTop="true"
             android:text="@string/welcomeText"
             android:textStyle="bold"
@@ -25,23 +25,23 @@
             android:id="@+id/startButtonStudent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="@dimen/elevation"
+            android:elevation="@dimen/standardElevation"
             android:layout_marginStart="@dimen/buttonMargin"
             android:layout_marginEnd="@dimen/buttonMargin"
-            android:layout_marginBottom="@dimen/buttonBottomMargin"
+            android:layout_marginBottom="@dimen/bottomMargin"
             android:layout_centerInParent="true"
             android:text="@string/startButtonStudentText"
             android:textStyle="italic"
             android:textSize="@dimen/textSizeMin"
             android:textColor="@color/colorBlack"
             android:foreground="@drawable/ripple_effect"
-            android:background="@drawable/button_shape_standart"/>
+            android:background="@drawable/button_shape_standard"/>
 
         <Button
             android:id="@+id/startButtonTeacher"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="@dimen/elevation"
+            android:elevation="@dimen/standardElevation"
             android:layout_marginStart="@dimen/buttonMargin"
             android:layout_marginEnd="@dimen/buttonMargin"
             android:layout_below="@id/startButtonStudent"
@@ -50,7 +50,7 @@
             android:textSize="@dimen/textSizeMin"
             android:textColor="@color/colorBlack"
             android:foreground="@drawable/ripple_effect"
-            android:background="@drawable/button_shape_standart"/>
+            android:background="@drawable/button_shape_standard"/>
 
         <ImageView
             android:id="@+id/logo"
