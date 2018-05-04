@@ -5,23 +5,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class WelcomeActivity extends AppCompatActivity {
     Listener listener;
 
     Button startButtonStudent, startButtonTeacher;
+    ImageView signinButton;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_welcome);
 
-//        listener = new Listener();
-//
-//        startButtonStudent = (Button) findViewById(R.id.startButtonStudent);
-//        startButtonTeacher = (Button) findViewById(R.id.startButtonTeacher);
-//        startButtonStudent.setOnClickListener(listener);
-//        startButtonTeacher.setOnClickListener(listener);
+        listener = new Listener();
+
+        startButtonStudent = (Button) findViewById(R.id.startButtonStudent);
+        startButtonTeacher = (Button) findViewById(R.id.startButtonTeacher);
+        signinButton = (ImageView) findViewById(R.id.logo);
+        startButtonStudent.setOnClickListener(listener);
+        startButtonTeacher.setOnClickListener(listener);
+        signinButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                startActivity(new Intent(getApplicationContext(), LoginAdminActivity.class));
+                return false;
+            }
+        });
     }
 
     class Listener implements View.OnClickListener {

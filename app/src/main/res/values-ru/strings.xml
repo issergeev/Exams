@@ -34,4 +34,7 @@
     <string name="loginShort">Введенный логин недостаточно имеет недостаточную длину</string>
     <string name="loginLong">Введенный логин превышает максимально допустимую длину. Пожалуйста, сократите логин до 32 символов</string>
     <string name="passwordLong">Введенный пароль превышает максимально допустимую длину. Пожалуйста, сократите пароль до 64 символов</string>
+    <string name="signoutText">Выйти</string>
+    <string name="resultCardText">Посмотреть результаты</string>
+    <string name="pass_examsText">Присупить к экзаменам</string>
 </resources>

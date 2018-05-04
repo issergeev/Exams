@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".RegActivity"
-    android:background="@color/colorMain">
+    android:background="@drawable/background">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -7,7 +7,7 @@
 
     <string name="loginText">Login</string>
     <string name="passwordText">Password</string>
-    <string name="loginButtonText">Log In</string>
+    <string name="loginButtonText">Sign In</string>
     <string name="createAccount">Do not have account?</string>
     <string name="registerButton">Create</string>
     <string name="IDNumber">Student ID</string>
@@ -38,5 +38,4 @@
     <string name="resultCardText">View results</string>
     <string name="pass_examsText">Pass exams</string>
     <string name="todo">TODO</string>
-    <string name="studentText">Student</string>
 </resources>

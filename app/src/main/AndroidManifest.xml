@@ -31,15 +31,17 @@
             android:name=".LoginStudentActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:theme="@style/AppThemeAdvanced"
             android:name=".LoginTeacherActivity"
-            android:windowSoftInputMode="adjustPan"/>
+            android:theme="@style/AppThemeAdvanced"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".RegActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".LoginSplash"/>
-        <activity android:name=".HomeActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".LoginSplash" />
+        <activity
+            android:name=".HomeActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".LoginAdminActivity"></activity>
     </application>
 
 </manifest>

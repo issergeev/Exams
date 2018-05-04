@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorMainNew">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/bottomMargin">
+        
+        <EditText
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/topMargin"
+            android:layout_alignParentTop="true"
+            android:hint="@string/loginText"
+            android:inputType="text"
+            android:gravity="start"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/averageMargin"
+            android:layout_below="@id/login"
+            android:inputType="textPassword"
+            android:hint="@string/passwordText"
+            android:gravity="start"/>
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/bottomMargin"
+            android:layout_alignParentBottom="true"
+            android:text="@string/loginButtonText"
+            android:textSize="@dimen/textSize"
+            android:textStyle="italic"
+            android:foreground="@drawable/ripple_effect"
+            android:background="@drawable/button_shape_standard_new"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

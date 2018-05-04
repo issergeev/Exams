@@ -7,6 +7,7 @@
     <dimen name="heddingsSize">30sp</dimen>
     <dimen name="textSizeMin">15sp</dimen>
     <dimen name="minMargin">2dp</dimen>
+    <dimen name="topMargin">5dp</dimen>
     <dimen name="standardElevation">10dp</dimen>
     <dimen name="startMargin">10dp</dimen>
     <dimen name="elementsPadding">20dp</dimen>
