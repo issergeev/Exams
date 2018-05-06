@@ -44,5 +44,5 @@
     <string name="loadingText">Preparing things…</string>
     <string name="declineText">Not now</string>
     <string name="changeText">Change</string>
-    <string name="userNotFound">Unfortunately, such user has not been registered in our system. Press "OK" button to retry Sign In procedure</string>
+    <string name="userNotFound">Unfortunately, such user has not been registered in our system. Press \"OK\" button to retry Sign In procedure</string>
 </resources>

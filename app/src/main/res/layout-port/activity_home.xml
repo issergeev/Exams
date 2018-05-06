@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--android:background="@drawable/background">-->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -53,6 +53,7 @@
                 android:layout_marginTop="@dimen/averagePadding"
                 android:layout_marginStart="@dimen/cardviewMargin"
                 android:layout_marginEnd="@dimen/cardviewMargin"
+                android:layout_marginBottom="@dimen/bottomMargin"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/titleLayout"
                 app:cardCornerRadius="10dp">
@@ -213,7 +214,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/topMargin"
-        android:backgroundTint="#838383"
         app:fabSize="normal"
         android:src="@android:drawable/ic_delete"/>
 

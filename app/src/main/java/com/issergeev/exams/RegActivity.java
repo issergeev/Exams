@@ -3,6 +3,7 @@ package com.issergeev.exams;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -95,104 +96,14 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                     createButton.setEnabled(false);
                     progressBar.setVisibility(View.VISIBLE);
                     lockScreenOrientation();
-                    createUser();
+
+                    new Registrar().execute();
                 }
             }
         });
 
         mask = new TextMask(SIDInput, "###-##/##");
         shakeAnimation = AnimationUtils.loadAnimation(this, R.anim.forbid_anim);
-    }
-
-    private void createUser() {
-        final String createURL = "http://exams-online.000webhostapp.com/add_new_user.php";
-
-        RequestQueue request = Volley.newRequestQueue(RegActivity.this);
-        StringRequest query = new StringRequest(Request.Method.POST, createURL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if (response != null) {
-                    createButton.setEnabled(true);
-                    progressBar.setVisibility(View.GONE);
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
-
-                    switch (response) {
-                        case "Success":
-                            Snackbar.make(rootLayout, R.string.createText, Snackbar.LENGTH_SHORT).setAction("Sign In now", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                }
-                            }).show();
-                            saveData();
-                            break;
-                        case "Login exists":
-                            Snackbar.make(rootLayout, R.string.userExistsText, Snackbar.LENGTH_LONG).show();
-                            break;
-                        case "User exists":
-                            Snackbar.make(rootLayout, R.string.studentIDExistsText, Snackbar.LENGTH_LONG).show();
-                            break;
-                        case "No such user":
-                            Snackbar.make(rootLayout, R.string.notSuchUser, Snackbar.LENGTH_LONG).show();
-                            break;
-                        default:
-                            Log.i("net", response);
-                            break;
-                    }
-                }
-            }
-        }, new Response.ErrorListener()
-
-            {
-                @Override
-                public void onErrorResponse (VolleyError error){
-                if (error.networkResponse != null) {
-                    createButton.setEnabled(true);
-
-                    int errorCode = error.networkResponse.statusCode;
-
-                    if (errorCode == 423) {
-                        Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
-                    } else {
-                        Snackbar.make(rootLayout, R.string.unknownErrorText, Snackbar.LENGTH_SHORT).show();
-                    }
-                } else {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        alert = new AlertDialog.Builder(RegActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-                    } else {
-                        alert = new AlertDialog.Builder(RegActivity.this);
-                    }
-                    alert.setCancelable(true)
-                            .setTitle(R.string.warningTitleText)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setMessage(R.string.connectionErrorText)
-                            .setPositiveButton(R.string.acceptText, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                }
-                            }).show();
-                }
-
-                progressBar.setVisibility(View.GONE);
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                HashMap<String, String> data = new HashMap<>();
-                passData = Encryption.Encrypt(passwordText).split("[\\ ]");
-                appendixText = passData[0];
-                passwordText = passData[1];
-
-                data.put("studentid_number", SIDText);
-                data.put("student_verif", loginText);
-                data.put("student_auth", passwordText);
-                data.put("student_appendix", appendixText);
-
-                return data;
-            }
-        };
-        request.add(query);
     }
 
     private void saveData() {
@@ -286,7 +197,8 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 progressBar.setVisibility(View.VISIBLE);
                                 lockScreenOrientation();
-                                createUser();
+
+                                new Registrar().execute();
                             }
                         }).show();
 
@@ -303,5 +215,102 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
 
         editor.putInt("progressBarVisibility", progressBar.getVisibility());
         editor.apply();
+    }
+
+    class Registrar extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+                final String createURL = "http://exams-online.000webhostapp.com/add_new_user.php";
+
+                RequestQueue request = Volley.newRequestQueue(RegActivity.this);
+                StringRequest query = new StringRequest(Request.Method.POST, createURL, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (response != null) {
+                            createButton.setEnabled(true);
+                            progressBar.setVisibility(View.GONE);
+                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+
+                            switch (response) {
+                                case "Success":
+                                    Snackbar.make(rootLayout, R.string.createText, Snackbar.LENGTH_SHORT).setAction("Sign In now", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            onBackPressed();
+                                        }
+                                    }).show();
+                                    saveData();
+                                    break;
+                                case "Login exists":
+                                    Snackbar.make(rootLayout, R.string.userExistsText, Snackbar.LENGTH_LONG).show();
+                                    break;
+                                case "User exists":
+                                    Snackbar.make(rootLayout, R.string.studentIDExistsText, Snackbar.LENGTH_LONG).show();
+                                    break;
+                                case "No such user":
+                                    Snackbar.make(rootLayout, R.string.notSuchUser, Snackbar.LENGTH_LONG).show();
+                                    break;
+                                default:
+                                    Log.i("net", response);
+                                    break;
+                            }
+                        }
+                    }
+                }, new Response.ErrorListener()
+
+                {
+                    @Override
+                    public void onErrorResponse (VolleyError error){
+                        if (error.networkResponse != null) {
+                            createButton.setEnabled(true);
+
+                            int errorCode = error.networkResponse.statusCode;
+
+                            if (errorCode == 423) {
+                                Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
+                            } else {
+                                Snackbar.make(rootLayout, R.string.unknownErrorText, Snackbar.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                alert = new AlertDialog.Builder(RegActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                            } else {
+                                alert = new AlertDialog.Builder(RegActivity.this);
+                            }
+                            alert.setCancelable(true)
+                                    .setTitle(R.string.warningTitleText)
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .setMessage(R.string.connectionErrorText)
+                                    .setPositiveButton(R.string.acceptText, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        }
+                                    }).show();
+                        }
+
+                        progressBar.setVisibility(View.GONE);
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() {
+                        HashMap<String, String> data = new HashMap<>();
+                        passData = Encryption.Encrypt(passwordText).split("[\\ ]");
+                        appendixText = passData[0];
+                        passwordText = passData[1];
+
+                        data.put("studentid_number", SIDText);
+                        data.put("student_verif", loginText);
+                        data.put("student_auth", passwordText);
+                        data.put("student_appendix", appendixText);
+
+                        return data;
+                    }
+                };
+                request.add(query);
+
+            return null;
+        }
     }
 }

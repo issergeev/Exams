@@ -63,4 +63,24 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            alert = new AlertDialog.Builder(HomeActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            alert = new AlertDialog.Builder(HomeActivity.this);
+        }
+        alert.setCancelable(true)
+                .setTitle(R.string.exitText)
+                .setMessage(R.string.exitMessage)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .show();
+    }
 }

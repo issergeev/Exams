@@ -43,5 +43,5 @@
     <string name="loadingText">Загружаем информацию…</string>
     <string name="declineText">Не сейчас</string>
     <string name="changeText">Изменить</string>
-    <string name="userNotFound">К сожалению, данный пользователь не зарегистрирован в системе. Для повторной попытки входа нажмите "ОК"</string>
+    <string name="userNotFound">К сожалению, данный пользователь не зарегистрирован в системе. Нажмите \"ОК\", чтобы повторить попытку входа</string>
 </resources>

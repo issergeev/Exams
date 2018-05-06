@@ -22,4 +22,8 @@
         <item name="colorAccent">@color/colorMainNewDark</item>
     </style>
 
+    <style name="CardView.Dark">
+        <item name="cardBackgroundColor">@android:color/darker_gray</item>
+    </style>
+
 </resources>
