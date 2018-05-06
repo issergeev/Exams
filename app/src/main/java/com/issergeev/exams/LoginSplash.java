@@ -14,10 +14,9 @@ public class LoginSplash extends AppCompatActivity {
 
         try {
             Thread.sleep(2000);
-            startActivity(new Intent(this, HomeActivity.class));
+            startActivity(new Intent(this, WelcomeActivity.class));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 }

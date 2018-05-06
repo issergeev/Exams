@@ -113,7 +113,6 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
             public void onResponse(String response) {
                 if (response != null) {
                     createButton.setEnabled(true);
-
                     progressBar.setVisibility(View.GONE);
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
@@ -193,7 +192,6 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                 return data;
             }
         };
-
         request.add(query);
     }
 
@@ -257,7 +255,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         }
 
         for (String s : UNAVALIABLE_LOGINS) {
-            if (loginText.contains(s)) {
+            if (loginText.toLowerCase().contains(s)) {
                 Snackbar.make(rootLayout, R.string.unavaliableLogin, Snackbar.LENGTH_LONG).show();
                 return false;
             }
@@ -282,18 +280,16 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                 alert.setCancelable(true)
                         .setTitle(R.string.warningTitleText)
                         .setMessage(R.string.passwordUnsafeMessage)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.changeText, null)
+                        .setNegativeButton(R.string.declineText, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 progressBar.setVisibility(View.VISIBLE);
                                 lockScreenOrientation();
                                 createUser();
                             }
-                        })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {}
                         }).show();
+
                 return false;
             }
         }

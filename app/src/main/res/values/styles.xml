@@ -19,6 +19,7 @@
 
     <style name="LoadingTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/loading_background</item>
+        <item name="colorAccent">@color/colorMainNewDark</item>
     </style>
 
 </resources>

@@ -38,4 +38,11 @@
     <string name="resultCardText">View results</string>
     <string name="pass_examsText">Pass exams</string>
     <string name="todo">TODO</string>
+    <string name="exitText">Exit</string>
+    <string name="exitMessage">Do you want to Log Out from your account?</string>
+    <string name="exitMessageSnackbar">Have a nice day!</string>
+    <string name="loadingText">Preparing things…</string>
+    <string name="declineText">Not now</string>
+    <string name="changeText">Change</string>
+    <string name="userNotFound">Unfortunately, such user has not been registered in our system. Press "OK" button to retry Sign In procedure</string>
 </resources>

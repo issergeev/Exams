@@ -12,4 +12,5 @@
     <dimen name="startMargin">10dp</dimen>
     <dimen name="elementsPadding">20dp</dimen>
     <dimen name="averagePadding">25dp</dimen>
+    <dimen name="cardviewMargin">6dp</dimen>
 </resources>

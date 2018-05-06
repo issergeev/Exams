@@ -36,4 +36,23 @@ public class Encryption {
 
         return salt.toString();
     }
+
+    public static String EncryptWithSalt(String password, String salt) {
+        String generatedPassword = "";
+
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update(salt.getBytes());
+            byte[] bytes = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte aByte : bytes) {
+                sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
+            }
+            generatedPassword = sb.toString();
+        }
+        catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+        }
+        return generatedPassword;
+    }
 }

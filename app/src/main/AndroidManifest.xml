@@ -41,7 +41,13 @@
         <activity
             android:name=".HomeActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".LoginAdminActivity"></activity>
+        <activity
+            android:name=".LoginAdminActivity"
+            android:theme="@style/AppThemeAdvanced"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".HomeSplashActivity"
+            android:theme="@style/LoadingTheme"/>
     </application>
 
 </manifest>

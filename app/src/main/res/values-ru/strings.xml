@@ -37,4 +37,11 @@
     <string name="signoutText">Выйти</string>
     <string name="resultCardText">Посмотреть результаты</string>
     <string name="pass_examsText">Присупить к экзаменам</string>
+    <string name="exitText">Выход</string>
+    <string name="exitMessage">Вы действительно хотете выйти?</string>
+    <string name="exitMessageSnackbar">Всего доброго!</string>
+    <string name="loadingText">Загружаем информацию…</string>
+    <string name="declineText">Не сейчас</string>
+    <string name="changeText">Изменить</string>
+    <string name="userNotFound">К сожалению, данный пользователь не зарегистрирован в системе. Для повторной попытки входа нажмите "ОК"</string>
 </resources>
