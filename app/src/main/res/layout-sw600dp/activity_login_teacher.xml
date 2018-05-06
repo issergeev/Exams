@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/rootLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background">
+    android:background="@drawable/home_screen_splash">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/bottomMargin">
 
-        <ImageView
-            android:id="@+id/logo"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/login"
-            android:src="@drawable/logo_drawable"/>
+            android:layout_above="@id/login">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/logo_drawable_advanced"/>
+
+        </RelativeLayout>
 
         <EditText
             android:id="@+id/login"
@@ -53,43 +59,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/bottomMargin"
-            android:layout_below="@id/passwordContainrt_LA"
+            android:layout_alignParentBottom="true"
             android:text="@string/loginButtonText"
             android:textSize="@dimen/textSize"
             android:textStyle="italic"
             android:foreground="@drawable/ripple_effect"
-            android:background="@drawable/button_shape_standard"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/minMargin"
-                android:text="@string/createAccount"
-                android:textSize="@dimen/textSize"
-                android:textStyle="italic"/>
-
-            <Button
-                android:id="@+id/createButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/registerButton"
-                android:background="@color/colorOpacue"/>
-
-        </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="gone"/>
+            android:background="@drawable/button_shape_standard_new"/>
 
     </RelativeLayout>
 

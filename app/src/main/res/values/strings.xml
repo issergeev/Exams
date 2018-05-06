@@ -26,7 +26,7 @@
     <string name="studentIDExistsText">User with such Student ID number has already created</string>
     <string name="SIDLength">Student ID number is invalid</string>
     <string name="loginBeginningInvalid">Login starts with invalid symbol</string>
-    <string name="unavaliableLogin">Input login is forbidden</string>
+    <string name="unavailableLogin">Input login is forbidden</string>
     <string name="passwordShort">Input password is too short</string>
     <string name="passwordUnsafeMessage">Input password in very widespread. It may decrease the safety level of your account.
         We strongly recommend you to use at least one digit, one special symbol and one capital letter in your password.
@@ -39,7 +39,7 @@
     <string name="pass_examsText">Pass exams</string>
     <string name="todo">TODO</string>
     <string name="exitText">Exit</string>
-    <string name="exitMessage">Do you want to Log Out from your account?</string>
+    <string name="exitMessage">Do you want to log out from your account?</string>
     <string name="exitMessageSnackbar">Have a nice day!</string>
     <string name="loadingText">Preparing things…</string>
     <string name="declineText">Not now</string>

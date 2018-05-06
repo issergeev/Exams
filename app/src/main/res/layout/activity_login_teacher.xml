@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorMainNew">
+    android:background="@drawable/home_screen_splash">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/login"
-            android:src="@drawable/main_theme_new_background"/>
+            android:src="@drawable/logo_drawable_advanced"/>
 
         <EditText
             android:id="@+id/login"

@@ -215,6 +215,7 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/topMargin"
         app:fabSize="normal"
-        android:src="@android:drawable/ic_delete"/>
+        android:src="@android:drawable/ic_delete"
+        app:backgroundTint="@color/colorLightRed"/>
 
 </RelativeLayout>

@@ -131,13 +131,13 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 break;
             case Surface.ROTATION_90 :
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 break;
             case Surface.ROTATION_180 :
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
                 break;
             case Surface.ROTATION_270 :
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
                 break;
         }
     }
@@ -167,7 +167,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
 
         for (String s : UNAVALIABLE_LOGINS) {
             if (loginText.toLowerCase().contains(s)) {
-                Snackbar.make(rootLayout, R.string.unavaliableLogin, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(rootLayout, R.string.unavailableLogin, Snackbar.LENGTH_LONG).show();
                 return false;
             }
         }

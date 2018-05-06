@@ -21,4 +21,5 @@
     <color name="colorMainNewDark">#407680</color>
     <color name="colorMainNewAccent">#ab7cf7</color>
     <color name="textColor">#000000</color>
+    <color name="colorLightRed">#ff7f7f</color>
 </resources>

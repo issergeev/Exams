@@ -26,7 +26,7 @@
     <string name="studentIDExistsText">Пользователь с указанным номером студенческого билета уже зарегистрирован</string>
     <string name="SIDLength">Недействительный номер студенческого билета</string>string>
     <string name="loginBeginningInvalid">Логин начинается с запрещенного символа</string>
-    <string name="unavaliableLogin">Введенный логин недоступен</string>
+    <string name="unavailableLogin">Введенный логин недоступен</string>
     <string name="passwordShort">Введенный пароль имеет недостаточную длину</string>
     <string name="passwordUnsafeMessage">Введенный пароль достаточно широко распространен. Использование данного пароля может
     снизить безопасность вашего аккаунта. Мы рекомендуем использовать при составлении пароля как минимум одну латинскую букву,

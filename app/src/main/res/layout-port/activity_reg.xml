@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/SIDInput"
-            android:src="@drawable/main_theme_background"/>
+            android:src="@drawable/logo_drawable"/>
 
         <EditText
             android:id="@+id/SIDInput"

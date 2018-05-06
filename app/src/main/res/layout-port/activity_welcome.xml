@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:foregroundGravity="center"
-            android:src="@drawable/main_theme_background"/>
+            android:src="@drawable/logo_drawable"/>
 
     </RelativeLayout>
 

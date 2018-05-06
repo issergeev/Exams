@@ -17,34 +17,35 @@
             android:configChanges="keyboardHidden"
             android:theme="@style/LoadingTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name=".WelcomeActivity">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".LoginStudentActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".LoginTeacherActivity"
             android:theme="@style/AppThemeAdvanced"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".RegActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".LoginSplash" />
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".LoginSplash"/>
         <activity
             android:name=".HomeActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:theme="@style/HomeScreenTheme"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".LoginAdminActivity"
             android:theme="@style/AppThemeAdvanced"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".HomeSplashActivity"
             android:theme="@style/LoadingTheme"/>
