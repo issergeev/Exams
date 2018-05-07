@@ -45,4 +45,5 @@
     <string name="declineText">Not now</string>
     <string name="changeText">Change</string>
     <string name="userNotFound">Unfortunately, such user has not been registered in our system. Press \"OK\" button to retry Sign In procedure</string>
+    <string name="incorrectIdentityData">Login or password has been input incorectly</string>
 </resources>

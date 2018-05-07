@@ -52,7 +52,7 @@ public class HomeSplashActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String loginURL = "http://exams-online.000webhostapp.com/sign_in.php";
+            final String loginURL = "http://exams-online.online/sign_in.php";
             final RequestQueue request = Volley.newRequestQueue(HomeSplashActivity.this);
             StringRequest query = new StringRequest(Request.Method.POST, loginURL, new Response.Listener<String>() {
                 @Override

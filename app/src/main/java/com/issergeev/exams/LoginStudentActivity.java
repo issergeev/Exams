@@ -13,7 +13,6 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Surface;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -29,21 +28,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class LoginStudentActivity extends AppCompatActivity {
     public static final String DATA_PREFS_NAME = "Data";
 
-    static String[] passData = new String[2];
-
     private String loginText = "", passwordText = "";
-    private String firstName, lastName, patronymic, groupNumber;
-    private int studentIDNumber;
 
     Listener listener;
 
@@ -155,7 +146,7 @@ public class LoginStudentActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-                final String appendixURL = "http://exams-online.000webhostapp.com/get_appendix.php";
+                final String appendixURL = "http://exams-online.online/get_appendix.php";
                 final RequestQueue request = Volley.newRequestQueue(LoginStudentActivity.this);
                 StringRequest query = new StringRequest(Request.Method.POST, appendixURL, new Response.Listener<String>() {
                     @Override
@@ -217,13 +208,13 @@ public class LoginStudentActivity extends AppCompatActivity {
                                     .setPositiveButton(R.string.acceptText, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
-
+                                            loginButton.setEnabled(true);
                                         }
                                     }).show();
                         }
 
                         progressBar.setVisibility(View.GONE);
-
+                        loginButton.setEnabled(true);
                     }
                 }){
                     @Override
