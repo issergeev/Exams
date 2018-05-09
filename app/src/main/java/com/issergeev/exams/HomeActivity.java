@@ -16,8 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity {
-    SharedPreferences examsData = LoginStudentActivity.examsData;
-    SharedPreferences.Editor editor = LoginStudentActivity.editor;
+    private SharedPreferences examsData = WelcomeActivity.examsData;
 
     Listener listener;
 

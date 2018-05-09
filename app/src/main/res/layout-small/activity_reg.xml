@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     android:id="@+id/rootLayout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".RegActivity"
     android:background="@drawable/background">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/bottomMargin">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/SIDInput"
+            android:src="@drawable/logo_drawable"
+            android:contentDescription="@string/todo"
+            android:visibility="gone"/>
 
         <EditText
             android:id="@+id/SIDInput"
@@ -41,7 +50,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/loginInput"
             android:gravity="center"
-            android:layout_marginBottom="@dimen/bottomMargin"
             app:passwordToggleEnabled="true">
 
             <android.support.design.widget.TextInputEditText
@@ -69,12 +77,12 @@
     </RelativeLayout>
 
     <ProgressBar
-        android:id="@+id/progressBar"
-        android:theme="@style/AppTheme.ProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@color/colorOpacue"
-        android:visibility="gone"/>
+            android:id="@+id/progressBar"
+            android:theme="@style/AppTheme.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/colorOpacue"
+            android:visibility="gone"/>
 
 </RelativeLayout>

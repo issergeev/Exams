@@ -11,7 +11,7 @@
     <string name="createAccount">Do not have account?</string>
     <string name="registerButton">Create</string>
     <string name="IDNumber">Student ID</string>
-    <string name="regButtonText">Sing Up</string>
+    <string name="regButtonText">Sign Up</string>
     <string name="createText">Account successfully created</string>
     <string name="userExistsText">Such login has already created</string>
     <string name="warningTitleText">Warning!</string>
@@ -42,8 +42,9 @@
     <string name="exitMessage">Do you want to log out from your account?</string>
     <string name="exitMessageSnackbar">Have a nice day!</string>
     <string name="loadingText">Preparing things…</string>
-    <string name="declineText">Not now</string>
+    <string name="declineText">Continue</string>
     <string name="changeText">Change</string>
     <string name="userNotFound">Unfortunately, such user has not been registered in our system. Press \"OK\" button to retry Sign In procedure</string>
     <string name="incorrectIdentityData">Login or password has been input incorectly</string>
+    <string name="hotspotError">No internet connection. Please, chech your hotspot</string>
 </resources>

@@ -32,6 +32,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginAdminActivity extends AppCompatActivity {
+    SharedPreferences.Editor editor = WelcomeActivity.editor;
+
     private String firstName, lastName, patronymic;
     private String loginText, passwordText, salt;
 
@@ -41,8 +43,6 @@ public class LoginAdminActivity extends AppCompatActivity {
     ProgressBar progressBar;
 
     AlertDialog.Builder alert;
-
-    SharedPreferences.Editor editor = WelcomeActivity.editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,10 +113,16 @@ public class LoginAdminActivity extends AppCompatActivity {
 
                         int errorCode = error.networkResponse.statusCode;
 
-                        if (errorCode == 423) {
-                            Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
-                        } else {
-                            Snackbar.make(rootLayout, R.string.unknownErrorText, Snackbar.LENGTH_SHORT).show();
+                        switch (errorCode) {
+                            case 302 :
+                                Snackbar.make(rootLayout, R.string.hotspotError, Snackbar.LENGTH_SHORT).show();
+                                break;
+                            case 423 :
+                                Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
+                                break;
+                            default :
+                                Snackbar.make(rootLayout, R.string.unknownErrorText, Snackbar.LENGTH_SHORT).show();
+                                break;
                         }
                     } else {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

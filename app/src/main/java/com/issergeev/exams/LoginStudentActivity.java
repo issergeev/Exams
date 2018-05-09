@@ -15,6 +15,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Surface;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,8 +33,11 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginStudentActivity extends AppCompatActivity {
+public class LoginStudentActivity extends AppCompatActivity implements View.OnLongClickListener {
     public static final String DATA_PREFS_NAME = "Data";
+
+    private SharedPreferences examsData;
+    private SharedPreferences.Editor editor;
 
     private String loginText = "", passwordText = "";
 
@@ -48,9 +53,7 @@ public class LoginStudentActivity extends AppCompatActivity {
 
     InputMethodManager inputMethodManager;
     View view;
-
-    public static SharedPreferences examsData;
-    public static SharedPreferences.Editor editor;
+    Animation shakeAnimation;
 
     @Override
     protected void onResume() {
@@ -69,8 +72,8 @@ public class LoginStudentActivity extends AppCompatActivity {
 
         listener = new Listener();
 
-        examsData = getApplicationContext().getSharedPreferences(DATA_PREFS_NAME, Context.MODE_PRIVATE);
-        editor = examsData.edit();
+        examsData = WelcomeActivity.examsData;
+        editor = WelcomeActivity.editor;
 
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -79,13 +82,23 @@ public class LoginStudentActivity extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(listener);
         login = (EditText) findViewById(R.id.login);
+        login.setOnLongClickListener(this);
         password = (TextInputEditText) findViewById(R.id.password);
+        password.setOnLongClickListener(this);
 
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         view = this.getCurrentFocus();
         if (view != null) {
             inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+        shakeAnimation = AnimationUtils.loadAnimation(this, R.anim.forbid_anim);
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        view.startAnimation(shakeAnimation);
+
+        return true;
     }
 
     class Listener implements View.OnClickListener {
@@ -190,10 +203,16 @@ public class LoginStudentActivity extends AppCompatActivity {
 
                             int errorCode = error.networkResponse.statusCode;
 
-                            if (errorCode == 423) {
-                                Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
-                            } else {
-                                Snackbar.make(rootLayout, R.string.unknownErrorText, Snackbar.LENGTH_SHORT).show();
+                            switch (errorCode) {
+                                case 302 :
+                                    Snackbar.make(rootLayout, R.string.hotspotError, Snackbar.LENGTH_SHORT).show();
+                                    break;
+                                case 423 :
+                                    Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
+                                    break;
+                                default :
+                                    Snackbar.make(rootLayout, R.string.unknownErrorText, Snackbar.LENGTH_SHORT).show();
+                                    break;
                             }
                         } else {
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

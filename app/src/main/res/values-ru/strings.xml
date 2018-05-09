@@ -44,4 +44,6 @@
     <string name="declineText">Не сейчас</string>
     <string name="changeText">Изменить</string>
     <string name="userNotFound">К сожалению, данный пользователь не зарегистрирован в системе. Нажмите \"ОК\", чтобы повторить попытку входа</string>
+    <string name="incorrectIdentityData">Логин или пароль введен неверно</string>
+    <string name="hotspotError">Невозможно установить соединение с интернетом. Проверьте вашу точку доступа</string>
 </resources>

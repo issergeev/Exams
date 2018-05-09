@@ -35,8 +35,7 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:layout_marginBottom="@dimen/bottomMargin"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleDrawable="@android:drawable/ic_lock_lock">
+            app:passwordToggleEnabled="true">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/password"

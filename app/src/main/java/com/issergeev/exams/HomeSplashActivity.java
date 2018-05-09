@@ -6,10 +6,12 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.RelativeLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,14 +28,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HomeSplashActivity extends AppCompatActivity {
+    private SharedPreferences.Editor editor = WelcomeActivity.editor;
+
     private String loginText, passwordText, firstName, lastName, patronymic, groupNumber, salt;
     private int studentIDNumber;
 
+    RelativeLayout rootLayout;
     Intent intent;
     AlertDialog.Builder alert;
-
-    SharedPreferences examsData = LoginStudentActivity.examsData;
-    SharedPreferences.Editor editor = LoginStudentActivity.editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class HomeSplashActivity extends AppCompatActivity {
         loginText = intent.getStringExtra("Login");
         passwordText = intent.getStringExtra("Password");
         salt = intent.getStringExtra("Salt");
+
+        rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
 
         new SignIn().execute();
     }
@@ -72,6 +76,8 @@ public class HomeSplashActivity extends AppCompatActivity {
                             patronymic = data.getString("patronymic");
                             groupNumber = data.getString("group_number");
 
+                            editor.putString("Login", loginText);
+                            editor.putString("Password", passwordText);
                             editor.putString("Name", lastName + " " + firstName + " " + patronymic);
                             editor.putInt("SIDNumber", studentIDNumber);
                             editor.putString("GroupNumber", groupNumber);
@@ -103,6 +109,19 @@ public class HomeSplashActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    int errorCode = error.networkResponse.statusCode;
+
+                    switch (errorCode) {
+                        case 302 :
+                            Snackbar.make(rootLayout, R.string.hotspotError, Snackbar.LENGTH_SHORT).show();
+                            break;
+                        case 423 :
+                            Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
+                            break;
+                        default :
+                            Snackbar.make(rootLayout, R.string.unknownErrorText, Snackbar.LENGTH_SHORT).show();
+                            break;
+                    }
                     Log.d("login", error.getMessage());
                 }
             }){

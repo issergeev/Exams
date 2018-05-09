@@ -53,4 +53,13 @@
 
     </RelativeLayout>
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:foregroundGravity="center"
+        android:src="@drawable/logo_drawable"
+        android:visibility="gone"/>
+
 </RelativeLayout>
