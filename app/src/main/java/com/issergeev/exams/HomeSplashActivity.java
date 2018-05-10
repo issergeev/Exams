@@ -73,12 +73,14 @@ public class HomeSplashActivity extends AppCompatActivity {
                             studentIDNumber = data.getInt("studentID_number");
                             firstName = data.getString("first_name");
                             lastName = data.getString("last_name");
-                            patronymic = data.getString("patronymic");
+                            patronymic = data.getString("student_patronymic");
                             groupNumber = data.getString("group_number");
 
                             editor.putString("Login", loginText);
                             editor.putString("Password", passwordText);
-                            editor.putString("Name", lastName + " " + firstName + " " + patronymic);
+                            editor.putString("firstName", firstName);
+                            editor.putString("lastName", lastName);
+                            editor.putString("patronymic", patronymic);
                             editor.putInt("SIDNumber", studentIDNumber);
                             editor.putString("GroupNumber", groupNumber);
                             editor.commit();

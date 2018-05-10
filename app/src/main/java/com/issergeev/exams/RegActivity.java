@@ -31,6 +31,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegActivity extends AppCompatActivity implements View.OnLongClickListener {
+    private final String maskText = "###-##/##";
+
     private String SIDText = "", loginText = "", passwordText = "", appendixText = "";
     private int progressBarVisibility = View.GONE;
 
@@ -86,10 +88,23 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SIDText = SIDInput.getText().toString();
+
+                for (int i = 0; i < SIDText.length(); i++) {
+                    Character SIDChar = SIDText.charAt(i);
+                    Character maskChar = maskText.charAt(i);
+
+                    Log.d("s", maskChar + " " + SIDChar);
+                    if (maskChar.compareTo('#') != 0 && SIDChar.compareTo(maskChar) != 0) {
+                        Snackbar.make(rootLayout, R.string.SIDLength, Snackbar.LENGTH_LONG).show();
+                        return;
+                    }
+                }
+
                 loginText = loginInput.getText().toString();
                 passwordText = passwordInput.getText().toString();
-                SIDText = SIDInput.getText().toString().replace("-", "")
-                        .replace("/", "");
+                SIDText = SIDInput.getText().toString().replaceAll("-", "")
+                        .replaceAll("/", "");
 
                 if (userDataChecker(SIDText, loginText, passwordText)) {
                     createButton.setEnabled(false);
@@ -101,7 +116,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
             }
         });
 
-        mask = new TextMask(SIDInput, "###-##/##");
+        mask = new TextMask(SIDInput, maskText);
         shakeAnimation = AnimationUtils.loadAnimation(this, R.anim.forbid_anim);
     }
 
@@ -146,6 +161,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         final String[] UNSAFE_PASSWORDS = new String[] {"qwerty", "password", "p@ssw0rd", "12345"};
 
         if (SIDText.length() != 7) {
+            Log.d("length", String.valueOf(SIDText.length()));
             Snackbar.make(rootLayout, R.string.SIDLength, Snackbar.LENGTH_LONG).show();
             return false;
         }

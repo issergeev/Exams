@@ -44,8 +44,6 @@ public class TextMask implements View.OnKeyListener, TextWatcher {
             length = charSequence.length() - 1;
         }
 
-        Log.d("Char", String.valueOf(mask.charAt(length)));
-
         if (mask.charAt(length + 1) != '#' && !isDeletePressed) {
             text.setText(text.getText() + mask.substring(length + 1, length + 2));
             text.setSelection(text.getText().length());

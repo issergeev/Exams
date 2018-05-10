@@ -28,7 +28,7 @@
     <string name="loginBeginningInvalid">Login starts with invalid symbol</string>
     <string name="unavailableLogin">Input login is forbidden</string>
     <string name="passwordShort">Input password is too short</string>
-    <string name="passwordUnsafeMessage">Input password in very widespread. It may decrease the safety level of your account.
+    <string name="passwordUnsafeMessage">Input password is very widespread. It may decrease the safety level of your account.
         We strongly recommend you to use at least one digit, one special symbol and one capital letter in your password.
         Would you like to change the password?</string>
     <string name="loginShort">Input login is too short</string>
@@ -47,4 +47,15 @@
     <string name="userNotFound">Unfortunately, such user has not been registered in our system. Press \"OK\" button to retry Sign In procedure</string>
     <string name="incorrectIdentityData">Login or password has been input incorectly</string>
     <string name="hotspotError">No internet connection. Please, chech your hotspot</string>
+    <string name="importantTitle">Important</string>
+    <string name="emailMessage">Email</string>
+    <string name="continueText">Continue</string>
+    <string name="exams_available">Exams available</string>
+    <string name="exams_passed">Exams passed</string>
+    <string name="title_activity_help">HelpActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="emailCorrectMessage">It seems youe email is incorrect. Do you confirm it?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 </resources>

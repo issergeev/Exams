@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:id="@+id/rootLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,10 +19,10 @@
             <RelativeLayout
                 android:id="@+id/heading"
                 android:layout_width="match_parent"
-                android:layout_height="405dp">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:id="@+id/titleLayout"
+                    android:id="@+id/title_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -35,12 +36,21 @@
                         android:src="@drawable/user_icon"/>
 
                     <TextView
-                        android:id="@+id/fullName"
+                        android:id="@+id/FaLName"
                         android:layout_marginTop="10dp"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Full Name"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/secondary_text_light"
+                        android:textSize="21sp"/>
+
+                    <TextView
+                        android:id="@+id/patronymic"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textColor="@android:color/secondary_text_light"
                         android:textSize="21sp"/>
@@ -55,7 +65,7 @@
                     android:layout_marginEnd="@dimen/cardviewMargin"
                     android:layout_marginBottom="@dimen/bottomMargin"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@id/titleLayout"
+                    android:layout_below="@id/title_layout"
                     app:cardCornerRadius="10dp">
 
 
@@ -76,7 +86,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Exams available"
+                                android:text="@string/exams_available"
                                 android:textColor="@android:color/secondary_text_light"
                                 android:textSize="20sp"/>
 
@@ -102,7 +112,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Exams passed"
+                                android:text="@string/exams_passed"
                                 android:textColor="@android:color/secondary_text_light"
                                 android:textSize="20sp" />
 
