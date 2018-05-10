@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <!--android:background="@drawable/background">-->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,48 +13,69 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/profileBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/averagePadding"
+                    android:layout_marginStart="@dimen/cardviewMargin"
+                    android:layout_marginEnd="@dimen/cardviewMargin"
+                    android:layout_marginBottom="@dimen/bottomMargin"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/title_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:orientation="horizontal"
+                        android:layout_margin="@dimen/minMargin">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/averageMargin"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/user_icon"
+                            android:contentDescription="@string/todo"/>
+
+                        <TextView
+                            android:id="@+id/FaLName"
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/secondary_text_light"
+                            android:textSize="21sp"/>
+
+                        <TextView
+                            android:id="@+id/patronymic"
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/secondary_text_light"
+                            android:textSize="@dimen/textSize"/>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/heading"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:id="@+id/title_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_margin="@dimen/minMargin">
-
-                    <ImageView
-                        android:layout_marginTop="45dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:src="@drawable/user_icon"/>
-
-                    <TextView
-                        android:id="@+id/FaLName"
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/secondary_text_light"
-                        android:textSize="21sp"/>
-
-                    <TextView
-                        android:id="@+id/patronymic"
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/secondary_text_light"
-                        android:textSize="21sp"/>
-
-                </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profileBar">
 
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
@@ -65,7 +85,6 @@
                     android:layout_marginEnd="@dimen/cardviewMargin"
                     android:layout_marginBottom="@dimen/bottomMargin"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@id/title_layout"
                     app:cardCornerRadius="10dp">
 
 
@@ -77,11 +96,11 @@
 
                         <LinearLayout
                             android:gravity="center"
-                            android:orientation="vertical"
                             android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:layout_margin="@dimen/cardviewMargin"
-                            android:layout_height="match_parent">
+                            android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -152,8 +171,8 @@
 
                     <ImageView
                         android:id="@+id/src"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:src="@drawable/pass_icon"
                         android:layout_alignParentStart="true"
                         android:contentDescription="@string/todo" />
@@ -225,7 +244,8 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/topMargin"
         app:fabSize="normal"
-        android:src="@android:drawable/ic_delete"
-        app:backgroundTint="@color/colorLightRed"/>
+        android:src="@drawable/test"
+        app:backgroundTint="@color/colorMainLight"
+        android:visibility="gone"/>
 
 </RelativeLayout>

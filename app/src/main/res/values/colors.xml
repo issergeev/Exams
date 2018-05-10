@@ -22,4 +22,5 @@
     <color name="colorMainNewAccent">#ab7cf7</color>
     <color name="textColor">#000000</color>
     <color name="colorLightRed">#ff7f7f</color>
+    <color name="colorMainLight">#ffbe5c</color>
 </resources>

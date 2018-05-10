@@ -49,6 +49,9 @@
         <activity
             android:name=".HomeSplashActivity"
             android:theme="@style/LoadingTheme" />
+        <activity
+            android:name=".TeacherHomeActivity"
+            android:theme="@style/AppThemeAdvanced"/>
     </application>
 
 </manifest>

@@ -46,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_student_home);
 
         listener = new Listener();
 
@@ -69,7 +69,8 @@ public class HomeActivity extends AppCompatActivity {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         email.setLayoutParams(params);
-        alert.setCancelable(true)
+        email.setTextColor(getResources().getColor(R.color.colorMain));
+        alert.setCancelable(false)
                 .setTitle(R.string.importantTitle)
                 .setMessage(R.string.emailMessage)
                 .setView(email)
@@ -169,6 +170,7 @@ public class HomeActivity extends AppCompatActivity {
                             break;
                         default :
                             Snackbar.make(rootLayout, "Error", Snackbar.LENGTH_LONG).show();
+                            Log.d("net", response);
                             break;
                     }
                 }
@@ -195,8 +197,8 @@ public class HomeActivity extends AppCompatActivity {
                 protected Map<String, String> getParams() {
                     HashMap<String, String> userData = new HashMap<>();
 
-                    userData.put("studentID", String.valueOf(examsData.getInt("SIDNumber", 1111111)));
-                    userData.put("student_email", "example");
+                    userData.put("studentID_number", String.valueOf(examsData.getInt("SIDNumber", 1111111)));
+                    userData.put("student_email", strings[0]);
 
                     return userData;
                 }

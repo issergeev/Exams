@@ -46,4 +46,12 @@
     <string name="userNotFound">К сожалению, данный пользователь не зарегистрирован в системе. Нажмите \"ОК\", чтобы повторить попытку входа</string>
     <string name="incorrectIdentityData">Логин или пароль введен неверно</string>
     <string name="hotspotError">Невозможно установить соединение с интернетом. Проверьте вашу точку доступа</string>
+    <string name="importantTitle">Важно</string>
+    <string name="emailMessage">Рекомендуется добавить ваш Email-адресс в аккаунт. Это позволит вам отправлять
+        сообщения другим пользователям, а так же сменить пароль, в случае, если вы забудете его</string>
+    <string name="continueText">Продолжить</string>
+    <string name="exams_available">Доступно экзаменов</string>
+    <string name="exams_passed">Сдано экзаменов</string>
+    <string name="no">Нет</string>
+    <string name="yes">Да</string>
 </resources>
