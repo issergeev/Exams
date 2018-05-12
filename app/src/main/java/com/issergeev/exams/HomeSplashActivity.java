@@ -124,7 +124,7 @@ public class HomeSplashActivity extends AppCompatActivity {
                             Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
                             break;
                         default :
-                            Snackbar.make(rootLayout, R.string.unknownErrorText, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout, R.string.unknownError, Snackbar.LENGTH_SHORT).show();
                             break;
                     }
                     Log.d("login", error.getMessage());

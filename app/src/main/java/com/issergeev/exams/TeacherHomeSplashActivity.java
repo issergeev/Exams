@@ -49,6 +49,11 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
         passwordText = intent.getStringExtra("Password");
         salt = intent.getStringExtra("Salt");
 
+        Log.i("net", salt);
+        if (salt == null) {
+            salt = "0000000000";
+        }
+
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
 
         new SignIn().execute();
@@ -124,7 +129,7 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
                             Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
                             break;
                         default :
-                            Snackbar.make(rootLayout, R.string.unknownErrorText, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout, R.string.unknownError, Snackbar.LENGTH_SHORT).show();
                             break;
                     }
                     Log.d("login", error.getMessage());

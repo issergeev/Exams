@@ -52,6 +52,7 @@
     <string name="continueText">Продолжить</string>
     <string name="exams_available">Доступно экзаменов</string>
     <string name="exams_passed">Сдано экзаменов</string>
+    <string name="emailCorrectMessage">Возможно вы ввели ваш Email екорректно. Если это так, вы можете исправить его</string>
     <string name="no">Нет</string>
     <string name="yes">Да</string>
 </resources>

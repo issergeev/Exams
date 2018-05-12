@@ -1,5 +1,6 @@
 package com.issergeev.exams;
 
+import android.util.Log;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -74,10 +75,11 @@ public class LoginTeacherActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
-                    startActivity(new Intent(LoginTeacherActivity.this, TeacherHomeSplashActivity.class)
-                            .putExtra("Login", loginText)
-                            .putExtra("Password", passwordText)
-                            .putExtra("Salt", response));
+                    Log.i("net", loginText);
+//                    startActivity(new Intent(LoginTeacherActivity.this, TeacherHomeSplashActivity.class)
+//                            .putExtra("Login", loginText)
+//                            .putExtra("Password", passwordText)
+//                            .putExtra("Salt", response));
                 }
             }, new Response.ErrorListener() {
 
@@ -96,7 +98,7 @@ public class LoginTeacherActivity extends AppCompatActivity {
                                 Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
                                 break;
                             default :
-                                Snackbar.make(rootLayout, R.string.unknownErrorText, Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(rootLayout, R.string.unknownError, Snackbar.LENGTH_SHORT).show();
                                 break;
                         }
                     } else {

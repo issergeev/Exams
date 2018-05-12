@@ -19,7 +19,6 @@
     <string name="acceptText">OK</string>
     <string name="connectionErrorText">Unable to establish connection with server. Check you internet connection</string>
     <string name="serverSleepingText">The Server is temporarily unavailable. Please, try to reconnect again later</string>
-    <string name="unknownErrorText">An unknown error occurred</string>
     <string name="notSuchUser">User with such Student ID number is not allowed to register</string>
     <string name="startButtonStudentText">Sign In as Student</string>
     <string name="startButtonTeacherText">Sign In as Teacher</string>
@@ -53,11 +52,8 @@
     <string name="continueText">Continue</string>
     <string name="exams_available">Exams available</string>
     <string name="exams_passed">Exams passed</string>
-    <string name="emailCorrectMessage">It seems your email is incorrect. Do you want to confirm it?</string>
+    <string name="emailCorrectMessage">It seems your email is incorrect. If you have made a mistake you can correct it</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
-    <string name="title_activity_teacher_home">TeacherHomeActivity</string>
-    <string name="title_home">Home</string>
-    <string name="results">Results</string>
-    <string name="students">Students</string>
+    <string name="emailAdded">Your email has been successfully added</string>
 </resources>
