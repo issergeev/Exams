@@ -53,7 +53,7 @@
     <string name="continueText">Continue</string>
     <string name="exams_available">Exams available</string>
     <string name="exams_passed">Exams passed</string>
-    <string name="emailCorrectMessage">It seems your email is incorrect. Do you confirm it?</string>
+    <string name="emailCorrectMessage">It seems your email is incorrect. Do you want to confirm it?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="title_activity_teacher_home">TeacherHomeActivity</string>

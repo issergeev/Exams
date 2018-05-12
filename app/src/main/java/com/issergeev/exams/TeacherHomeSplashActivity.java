@@ -1,5 +1,6 @@
 package com.issergeev.exams;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,19 +28,21 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HomeSplashActivity extends AppCompatActivity {
+public class TeacherHomeSplashActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor = WelcomeActivity.editor;
+    private String firstName, lastName, patronymic;
+    private int teacherIDNumber;
 
-    private String loginText, passwordText, firstName, lastName, patronymic, groupNumber, salt;
-    private int studentIDNumber;
+    String loginText, passwordText, salt;
 
     RelativeLayout rootLayout;
+
     AlertDialog.Builder alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_splash);
+        setContentView(R.layout.activity_teacher_home_splash);
 
         Intent intent = getIntent();
         loginText = intent.getStringExtra("Login");
@@ -51,12 +54,13 @@ public class HomeSplashActivity extends AppCompatActivity {
         new SignIn().execute();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class SignIn extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String loginURL = "http://exams-online.online/sign_in.php";
-            final RequestQueue request = Volley.newRequestQueue(HomeSplashActivity.this);
+            final String loginURL = "http://exams-online.online/sign_in_teacher.php";
+            final RequestQueue request = Volley.newRequestQueue(TeacherHomeSplashActivity.this);
             StringRequest query = new StringRequest(Request.Method.POST, loginURL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -65,34 +69,30 @@ public class HomeSplashActivity extends AppCompatActivity {
                     if (!response.equals("null")) {
                         try {
                             JSONObject serverResponse = new JSONObject(response);
-                            JSONArray user = serverResponse.getJSONArray("User");
+                            JSONArray user = serverResponse.getJSONArray("Teacher");
                             JSONObject data = user.getJSONObject(0);
 
-                            studentIDNumber = data.getInt("studentID_number");
-                            firstName = data.getString("first_name");
-                            lastName = data.getString("last_name");
-                            patronymic = data.getString("student_patronymic");
-                            groupNumber = data.getString("group_number");
+                            teacherIDNumber = data.getInt("teacher_id");
+                            firstName = data.getString("teacher_firstName");
+                            lastName = data.getString("teacher_lastName");
+                            patronymic = data.getString("teacher_patronymic");
 
-                            editor.putString("Login", loginText);
-                            editor.putString("Password", passwordText);
                             editor.putString("firstName", firstName);
                             editor.putString("lastName", lastName);
                             editor.putString("patronymic", patronymic);
-                            editor.putInt("SIDNumber", studentIDNumber);
-                            editor.putString("GroupNumber", groupNumber);
+                            editor.putInt("SIDNumber", teacherIDNumber);
                             editor.commit();
 
                             finish();
-                            startActivity(new Intent(HomeSplashActivity.this, HomeActivity.class));
+                            startActivity(new Intent(TeacherHomeSplashActivity.this, TeacherHomeActivity.class));
                         } catch (JSONException e) {
                             Log.d("login", e.getMessage());
                         }
                     } else {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            alert = new AlertDialog.Builder(HomeSplashActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                            alert = new AlertDialog.Builder(TeacherHomeSplashActivity.this, android.R.style.Theme_Material_Dialog_Alert);
                         } else {
-                            alert = new AlertDialog.Builder(HomeSplashActivity.this);
+                            alert = new AlertDialog.Builder(TeacherHomeSplashActivity.this);
                         }
                         alert.setCancelable(true)
                                 .setTitle(R.string.warningTitleText)

@@ -63,7 +63,7 @@ public class LoginAdminActivity extends AppCompatActivity {
         });
     }
 
-    class SignInChecker extends AsyncTask<Void, Void, Void> {
+    private class SignInChecker extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -163,7 +163,7 @@ public class LoginAdminActivity extends AppCompatActivity {
         }
     }
 
-    class SignIn extends AsyncTask<Void, Void, Void> {
+    private class SignIn extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {

@@ -225,7 +225,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         return true;
     }
 
-    class Registrar extends AsyncTask<Void, Void, Void> {
+    private class Registrar extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {

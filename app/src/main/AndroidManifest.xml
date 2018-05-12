@@ -37,7 +37,6 @@
         <activity
             android:name=".RegActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".LoginSplash" />
         <activity
             android:name=".HomeActivity"
             android:theme="@style/HomeScreenTheme"
@@ -51,7 +50,10 @@
             android:theme="@style/LoadingTheme" />
         <activity
             android:name=".TeacherHomeActivity"
-            android:theme="@style/AppThemeAdvanced"/>
+            android:theme="@style/AppThemeAdvanced" />
+        <activity
+            android:name=".TeacherHomeSplashActivity"
+            android:theme="@style/LoadingTheme"/>
     </application>
 
 </manifest>

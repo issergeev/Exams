@@ -23,4 +23,5 @@
     <color name="textColor">#000000</color>
     <color name="colorLightRed">#ff7f7f</color>
     <color name="colorMainLight">#ffbe5c</color>
+    <color name="colorNewLight">#79d3e2</color>
 </resources>

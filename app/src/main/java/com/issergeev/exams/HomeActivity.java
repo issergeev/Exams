@@ -1,9 +1,8 @@
 package com.issergeev.exams;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -26,10 +24,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,9 +33,10 @@ public class HomeActivity extends AppCompatActivity {
     Listener listener;
 
     RelativeLayout rootLayout;
-    AlertDialog.Builder alert, alert_email;
     FloatingActionButton logoutButton;
     TextView fullName, patronymic;
+
+    AlertDialog.Builder alert, alert_email;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,8 +52,8 @@ public class HomeActivity extends AppCompatActivity {
         fullName = (TextView) findViewById(R.id.FaLName);
         patronymic = (TextView) findViewById(R.id.patronymic);
         fullName.setText(examsData.getString("firstName", "First Name") + " " +
-                examsData.getString("lastName", "Last Name"));
-        patronymic.setText(examsData.getString("patronymic", "Patronymic"));
+                examsData.getString("patronymic", "Patronymic"));
+        patronymic.setText(examsData.getString("lastName", "Last Name"));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             alert = new AlertDialog.Builder(HomeActivity.this, android.R.style.Theme_Material_Dialog_Alert);
@@ -77,34 +72,37 @@ public class HomeActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.continueText, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        final String emailText = email.getText().toString();
-                        if (emailText.trim().length() == 0 || !emailText.contains("@") ||
-                                !emailText.contains(".") || emailText.startsWith("@") || emailText.endsWith("@") ||
-                                emailText.startsWith(".") || emailText.endsWith(".")) {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                alert_email = new AlertDialog.Builder(HomeActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-                            } else {
-                                alert_email = new AlertDialog.Builder(HomeActivity.this);
-                            }
-                            final EditText email = new EditText(HomeActivity.this);
-                            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                                    RelativeLayout.LayoutParams.WRAP_CONTENT);
-                            email.setLayoutParams(params);
-                            alert_email.setCancelable(true)
-                                    .setTitle(R.string.warningTitleText)
-                                    .setMessage(R.string.emailCorrectMessage)
-                                    .setView(email)
-                                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            new EmailSender().execute(email.getText().toString());
-                                        }
-                                    })
-                                    .setNegativeButton(R.string.no, null)
-                                    .show();
+                    final String emailText = email.getText().toString();
+                    if (emailText.trim().length() == 0 || !emailText.contains("@") ||
+                            !emailText.contains(".") || emailText.startsWith("@") || emailText.endsWith("@") ||
+                            emailText.startsWith(".") || emailText.endsWith(".")) {
+                        final EditText email_c = new EditText(HomeActivity.this);
+                        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                                RelativeLayout.LayoutParams.WRAP_CONTENT);
+                        email_c.setLayoutParams(params);
+                        email_c.setTextColor(getResources().getColor(R.color.colorMain));
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            alert_email = new AlertDialog.Builder(HomeActivity.this, android.R.style.Theme_Material_Dialog_Alert);
                         } else {
-                            new EmailSender().execute(email.getText().toString());
+                            alert_email = new AlertDialog.Builder(HomeActivity.this);
                         }
+                        final EditText email = new EditText(HomeActivity.this);
+                        email.setLayoutParams(params);
+                        alert_email.setCancelable(true)
+                                .setTitle(R.string.warningTitleText)
+                                .setMessage(R.string.emailCorrectMessage)
+                                .setView(email)
+                                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        new EmailSender().execute(email.getText().toString());
+                                    }
+                                })
+                                .setNegativeButton(R.string.no, null)
+                                .show();
+                    } else {
+                        new EmailSender().execute(email.getText().toString());
+                    }
                     }
                 })
                 .show();
@@ -155,7 +153,8 @@ public class HomeActivity extends AppCompatActivity {
                 .show();
     }
 
-    class EmailSender extends AsyncTask<String, Void, Void> {
+    @SuppressLint("StaticFieldLeak")
+    private class EmailSender extends AsyncTask<String, Void, Void> {
 
         @Override
         protected Void doInBackground(final String... strings) {

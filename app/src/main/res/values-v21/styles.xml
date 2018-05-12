@@ -18,11 +18,6 @@
         <!--<item name="android:background">@color/colorMain</item>-->
     </style>
 
-    <style name="LoadingTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/loading_background</item>
-        <item name="colorAccent">@color/colorMainNewDark</item>
-    </style>
-
     <style name="AppTheme.ProgressBar">
         <item name="colorAccent">@color/colorProgressbar</item>
     </style>

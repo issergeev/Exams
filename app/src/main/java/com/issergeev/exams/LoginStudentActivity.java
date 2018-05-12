@@ -36,8 +36,8 @@ import java.util.Map;
 public class LoginStudentActivity extends AppCompatActivity implements View.OnLongClickListener {
     public static final String DATA_PREFS_NAME = "Data";
 
-    private SharedPreferences examsData;
-    private SharedPreferences.Editor editor;
+    private SharedPreferences examsData = WelcomeActivity.examsData;
+    private SharedPreferences.Editor editor = WelcomeActivity.editor;
 
     private String loginText = "", passwordText = "";
 
@@ -71,9 +71,6 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
         setContentView(R.layout.activity_login_student);
 
         listener = new Listener();
-
-        examsData = WelcomeActivity.examsData;
-        editor = WelcomeActivity.editor;
 
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -155,7 +152,7 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
         editor.apply();
     }
 
-    class SignInChecker extends AsyncTask<Void, Void, Void> {
+    private class SignInChecker extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -164,35 +161,14 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
                 StringRequest query = new StringRequest(Request.Method.POST, appendixURL, new Response.Listener<String>() {
                     @Override
                     public void onResponse(final String response) {
-                        if (response.equals("")) {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                alert = new AlertDialog.Builder(LoginStudentActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-                            } else {
-                                alert = new AlertDialog.Builder(LoginStudentActivity.this);
-                            }
-                            alert.setCancelable(false)
-                                    .setTitle(R.string.warningTitleText)
-                                    .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .setMessage(R.string.userNotFound)
-                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            loginButton.setEnabled(true);
-                                            progressBar.setVisibility(View.GONE);
-                                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
-                                        }
-                                    })
-                                    .show();
-                        } else {
-                            loginButton.setEnabled(true);
-                            progressBar.setVisibility(View.GONE);
-                            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+                        loginButton.setEnabled(true);
+                        progressBar.setVisibility(View.GONE);
+                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
-                            startActivity(new Intent(LoginStudentActivity.this, HomeSplashActivity.class)
-                                    .putExtra("Login", loginText)
-                                    .putExtra("Password", passwordText)
-                                    .putExtra("Salt", response));
-                        }
+                        startActivity(new Intent(LoginStudentActivity.this, HomeSplashActivity.class)
+                                .putExtra("Login", loginText)
+                                .putExtra("Password", passwordText)
+                                .putExtra("Salt", response));
                     }
                 }, new Response.ErrorListener() {
 
