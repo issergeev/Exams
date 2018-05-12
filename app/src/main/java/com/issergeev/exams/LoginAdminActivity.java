@@ -1,5 +1,6 @@
 package com.issergeev.exams;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,7 +33,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginAdminActivity extends AppCompatActivity {
-    SharedPreferences.Editor editor = WelcomeActivity.editor;
+    private static final String DATA_PREFS_NAME = "Data";
+
+    private static SharedPreferences examsData;
+    private static SharedPreferences.Editor editor;
 
     private String firstName, lastName, patronymic;
     private String loginText, passwordText, salt;
@@ -48,6 +52,9 @@ public class LoginAdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_admin);
+
+        examsData = getSharedPreferences(DATA_PREFS_NAME, Context.MODE_PRIVATE);
+        editor = examsData.edit();
 
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
         login = (EditText) findViewById(R.id.login);

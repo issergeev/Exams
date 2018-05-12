@@ -1,5 +1,6 @@
 package com.issergeev.exams;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -12,7 +13,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class TeacherHomeActivity extends AppCompatActivity {
-    private SharedPreferences examsData = WelcomeActivity.examsData;
+    private static final String DATA_PREFS_NAME = "Data";
+
+    private static SharedPreferences examsData;
+    private static SharedPreferences.Editor editor;
 
     Listener listener;
 
@@ -20,12 +24,15 @@ public class TeacherHomeActivity extends AppCompatActivity {
     FloatingActionButton logoutButton;
     TextView fullName, patronymic;
 
-    AlertDialog.Builder alert, alert_email;
+    AlertDialog.Builder alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_home);
+
+        examsData = getSharedPreferences(DATA_PREFS_NAME, Context.MODE_PRIVATE);
+        editor = examsData.edit();
 
         listener = new Listener();
 

@@ -6,17 +6,15 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <!--<item name="android:background">@color/colorMain</item>-->
         <item name="android:windowActivityTransitions">true</item>
     </style>
 
-    <style name="AppThemeAdvanced" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorMainNew</item>
-        <item name="colorPrimaryDark">@color/colorMainNewDark</item>
-        <item name="colorAccent">@color/colorMainNewAccent</item>
-        <!--<item name="android:background">@color/colorMain</item>-->
-    </style>
+    <!--<style name="AppThemeAdvanced" parent="Theme.AppCompat.Light.DarkActionBar">-->
+        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+        <!--<item name="colorPrimary">@color/colorMainNew</item>-->
+        <!--<item name="colorPrimaryDark">@color/colorMainNewDark</item>-->
+        <!--<item name="colorAccent">@color/colorMainNewAccent</item>-->
+    <!--</style>-->
 
     <style name="AppTheme.ProgressBar">
         <item name="colorAccent">@color/colorProgressbar</item>

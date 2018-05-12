@@ -28,10 +28,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
-    public static final String DATA_PREFS_NAME = "Data";
+    private static final String DATA_PREFS_NAME = "Data";
 
-    public static SharedPreferences examsData;
-    public static SharedPreferences.Editor editor;
+    private static SharedPreferences examsData;
+    private static SharedPreferences.Editor editor;
 
     Listener listener;
 

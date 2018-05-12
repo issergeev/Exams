@@ -1,6 +1,7 @@
 package com.issergeev.exams;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,9 +30,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TeacherHomeSplashActivity extends AppCompatActivity {
-    private SharedPreferences.Editor editor = WelcomeActivity.editor;
+    private static final String DATA_PREFS_NAME = "Data";
+
     private String firstName, lastName, patronymic;
     private int teacherIDNumber;
+
+    private static SharedPreferences examsData;
+    private static SharedPreferences.Editor editor;
 
     String loginText, passwordText, salt;
 
@@ -44,12 +49,14 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_home_splash);
 
+        examsData = getSharedPreferences(DATA_PREFS_NAME, Context.MODE_PRIVATE);
+        editor = examsData.edit();
+
         Intent intent = getIntent();
         loginText = intent.getStringExtra("Login");
         passwordText = intent.getStringExtra("Password");
         salt = intent.getStringExtra("Salt");
 
-        Log.i("net", salt);
         if (salt == null) {
             salt = "0000000000";
         }

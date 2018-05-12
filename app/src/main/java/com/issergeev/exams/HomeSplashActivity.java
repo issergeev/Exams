@@ -1,5 +1,6 @@
 package com.issergeev.exams;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,7 +29,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HomeSplashActivity extends AppCompatActivity {
-    private SharedPreferences.Editor editor = WelcomeActivity.editor;
+    private static final String DATA_PREFS_NAME = "Data";
+
+    private static SharedPreferences examsData;
+    private static SharedPreferences.Editor editor;
 
     private String loginText, passwordText, firstName, lastName, patronymic, groupNumber, salt;
     private int studentIDNumber;
@@ -40,6 +44,9 @@ public class HomeSplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_splash);
+
+        examsData = getSharedPreferences(DATA_PREFS_NAME, Context.MODE_PRIVATE);
+        editor = examsData.edit();
 
         Intent intent = getIntent();
         loginText = intent.getStringExtra("Login");

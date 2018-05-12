@@ -1,5 +1,8 @@
 package com.issergeev.exams;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
@@ -28,7 +31,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginTeacherActivity extends AppCompatActivity {
+    private static final String DATA_PREFS_NAME = "Data";
     private String loginText, passwordText;
+
+    private static SharedPreferences examsData;
+    private static SharedPreferences.Editor editor;
 
     RelativeLayout rootLayout;
     EditText login, password;
@@ -42,11 +49,13 @@ public class LoginTeacherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_teacher);
 
+        examsData = getSharedPreferences(DATA_PREFS_NAME, Context.MODE_PRIVATE);
+        editor = examsData.edit();
+
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
         login = (EditText) findViewById(R.id.login);
         password = (EditText) findViewById(R.id.password);
         loginButton = (Button) findViewById(R.id.loginButton);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,6 +68,7 @@ public class LoginTeacherActivity extends AppCompatActivity {
                 new SignInChecker().execute();
             }
         });
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -76,10 +86,10 @@ public class LoginTeacherActivity extends AppCompatActivity {
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
                     Log.i("net", loginText);
-//                    startActivity(new Intent(LoginTeacherActivity.this, TeacherHomeSplashActivity.class)
-//                            .putExtra("Login", loginText)
-//                            .putExtra("Password", passwordText)
-//                            .putExtra("Salt", response));
+                    startActivity(new Intent(LoginTeacherActivity.this, TeacherHomeSplashActivity.class)
+                            .putExtra("Login", loginText)
+                            .putExtra("Password", passwordText)
+                            .putExtra("Salt", response));
                 }
             }, new Response.ErrorListener() {
 

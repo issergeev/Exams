@@ -34,10 +34,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginStudentActivity extends AppCompatActivity implements View.OnLongClickListener {
-    public static final String DATA_PREFS_NAME = "Data";
+    private static final String DATA_PREFS_NAME = "Data";
 
-    private SharedPreferences examsData = WelcomeActivity.examsData;
-    private SharedPreferences.Editor editor = WelcomeActivity.editor;
+    private static SharedPreferences examsData;
+    private static SharedPreferences.Editor editor;
 
     private String loginText = "", passwordText = "";
 
@@ -69,6 +69,9 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_student);
+
+        examsData = getSharedPreferences(DATA_PREFS_NAME, Context.MODE_PRIVATE);
+        editor = examsData.edit();
 
         listener = new Listener();
 

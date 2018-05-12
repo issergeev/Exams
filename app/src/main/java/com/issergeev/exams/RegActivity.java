@@ -1,5 +1,6 @@
 package com.issergeev.exams;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -31,12 +32,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegActivity extends AppCompatActivity implements View.OnLongClickListener {
+    private static final String DATA_PREFS_NAME = "Data";
     private final String maskText = "###-##/##";
-
     private String SIDText = "", loginText = "", passwordText = "", appendixText = "";
     private int progressBarVisibility = View.GONE;
-
     static String[] passData = new String[2];
+
+    private static SharedPreferences examsData;
+    private static SharedPreferences.Editor editor;
 
     RelativeLayout rootLayout;
     EditText SIDInput, loginInput, passwordInput;
@@ -47,8 +50,6 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
 
     TextMask mask;
     Animation shakeAnimation;
-    SharedPreferences examsData = WelcomeActivity.examsData;
-    SharedPreferences.Editor editor = WelcomeActivity.editor;
 
     @Override
     protected void onResume() {
@@ -72,6 +73,9 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reg);
+
+        examsData = getSharedPreferences(DATA_PREFS_NAME, Context.MODE_PRIVATE);
+        editor = examsData.edit();
 
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
 
