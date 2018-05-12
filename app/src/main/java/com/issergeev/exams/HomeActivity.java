@@ -78,33 +78,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         final String emailText = email.getText().toString();
-                        if (emailText.trim().length() == 0 || !emailText.contains("@") ||
-                                !emailText.contains(".") || emailText.startsWith("@") || emailText.endsWith("@") ||
-                                emailText.startsWith(".") || emailText.endsWith(".")) {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                alert_email = new AlertDialog.Builder(HomeActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-                            } else {
-                                alert_email = new AlertDialog.Builder(HomeActivity.this);
-                            }
-                            final EditText email = new EditText(HomeActivity.this);
-                            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                                    RelativeLayout.LayoutParams.WRAP_CONTENT);
-                            email.setLayoutParams(params);
-                            alert_email.setCancelable(true)
-                                    .setTitle(R.string.warningTitleText)
-                                    .setMessage(R.string.emailCorrectMessage)
-                                    .setView(email)
-                                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            new EmailSender().execute(email.getText().toString());
-                                        }
-                                    })
-                                    .setNegativeButton(R.string.no, null)
-                                    .show();
-                        } else {
                             new EmailSender().execute(email.getText().toString());
-                        }
                     }
                 })
                 .show();
