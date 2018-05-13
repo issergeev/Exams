@@ -92,7 +92,7 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
                             editor.putString("firstName", firstName);
                             editor.putString("lastName", lastName);
                             editor.putString("patronymic", patronymic);
-                            editor.putInt("SIDNumber", teacherIDNumber);
+                            editor.putInt("TeacherIDNumber", teacherIDNumber);
                             editor.commit();
 
                             finish();

@@ -2,12 +2,14 @@ package com.issergeev.exams;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ public class TeacherHomeActivity extends AppCompatActivity {
     Listener listener;
 
     RelativeLayout rootLayout;
+    CardView examsCard, studentsCard;
     FloatingActionButton logoutButton;
     TextView fullName, patronymic;
 
@@ -37,11 +40,14 @@ public class TeacherHomeActivity extends AppCompatActivity {
         listener = new Listener();
 
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
-        fullName = (TextView) findViewById(R.id.FaLName);
+        fullName = (TextView) findViewById(R.id.FaL_name);
         patronymic = (TextView) findViewById(R.id.patronymic);
 
         logoutButton = (FloatingActionButton) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(listener);
+        examsCard = (CardView) findViewById(R.id.exams_view);
+        studentsCard = (CardView) findViewById(R.id.students_view);
+        studentsCard.setOnClickListener(listener);
 
         fullName.setText(examsData.getString("firstName", "First Name") + " " +
             examsData.getString("patronymic", "Patronymic"));
@@ -90,6 +96,9 @@ public class TeacherHomeActivity extends AppCompatActivity {
                             })
                             .setNegativeButton(android.R.string.no, null)
                             .show();
+                    break;
+                case R.id.students_view :
+                    startActivity(new Intent(TeacherHomeActivity.this, StudentsActivity.class));
                     break;
             }
         }

@@ -56,4 +56,5 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="emailAdded">Your email has been successfully added</string>
+    <string name="no_groups_found">There are no groups which you can manage</string>
 </resources>

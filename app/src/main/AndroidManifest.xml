@@ -53,7 +53,8 @@
             android:theme="@style/AppThemeAdvanced" />
         <activity
             android:name=".TeacherHomeSplashActivity"
-            android:theme="@style/LoadingTheme"/>
+            android:theme="@style/LoadingTheme" />
+        <activity android:name=".StudentsActivity"/>
     </application>
 
 </manifest>

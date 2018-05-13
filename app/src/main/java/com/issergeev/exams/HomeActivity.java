@@ -54,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
         logoutButton = (FloatingActionButton) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(listener);
 
-        fullName = (TextView) findViewById(R.id.FaLName);
+        fullName = (TextView) findViewById(R.id.FaL_name);
         patronymic = (TextView) findViewById(R.id.patronymic);
         fullName.setText(examsData.getString("firstName", "First Name") + " " +
                 examsData.getString("lastName", "Last Name"));
