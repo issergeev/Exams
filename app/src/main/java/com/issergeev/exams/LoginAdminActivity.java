@@ -1,8 +1,8 @@
 package com.issergeev.exams;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
@@ -70,13 +70,14 @@ public class LoginAdminActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class SignInChecker extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String appendixURL = "http://exams-online.online/get_appendix_admin.php";
+            final String APPENDIX_URL = "http://exams-online.online/get_appendix_admin.php";
             final RequestQueue request = Volley.newRequestQueue(LoginAdminActivity.this);
-            StringRequest query = new StringRequest(Request.Method.POST, appendixURL, new Response.Listener<String>() {
+            StringRequest query = new StringRequest(Request.Method.POST, APPENDIX_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(final String response) {
                     if (response.equals("")) {
@@ -86,9 +87,9 @@ public class LoginAdminActivity extends AppCompatActivity {
                             alert = new AlertDialog.Builder(LoginAdminActivity.this);
                         }
                         alert.setCancelable(false)
-                                .setTitle(R.string.warningTitleText)
+                                .setTitle(R.string.warning_title_text)
                                 .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setMessage(R.string.incorrectIdentityData)
+                                .setMessage(R.string.incorrect_identity_data)
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -122,13 +123,13 @@ public class LoginAdminActivity extends AppCompatActivity {
 
                         switch (errorCode) {
                             case 302 :
-                                Snackbar.make(rootLayout, R.string.hotspotError, Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(rootLayout, R.string.hotspot_error, Snackbar.LENGTH_SHORT).show();
                                 break;
                             case 423 :
-                                Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(rootLayout, R.string.server_sleeping_text, Snackbar.LENGTH_SHORT).show();
                                 break;
                             default :
-                                Snackbar.make(rootLayout, R.string.unknownError, Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_SHORT).show();
                                 break;
                         }
                     } else {
@@ -138,10 +139,10 @@ public class LoginAdminActivity extends AppCompatActivity {
                             alert = new AlertDialog.Builder(LoginAdminActivity.this);
                         }
                         alert.setCancelable(true)
-                                .setTitle(R.string.warningTitleText)
+                                .setTitle(R.string.warning_title_text)
                                 .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setMessage(R.string.connectionErrorText)
-                                .setPositiveButton(R.string.acceptText, new DialogInterface.OnClickListener() {
+                                .setMessage(R.string.connection_error_text)
+                                .setPositiveButton(R.string.accept_text, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -170,13 +171,14 @@ public class LoginAdminActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class SignIn extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String loginURL = "http://exams-online.online/sign_in_admin.php";
+            final String LOGIN_URL = "http://exams-online.online/sign_in_admin.php";
             final RequestQueue request = Volley.newRequestQueue(LoginAdminActivity.this);
-            StringRequest query = new StringRequest(Request.Method.POST, loginURL, new Response.Listener<String>() {
+            StringRequest query = new StringRequest(Request.Method.POST, LOGIN_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
@@ -210,9 +212,9 @@ public class LoginAdminActivity extends AppCompatActivity {
                             alert = new AlertDialog.Builder(LoginAdminActivity.this);
                         }
                         alert.setCancelable(true)
-                                .setTitle(R.string.warningTitleText)
+                                .setTitle(R.string.warning_title_text)
                                 .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setMessage(R.string.incorrectIdentityData)
+                                .setMessage(R.string.incorrect_identity_data)
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -238,6 +240,7 @@ public class LoginAdminActivity extends AppCompatActivity {
                 }
             };
             request.add(query);
+
             return null;
         }
     }

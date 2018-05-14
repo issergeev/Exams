@@ -1,5 +1,6 @@
 package com.issergeev.exams;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -33,7 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     private static SharedPreferences examsData;
     private static SharedPreferences.Editor editor;
 
-    Listener listener;
+    private Listener listener;
 
     RelativeLayout rootLayout;
     AlertDialog.Builder alert, alert_email;
@@ -72,10 +73,10 @@ public class HomeActivity extends AppCompatActivity {
             email.setLayoutParams(params);
             email.setTextColor(getResources().getColor(R.color.colorMain));
             alert.setCancelable(false)
-                    .setTitle(R.string.importantTitle)
-                    .setMessage(R.string.emailMessage)
+                    .setTitle(R.string.important_title)
+                    .setMessage(R.string.email_message)
                     .setView(email)
-                    .setPositiveButton(R.string.continueText, new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.continue_text, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             final String emailText = email.getText().toString();
@@ -95,15 +96,15 @@ public class HomeActivity extends AppCompatActivity {
                                 email_new.setText(emailText);
 
                                 alert_email.setCancelable(true)
-                                        .setTitle(R.string.warningTitleText)
-                                        .setMessage(R.string.emailCorrectMessage)
+                                        .setTitle(R.string.warning_title_text)
+                                        .setMessage(R.string.email_correct_message)
                                         .setView(email_new)
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 new EmailSender().execute(email_new.getText().toString());
                                                 editor.putBoolean("isFirstStart", false);
-                                                editor.commit();
+                                                editor.apply();
                                             }
                                         })
                                         .setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -111,13 +112,13 @@ public class HomeActivity extends AppCompatActivity {
                                             public void onCancel(DialogInterface dialogInterface) {
                                                 new EmailSender().execute(email_new.getText().toString());
                                                 editor.putBoolean("isFirstStart", false);
-                                                editor.commit();
+                                                editor.apply();
                                             }
                                         }).show();
                             } else {
                                 new EmailSender().execute(email.getText().toString());
                                 editor.putBoolean("isFirstStart", false);
-                                editor.commit();
+                                editor.apply();
                             }
                         }
                     })
@@ -125,7 +126,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    class Listener implements View.OnClickListener {
+    private class Listener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
@@ -136,8 +137,8 @@ public class HomeActivity extends AppCompatActivity {
                         alert = new AlertDialog.Builder(HomeActivity.this);
                     }
                     alert.setCancelable(true)
-                            .setTitle(R.string.exitText)
-                            .setMessage(R.string.exitMessage)
+                            .setTitle(R.string.exit_text)
+                            .setMessage(R.string.exit_message)
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -158,8 +159,8 @@ public class HomeActivity extends AppCompatActivity {
             alert = new AlertDialog.Builder(HomeActivity.this);
         }
         alert.setCancelable(true)
-                .setTitle(R.string.exitText)
-                .setMessage(R.string.exitMessage)
+                .setTitle(R.string.exit_text)
+                .setMessage(R.string.exit_message)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -170,21 +171,30 @@ public class HomeActivity extends AppCompatActivity {
                 .show();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        editor.putBoolean("isFirstStart", false);
+        editor.apply();
+    }
+
+    @SuppressLint("StaticFieldLeak")
     class EmailSender extends AsyncTask<String, Void, Void> {
 
         @Override
         protected Void doInBackground(final String... strings) {
-            final String loginURL = "http://exams-online.online/add_email.php";
+            final String LOGIN_URL = "http://exams-online.online/add_email.php";
             final RequestQueue request = Volley.newRequestQueue(HomeActivity.this);
-            StringRequest query = new StringRequest(Request.Method.POST, loginURL, new Response.Listener<String>() {
+            StringRequest query = new StringRequest(Request.Method.POST, LOGIN_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     switch (response) {
                         case "Success" :
-                            Snackbar.make(rootLayout, R.string.emailAdded, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout, R.string.email_added, Snackbar.LENGTH_SHORT).show();
                             break;
                         default :
-                            Snackbar.make(rootLayout, R.string.unknownError, Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
                             Log.d("net", response);
                             break;
                     }
@@ -196,13 +206,13 @@ public class HomeActivity extends AppCompatActivity {
 
                     switch (errorCode) {
                         case 302 :
-                            Snackbar.make(rootLayout, R.string.hotspotError, Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(rootLayout, R.string.hotspot_error, Snackbar.LENGTH_LONG).show();
                             break;
                         case 423 :
-                            Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(rootLayout, R.string.server_sleeping_text, Snackbar.LENGTH_LONG).show();
                             break;
                         default :
-                            Snackbar.make(rootLayout, R.string.unknownError, Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
                             break;
                     }
                     Log.d("login", error.getMessage());

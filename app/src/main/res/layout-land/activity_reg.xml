@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:gravity="start"
-            android:hint="@string/IDNumber"
+            android:hint="@string/id_number"
             android:inputType="numberDecimal"
             android:digits="1234567890"
             android:maxLength="9"/>
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/SIDInput"
             android:gravity="start"
-            android:hint="@string/loginText"
+            android:hint="@string/login_text"
             android:inputType="text"
             android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"/>
 
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="@string/passwordText"
+                android:hint="@string/password_text"
                 android:gravity="start"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/bottomMargin"
-            android:text="@string/regButtonText"
+            android:text="@string/reg_button_text"
             android:textStyle="italic"
             android:textSize="@dimen/textSize"
             android:foreground="@drawable/ripple_effect"

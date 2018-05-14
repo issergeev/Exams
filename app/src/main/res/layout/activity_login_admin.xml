@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/colorMainNew">
 
     <RelativeLayout
@@ -17,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/topMargin"
             android:layout_alignParentTop="true"
-            android:hint="@string/loginText"
+            android:hint="@string/login_text"
             android:inputType="text"
             android:gravity="start"/>
 
@@ -28,7 +29,7 @@
             android:layout_marginTop="@dimen/averageMargin"
             android:layout_below="@id/login"
             android:inputType="textPassword"
-            android:hint="@string/passwordText"
+            android:hint="@string/password_text"
             android:gravity="start"/>
 
         <Button
@@ -37,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/bottomMargin"
             android:layout_alignParentBottom="true"
-            android:text="@string/loginButtonText"
+            android:text="@string/login_button_text"
             android:textSize="@dimen/textSize"
             android:textStyle="italic"
             android:foreground="@drawable/ripple_effect"

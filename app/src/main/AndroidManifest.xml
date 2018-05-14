@@ -54,7 +54,8 @@
         <activity
             android:name=".TeacherHomeSplashActivity"
             android:theme="@style/LoadingTheme" />
-        <activity android:name=".StudentsActivity"/>
+        <activity android:name=".StudentsActivity" />
+        <activity android:name=".AddNewStudentActivity"></activity>
     </application>
 
 </manifest>

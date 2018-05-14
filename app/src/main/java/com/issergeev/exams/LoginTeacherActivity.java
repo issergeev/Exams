@@ -2,8 +2,6 @@ package com.issergeev.exams;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -56,6 +54,8 @@ public class LoginTeacherActivity extends AppCompatActivity {
         login = (EditText) findViewById(R.id.login);
         password = (EditText) findViewById(R.id.password);
         loginButton = (Button) findViewById(R.id.loginButton);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +68,6 @@ public class LoginTeacherActivity extends AppCompatActivity {
                 new SignInChecker().execute();
             }
         });
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -76,16 +75,15 @@ public class LoginTeacherActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String appendixURL = "http://exams-online.online/get_appendix_teacher.php";
+            final String APPENDIX_URL = "http://exams-online.online/get_appendix_teacher.php";
             final RequestQueue request = Volley.newRequestQueue(LoginTeacherActivity.this);
-            StringRequest query = new StringRequest(Request.Method.POST, appendixURL, new Response.Listener<String>() {
+            StringRequest query = new StringRequest(Request.Method.POST, APPENDIX_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(final String response) {
                     loginButton.setEnabled(true);
                     progressBar.setVisibility(View.GONE);
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
-                    Log.i("net", loginText);
                     startActivity(new Intent(LoginTeacherActivity.this, TeacherHomeSplashActivity.class)
                             .putExtra("Login", loginText)
                             .putExtra("Password", passwordText)
@@ -102,13 +100,13 @@ public class LoginTeacherActivity extends AppCompatActivity {
 
                         switch (errorCode) {
                             case 302 :
-                                Snackbar.make(rootLayout, R.string.hotspotError, Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(rootLayout, R.string.hotspot_error, Snackbar.LENGTH_SHORT).show();
                                 break;
                             case 423 :
-                                Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(rootLayout, R.string.server_sleeping_text, Snackbar.LENGTH_SHORT).show();
                                 break;
                             default :
-                                Snackbar.make(rootLayout, R.string.unknownError, Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_SHORT).show();
                                 break;
                         }
                     } else {
@@ -118,10 +116,10 @@ public class LoginTeacherActivity extends AppCompatActivity {
                             alert = new AlertDialog.Builder(LoginTeacherActivity.this);
                         }
                         alert.setCancelable(true)
-                                .setTitle(R.string.warningTitleText)
+                                .setTitle(R.string.warning_title_text)
                                 .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setMessage(R.string.connectionErrorText)
-                                .setPositiveButton(R.string.acceptText, new DialogInterface.OnClickListener() {
+                                .setMessage(R.string.connection_error_text)
+                                .setPositiveButton(R.string.accept_text, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         loginButton.setEnabled(true);

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:background="@drawable/background">
 
     <RelativeLayout
@@ -17,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/passwordContainrt_LA"
-            android:hint="@string/loginText"
+            android:hint="@string/login_text"
             android:inputType="text"
             android:gravity="start"/>
 
@@ -35,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="@string/passwordText"
+                android:hint="@string/password_text"
                 android:gravity="start"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -46,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/bottomMargin"
             android:layout_below="@id/passwordContainrt_LA"
-            android:text="@string/loginButtonText"
+            android:text="@string/login_button_text"
             android:textSize="@dimen/textSize"
             android:textStyle="italic"
             android:foreground="@drawable/ripple_effect"
@@ -64,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/minMargin"
-                android:text="@string/createAccount"
+                android:text="@string/create_account"
                 android:textSize="@dimen/textSize"
                 android:textStyle="italic"/>
 
@@ -72,14 +73,14 @@
                 android:id="@+id/createButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/registerButton"
+                android:text="@string/register_button"
                 android:background="@color/colorOpacue"/>
 
         </LinearLayout>
 
         <ProgressBar
             android:id="@+id/progressBar"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="gone"/>

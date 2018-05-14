@@ -1,5 +1,6 @@
 package com.issergeev.exams;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -49,6 +50,7 @@ public class HomeSplashActivity extends AppCompatActivity {
         editor = examsData.edit();
 
         Intent intent = getIntent();
+
         loginText = intent.getStringExtra("Login");
         passwordText = intent.getStringExtra("Password");
         salt = intent.getStringExtra("Salt");
@@ -58,13 +60,14 @@ public class HomeSplashActivity extends AppCompatActivity {
         new SignIn().execute();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class SignIn extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String loginURL = "http://exams-online.online/sign_in.php";
+            final String LOGIN_URL = "http://exams-online.online/sign_in.php";
             final RequestQueue request = Volley.newRequestQueue(HomeSplashActivity.this);
-            StringRequest query = new StringRequest(Request.Method.POST, loginURL, new Response.Listener<String>() {
+            StringRequest query = new StringRequest(Request.Method.POST, LOGIN_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
@@ -88,7 +91,7 @@ public class HomeSplashActivity extends AppCompatActivity {
                             editor.putString("patronymic", patronymic);
                             editor.putInt("SIDNumber", studentIDNumber);
                             editor.putString("GroupNumber", groupNumber);
-                            editor.commit();
+                            editor.apply();
 
                             finish();
                             startActivity(new Intent(HomeSplashActivity.this, HomeActivity.class));
@@ -102,9 +105,9 @@ public class HomeSplashActivity extends AppCompatActivity {
                             alert = new AlertDialog.Builder(HomeSplashActivity.this);
                         }
                         alert.setCancelable(true)
-                                .setTitle(R.string.warningTitleText)
+                                .setTitle(R.string.warning_title_text)
                                 .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setMessage(R.string.userNotFound)
+                                .setMessage(R.string.user_not_found)
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -125,13 +128,13 @@ public class HomeSplashActivity extends AppCompatActivity {
 
                     switch (errorCode) {
                         case 302 :
-                            Snackbar.make(rootLayout, R.string.hotspotError, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout, R.string.hotspot_error, Snackbar.LENGTH_SHORT).show();
                             break;
                         case 423 :
-                            Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout, R.string.server_sleeping_text, Snackbar.LENGTH_SHORT).show();
                             break;
                         default :
-                            Snackbar.make(rootLayout, R.string.unknownError, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_SHORT).show();
                             break;
                     }
                     Log.d("login", error.getMessage());
@@ -148,6 +151,7 @@ public class HomeSplashActivity extends AppCompatActivity {
                 }
             };
             request.add(query);
+
             return null;
         }
     }

@@ -13,9 +13,6 @@
     <color name="colorOpacue">#00000000</color>
     <color name="colorProgressbar">#e3a43c00</color>
     <color name="colorSnackbar">@android:color/darker_gray</color>
-
-    <color name="design_snackbar_background_color" tools:override="true">@color/colorSnackbar</color>
-
     <color name="colorMainNew">#559AA6</color>
     <color name="ic_launcher_background_advanced">#559AA6</color>
     <color name="colorMainNewDark">#407680</color>
@@ -24,4 +21,6 @@
     <color name="colorLightRed">#ff7f7f</color>
     <color name="colorMainLight">#ffbe5c</color>
     <color name="colorNewLight">#79d3e2</color>
+
+    <color name="design_snackbar_background_color" tools:override="true">@color/colorSnackbar</color>
 </resources>

@@ -12,7 +12,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.android.volley.Request;
@@ -33,12 +32,11 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
     private static final String DATA_PREFS_NAME = "Data";
 
     private String firstName, lastName, patronymic;
+    private String loginText, passwordText, salt;
     private int teacherIDNumber;
 
     private static SharedPreferences examsData;
     private static SharedPreferences.Editor editor;
-
-    String loginText, passwordText, salt;
 
     RelativeLayout rootLayout;
 
@@ -53,6 +51,7 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
         editor = examsData.edit();
 
         Intent intent = getIntent();
+
         loginText = intent.getStringExtra("Login");
         passwordText = intent.getStringExtra("Password");
         salt = intent.getStringExtra("Salt");
@@ -71,9 +70,9 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String loginURL = "http://exams-online.online/sign_in_teacher.php";
+            final String LOGIN_URL = "http://exams-online.online/sign_in_teacher.php";
             final RequestQueue request = Volley.newRequestQueue(TeacherHomeSplashActivity.this);
-            StringRequest query = new StringRequest(Request.Method.POST, loginURL, new Response.Listener<String>() {
+            StringRequest query = new StringRequest(Request.Method.POST, LOGIN_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
@@ -93,12 +92,12 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
                             editor.putString("lastName", lastName);
                             editor.putString("patronymic", patronymic);
                             editor.putInt("TeacherIDNumber", teacherIDNumber);
-                            editor.commit();
+                            editor.apply();
 
                             finish();
                             startActivity(new Intent(TeacherHomeSplashActivity.this, TeacherHomeActivity.class));
                         } catch (JSONException e) {
-                            Log.d("login", e.getMessage());
+                            Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
                         }
                     } else {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -107,9 +106,9 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
                             alert = new AlertDialog.Builder(TeacherHomeSplashActivity.this);
                         }
                         alert.setCancelable(true)
-                                .setTitle(R.string.warningTitleText)
+                                .setTitle(R.string.warning_title_text)
                                 .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setMessage(R.string.userNotFound)
+                                .setMessage(R.string.user_not_found)
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -130,16 +129,17 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
 
                     switch (errorCode) {
                         case 302 :
-                            Snackbar.make(rootLayout, R.string.hotspotError, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout, R.string.hotspot_error, Snackbar.LENGTH_SHORT).show();
                             break;
                         case 423 :
-                            Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout, R.string.server_sleeping_text, Snackbar.LENGTH_SHORT).show();
                             break;
                         default :
-                            Snackbar.make(rootLayout, R.string.unknownError, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_SHORT).show();
                             break;
                     }
-                    Log.d("login", error.getMessage());
+
+                    Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
                 }
             }){
                 @Override
@@ -153,6 +153,7 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
                 }
             };
             request.add(query);
+
             return null;
         }
     }

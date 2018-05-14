@@ -187,7 +187,7 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginStart="10dp"
                         android:layout_toEndOf="@id/src"
-                        android:text="@string/pass_examsText"
+                        android:text="@string/pass_exams_text"
                         android:textStyle="normal"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/textSize"/>
@@ -226,7 +226,7 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginStart="10dp"
                         android:layout_toEndOf="@id/src1"
-                        android:text="@string/resultCardText"
+                        android:text="@string/result_card_text"
                         android:textStyle="normal"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/textSize"/>

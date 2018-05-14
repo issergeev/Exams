@@ -20,7 +20,7 @@ public class TeacherHomeActivity extends AppCompatActivity {
     private static SharedPreferences examsData;
     private static SharedPreferences.Editor editor;
 
-    Listener listener;
+    private Listener listener;
 
     RelativeLayout rootLayout;
     CardView examsCard, studentsCard;
@@ -62,8 +62,8 @@ public class TeacherHomeActivity extends AppCompatActivity {
             alert = new AlertDialog.Builder(TeacherHomeActivity.this);
         }
         alert.setCancelable(true)
-                .setTitle(R.string.exitText)
-                .setMessage(R.string.exitMessage)
+                .setTitle(R.string.exit_text)
+                .setMessage(R.string.exit_message)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -74,7 +74,7 @@ public class TeacherHomeActivity extends AppCompatActivity {
                 .show();
     }
 
-    class Listener implements View.OnClickListener {
+    private class Listener implements View.OnClickListener {
 
         @Override
         public void onClick(View view) {
@@ -86,8 +86,8 @@ public class TeacherHomeActivity extends AppCompatActivity {
                         alert = new AlertDialog.Builder(TeacherHomeActivity.this);
                     }
                     alert.setCancelable(true)
-                            .setTitle(R.string.exitText)
-                            .setMessage(R.string.exitMessage)
+                            .setTitle(R.string.exit_text)
+                            .setMessage(R.string.exit_message)
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {

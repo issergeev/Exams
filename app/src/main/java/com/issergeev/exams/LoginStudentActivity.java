@@ -1,5 +1,6 @@
 package com.issergeev.exams;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -41,7 +42,7 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
 
     private String loginText = "", passwordText = "";
 
-    Listener listener;
+    private Listener listener;
 
     AlertDialog.Builder alert;
 
@@ -82,15 +83,18 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
         loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(listener);
         login = (EditText) findViewById(R.id.login);
-        login.setOnLongClickListener(this);
         password = (TextInputEditText) findViewById(R.id.password);
+
+        login.setOnLongClickListener(this);
         password.setOnLongClickListener(this);
 
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         view = this.getCurrentFocus();
+
         if (view != null) {
             inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+
         shakeAnimation = AnimationUtils.loadAnimation(this, R.anim.forbid_anim);
     }
 
@@ -101,7 +105,7 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
         return true;
     }
 
-    class Listener implements View.OnClickListener {
+    private class Listener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
@@ -155,13 +159,14 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
         editor.apply();
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class SignInChecker extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
-                final String appendixURL = "http://exams-online.online/get_appendix.php";
+                final String APPENDIX_URL = "http://exams-online.online/get_appendix.php";
                 final RequestQueue request = Volley.newRequestQueue(LoginStudentActivity.this);
-                StringRequest query = new StringRequest(Request.Method.POST, appendixURL, new Response.Listener<String>() {
+                StringRequest query = new StringRequest(Request.Method.POST, APPENDIX_URL, new Response.Listener<String>() {
                     @Override
                     public void onResponse(final String response) {
                         loginButton.setEnabled(true);
@@ -175,58 +180,58 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
                     }
                 }, new Response.ErrorListener() {
 
-                    @Override
-                    public void onErrorResponse (VolleyError error){
-                        if (error.networkResponse != null) {
-                            loginButton.setEnabled(true);
-
-                            int errorCode = error.networkResponse.statusCode;
-
-                            switch (errorCode) {
-                                case 302 :
-                                    Snackbar.make(rootLayout, R.string.hotspotError, Snackbar.LENGTH_SHORT).show();
-                                    break;
-                                case 423 :
-                                    Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
-                                    break;
-                                default :
-                                    Snackbar.make(rootLayout, R.string.unknownError, Snackbar.LENGTH_SHORT).show();
-                                    break;
-                            }
-                        } else {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                alert = new AlertDialog.Builder(LoginStudentActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-                            } else {
-                                alert = new AlertDialog.Builder(LoginStudentActivity.this);
-                            }
-                            alert.setCancelable(true)
-                                    .setTitle(R.string.warningTitleText)
-                                    .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .setMessage(R.string.connectionErrorText)
-                                    .setPositiveButton(R.string.acceptText, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            loginButton.setEnabled(true);
-                                        }
-                                    }).show();
-                        }
-
-                        progressBar.setVisibility(View.GONE);
+                @Override
+                public void onErrorResponse (VolleyError error){
+                    if (error.networkResponse != null) {
                         loginButton.setEnabled(true);
+
+                        int errorCode = error.networkResponse.statusCode;
+
+                        switch (errorCode) {
+                            case 302 :
+                                Snackbar.make(rootLayout, R.string.hotspot_error, Snackbar.LENGTH_SHORT).show();
+                                break;
+                            case 423 :
+                                Snackbar.make(rootLayout, R.string.server_sleeping_text, Snackbar.LENGTH_SHORT).show();
+                                break;
+                            default :
+                                Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_SHORT).show();
+                                break;
+                        }
+                    } else {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            alert = new AlertDialog.Builder(LoginStudentActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                        } else {
+                            alert = new AlertDialog.Builder(LoginStudentActivity.this);
+                        }
+                        alert.setCancelable(true)
+                                .setTitle(R.string.warning_title_text)
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setMessage(R.string.connection_error_text)
+                                .setPositiveButton(R.string.accept_text, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        loginButton.setEnabled(true);
+                                    }
+                                }).show();
                     }
-                }){
-                    @Override
-                    protected Map<String, String> getParams() {
-                        HashMap<String, String> userData = new HashMap<>();
 
-                        loginText = login.getText().toString();
+                    progressBar.setVisibility(View.GONE);
+                    loginButton.setEnabled(true);
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() {
+                    HashMap<String, String> userData = new HashMap<>();
 
-                        userData.put("student_verif", loginText);
+                    loginText = login.getText().toString();
 
-                        return userData;
-                    }
-                };
-                request.add(query);
+                    userData.put("student_verif", loginText);
+
+                    return userData;
+                }
+            };
+            request.add(query);
 
             return null;
         }

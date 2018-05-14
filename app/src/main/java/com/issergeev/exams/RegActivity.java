@@ -1,5 +1,6 @@
 package com.issergeev.exams;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -34,9 +35,10 @@ import java.util.Map;
 public class RegActivity extends AppCompatActivity implements View.OnLongClickListener {
     private static final String DATA_PREFS_NAME = "Data";
     private final String maskText = "###-##/##";
+
     private String SIDText = "", loginText = "", passwordText = "", appendixText = "";
-    private int progressBarVisibility = View.GONE;
     static String[] passData = new String[2];
+    private int progressBarVisibility = View.GONE;
 
     private static SharedPreferences examsData;
     private static SharedPreferences.Editor editor;
@@ -48,7 +50,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
 
     AlertDialog.Builder alert;
 
-    TextMask mask;
+    private TextMask mask;
     Animation shakeAnimation;
 
     @Override
@@ -100,7 +102,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
 
                     Log.d("s", maskChar + " " + SIDChar);
                     if (maskChar.compareTo('#') != 0 && SIDChar.compareTo(maskChar) != 0) {
-                        Snackbar.make(rootLayout, R.string.SIDLength, Snackbar.LENGTH_LONG).show();
+                        Snackbar.make(rootLayout, R.string.sid_length, Snackbar.LENGTH_LONG).show();
                         return;
                     }
                 }
@@ -166,38 +168,38 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
 
         if (SIDText.length() != 7) {
             Log.d("length", String.valueOf(SIDText.length()));
-            Snackbar.make(rootLayout, R.string.SIDLength, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(rootLayout, R.string.sid_length, Snackbar.LENGTH_LONG).show();
             return false;
         }
 
         if (!Character.isLetter(loginText.charAt(0))) {
-            Snackbar.make(rootLayout, R.string.loginBeginningInvalid, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(rootLayout, R.string.login_beginning_invalid, Snackbar.LENGTH_LONG).show();
             return false;
         }
 
         if (loginText.length() < 4) {
-            Snackbar.make(rootLayout, R.string.loginShort, Toast.LENGTH_LONG).show();
+            Snackbar.make(rootLayout, R.string.login_short, Toast.LENGTH_LONG).show();
             return false;
         }
 
         if (loginText.length() > 32) {
-            Snackbar.make(rootLayout, R.string.loginLong, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(rootLayout, R.string.login_long, Snackbar.LENGTH_LONG).show();
         }
 
         for (String s : UNAVALIABLE_LOGINS) {
             if (loginText.toLowerCase().contains(s)) {
-                Snackbar.make(rootLayout, R.string.unavailableLogin, Snackbar.LENGTH_LONG).show();
+                Snackbar.make(rootLayout, R.string.unavailable_login, Snackbar.LENGTH_LONG).show();
                 return false;
             }
         }
 
         if (passwordText.length() < 5) {
-            Snackbar.make(rootLayout, R.string.passwordShort, Toast.LENGTH_LONG).show();
+            Snackbar.make(rootLayout, R.string.password_short, Toast.LENGTH_LONG).show();
             return false;
         }
 
         if (passwordText.length() > 64) {
-            Snackbar.make(rootLayout, R.string.passwordLong, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(rootLayout, R.string.password_long, Snackbar.LENGTH_LONG).show();
         }
 
         for (String s : UNSAFE_PASSWORDS) {
@@ -208,10 +210,10 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                     alert = new AlertDialog.Builder(RegActivity.this);
                 }
                 alert.setCancelable(true)
-                        .setTitle(R.string.warningTitleText)
-                        .setMessage(R.string.passwordUnsafeMessage)
-                        .setPositiveButton(R.string.changeText, null)
-                        .setNegativeButton(R.string.declineText, new DialogInterface.OnClickListener() {
+                        .setTitle(R.string.warning_title_text)
+                        .setMessage(R.string.password_unsafe_message)
+                        .setPositiveButton(R.string.change_text, null)
+                        .setNegativeButton(R.string.decline_text, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 createButton.setEnabled(false);
@@ -229,6 +231,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         return true;
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class Registrar extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -246,7 +249,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
 
                         switch (response) {
                             case "Success":
-                                Snackbar.make(rootLayout, R.string.createText, Snackbar.LENGTH_SHORT).setAction("Sign In now", new View.OnClickListener() {
+                                Snackbar.make(rootLayout, R.string.create_text, Snackbar.LENGTH_SHORT).setAction("Sign In now", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
                                         onBackPressed();
@@ -255,13 +258,13 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                                 saveData();
                                 break;
                             case "Login exists":
-                                Snackbar.make(rootLayout, R.string.userExistsText, Snackbar.LENGTH_LONG).show();
+                                Snackbar.make(rootLayout, R.string.user_exists_text, Snackbar.LENGTH_LONG).show();
                                 break;
                             case "User exists":
-                                Snackbar.make(rootLayout, R.string.studentIDExistsText, Snackbar.LENGTH_LONG).show();
+                                Snackbar.make(rootLayout, R.string.student_ID_exists_text, Snackbar.LENGTH_LONG).show();
                                 break;
                             case "No such user":
-                                Snackbar.make(rootLayout, R.string.notSuchUser, Snackbar.LENGTH_LONG).show();
+                                Snackbar.make(rootLayout, R.string.not_such_user, Snackbar.LENGTH_LONG).show();
                                 break;
                             default:
                                 Log.i("net", response);
@@ -280,9 +283,9 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                         int errorCode = error.networkResponse.statusCode;
 
                         if (errorCode == 423) {
-                            Snackbar.make(rootLayout, R.string.serverSleepingText, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout, R.string.server_sleeping_text, Snackbar.LENGTH_SHORT).show();
                         } else {
-                            Snackbar.make(rootLayout, R.string.unknownError, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_SHORT).show();
                         }
                     } else {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -291,10 +294,10 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                             alert = new AlertDialog.Builder(RegActivity.this);
                         }
                         alert.setCancelable(true)
-                                .setTitle(R.string.warningTitleText)
+                                .setTitle(R.string.warning_title_text)
                                 .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setMessage(R.string.connectionErrorText)
-                                .setPositiveButton(R.string.acceptText, new DialogInterface.OnClickListener() {
+                                .setMessage(R.string.connection_error_text)
+                                .setPositiveButton(R.string.accept_text, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -308,6 +311,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                 @Override
                 protected Map<String, String> getParams() {
                     HashMap<String, String> data = new HashMap<>();
+
                     passData = Encryption.Encrypt(passwordText).split("[\\ ]");
                     appendixText = passData[0];
                     passwordText = passData[1];

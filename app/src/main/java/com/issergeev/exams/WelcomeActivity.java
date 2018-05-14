@@ -15,7 +15,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private static SharedPreferences examsData;
     private static SharedPreferences.Editor editor;
 
-    Listener listener;
+    private Listener listener;
 
     Button startButtonStudent, startButtonTeacher;
     ImageView signinButton;
@@ -52,7 +52,7 @@ public class WelcomeActivity extends AppCompatActivity {
         });
     }
 
-    class Listener implements View.OnClickListener {
+    private class Listener implements View.OnClickListener {
 
         @Override
         public void onClick(View view) {
