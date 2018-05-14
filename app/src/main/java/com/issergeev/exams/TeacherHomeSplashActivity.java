@@ -46,6 +46,7 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_home_splash);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
         examsData = getSharedPreferences(DATA_PREFS_NAME, Context.MODE_PRIVATE);
         editor = examsData.edit();

@@ -1,10 +1,10 @@
 package com.issergeev.exams;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -43,6 +43,13 @@ public class LoginTeacherActivity extends AppCompatActivity {
     AlertDialog.Builder alert;
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_teacher);
@@ -61,6 +68,7 @@ public class LoginTeacherActivity extends AppCompatActivity {
             public void onClick(View view) {
                 loginButton.setEnabled(false);
                 progressBar.setVisibility(View.VISIBLE);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
                 loginText = login.getText().toString();
                 passwordText = password.getText().toString();
@@ -68,6 +76,8 @@ public class LoginTeacherActivity extends AppCompatActivity {
                 new SignInChecker().execute();
             }
         });
+
+
     }
 
     @SuppressLint("StaticFieldLeak")

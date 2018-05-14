@@ -14,7 +14,6 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Surface;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -114,7 +113,7 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
                 case R.id.loginButton :
                     loginButton.setEnabled(false);
                     progressBar.setVisibility(View.VISIBLE);
-                    lockScreenOrientation();
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
                     loginText = login.getText().toString();
                     passwordText = password.getText().toString();
@@ -126,25 +125,6 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
                     overridePendingTransition(R.anim.activity_appear_anim, R.anim.activity_disappear_anim);
                     break;
             }
-        }
-    }
-
-    private void lockScreenOrientation() {
-        int rotation = getWindowManager().getDefaultDisplay().getRotation();
-
-        switch (rotation) {
-            case Surface.ROTATION_0 :
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-                break;
-            case Surface.ROTATION_90 :
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                break;
-            case Surface.ROTATION_180 :
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
-                break;
-            case Surface.ROTATION_270 :
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
-                break;
         }
     }
 
