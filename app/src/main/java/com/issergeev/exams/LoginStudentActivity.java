@@ -44,6 +44,8 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
 
     private Listener listener;
 
+    private SignInChecker signInChecker = new SignInChecker();
+
     AlertDialog.Builder alert;
 
     RelativeLayout rootLayout;
@@ -132,16 +134,16 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
 
         switch (rotation) {
             case Surface.ROTATION_0 :
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
                 break;
             case Surface.ROTATION_90 :
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 break;
             case Surface.ROTATION_180 :
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
                 break;
             case Surface.ROTATION_270 :
-                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT);
                 break;
         }
     }

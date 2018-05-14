@@ -67,7 +67,7 @@ public class AddNewStudentActivity extends AppCompatActivity {
 
         groupsList = new ArrayList<>(5);
         groupsList.addAll((Collection<? extends String>) data.getSerializable("Groups"));
-        
+
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, groupsList);
         groupNumberInput.setAdapter(adapter);
 

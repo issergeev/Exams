@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/background">
 
     <RelativeLayout
@@ -19,7 +20,7 @@
             android:text="@string/welcomeText"
             android:textStyle="bold"
             android:gravity="center"
-            android:textSize="@dimen/heddingsSize"/>
+            android:textSize="@dimen/headingsSize"/>
 
         <Button
             android:id="@+id/startButtonStudent"
@@ -60,6 +61,7 @@
         android:layout_alignParentBottom="true"
         android:foregroundGravity="center"
         android:src="@drawable/logo_drawable"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:contentDescription="@string/todo"/>
 
 </RelativeLayout>

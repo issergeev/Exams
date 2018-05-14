@@ -42,6 +42,13 @@ public class HomeSplashActivity extends AppCompatActivity {
     AlertDialog.Builder alert;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_splash);

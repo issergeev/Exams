@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.issergeev.exams.TeacherHomeActivity"
+    android:orientation="vertical"
     android:background="#e9e9e9">
 
         <ScrollView
@@ -35,7 +36,8 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
-                            android:src="@drawable/user_icon"/>
+                            android:src="@drawable/user_icon"
+                            android:contentDescription="@string/todo"/>
 
                         <TextView
                             android:id="@+id/FaL_name"
@@ -93,7 +95,7 @@
                             android:layout_marginTop="12dp"
                             android:layout_marginStart="10dp"
                             android:layout_toEndOf="@id/src"
-                            android:text="Exams"
+                            android:text="@string/exams"
                             android:textStyle="normal"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/textSize"/>
@@ -132,7 +134,7 @@
                             android:layout_marginTop="12dp"
                             android:layout_marginStart="10dp"
                             android:layout_toEndOf="@id/src1"
-                            android:text="Students"
+                            android:text="@string/students"
                             android:textStyle="normal"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/textSize"/>

@@ -115,7 +115,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                 if (userDataChecker(SIDText, loginText, passwordText)) {
                     createButton.setEnabled(false);
                     progressBar.setVisibility(View.VISIBLE);
-                    lockScreenOrientation();
+                    //lockScreenOrientation();
 
                     new Registrar().execute();
                 }

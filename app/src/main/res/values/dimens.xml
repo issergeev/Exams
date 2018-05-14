@@ -4,7 +4,7 @@
     <dimen name="buttonMargin">60dp</dimen>
     <dimen name="bottomMargin">15dp</dimen>
     <dimen name="textSize">20sp</dimen>
-    <dimen name="heddingsSize">30sp</dimen>
+    <dimen name="headingsSize">30sp</dimen>
     <dimen name="textSizeMin">15sp</dimen>
     <dimen name="minMargin">2dp</dimen>
     <dimen name="topMargin">5dp</dimen>
@@ -18,4 +18,9 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="height">40dp</dimen>
+    <dimen name="corner_radius">10dp</dimen>
+    <dimen name="image_margin">5dp</dimen>
+    <dimen name="image_width">100dp</dimen>
+    <dimen name="image_height">100dp</dimen>
 </resources>
