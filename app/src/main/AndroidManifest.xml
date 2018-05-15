@@ -56,15 +56,15 @@
             android:theme="@style/LoadingTheme" />
         <activity
             android:name=".StudentsActivity"
-            android:theme="@style/BackgroudTheme" />
+            android:theme="@style/AppThemeAdvanced" />
         <activity
             android:name=".AddNewStudentActivity"
-            android:theme="@style/BackgroudTheme"
+            android:theme="@style/AppThemeAdvanced"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ExamsActivity"
-            android:theme="@style/BackgroudTheme" />
-        <activity android:name=".AddQuestion"></activity>
+            android:theme="@style/AppThemeAdvanced" />
+        <activity android:name=".AddQuestion"/>
     </application>
 
 </manifest>

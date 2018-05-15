@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context="com.issergeev.exams.TeacherHomeActivity"
     android:orientation="vertical"
-    android:background="#e9e9e9">
+    android:background="#416684">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,11 +29,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/averagePadding"
-                    android:layout_marginStart="@dimen/cardviewMargin"
-                    android:layout_marginEnd="@dimen/cardviewMargin"
+                    android:layout_marginStart="@dimen/cardViewMargin"
+                    android:layout_marginEnd="@dimen/cardViewMargin"
                     android:layout_marginBottom="@dimen/bottomMargin"
                     android:layout_centerHorizontal="true"
-                    app:cardCornerRadius="10dp">
+                    app:cardCornerRadius="10dp"
+                    app:cardBackgroundColor="#87c6da">
 
                     <LinearLayout
                         android:id="@+id/title_layout"
@@ -46,38 +47,38 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
+                            android:layout_gravity="center"
                             android:src="@drawable/user_icon"
                             android:contentDescription="@string/todo"/>
 
                         <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/FaL_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top|end"
-                            android:layout_marginEnd="@dimen/averageMargin"
-                            android:gravity="end"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/secondary_text_light"
-                            android:textSize="21sp"/>
+                            <TextView
+                                android:id="@+id/FaL_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="top|end"
+                                android:layout_marginEnd="@dimen/averageMargin"
+                                android:gravity="end"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/secondary_text_light"
+                                android:textSize="@dimen/extra_large_text"/>
 
-                        <TextView
-                            android:id="@+id/patronymic"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="@dimen/averageMargin"
-                            android:layout_gravity="end"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/secondary_text_light"
-                            android:textSize="21sp"/>
+                            <TextView
+                                android:id="@+id/patronymic"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="@dimen/averageMargin"
+                                android:layout_gravity="end"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textColor="#636363"
+                                android:textSize="@dimen/large_text"/>
 
-                    </LinearLayout>
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -95,7 +96,8 @@
                 android:layout_marginTop="@dimen/startMargin"
                 android:layout_below="@id/heading"
                 app:cardCornerRadius="5dp"
-                style="@style/CardView.Dark">
+                style="@style/CardView.Dark"
+                app:cardBackgroundColor="#87c6da">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -114,13 +116,13 @@
                         android:id="@+id/descriptionText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginStart="30dp"
                         android:layout_toEndOf="@id/src"
                         android:text="@string/exams"
-                        android:textStyle="normal"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/textSize"/>
+                        android:textStyle="bold"
+                        android:textColor="#646464"
+                        android:textSize="35sp"/>
 
                 </RelativeLayout>
 
@@ -134,7 +136,8 @@
                 android:elevation="@dimen/standardElevation"
                 android:layout_margin="@dimen/startMargin"
                 app:cardCornerRadius="5dp"
-                style="@style/CardView.Dark">
+                style="@style/CardView.Dark"
+                app:cardBackgroundColor="#87c6da">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -153,13 +156,13 @@
                         android:id="@+id/descriptionText1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginStart="30dp"
                         android:layout_toEndOf="@id/src1"
                         android:text="@string/students"
-                        android:textStyle="normal"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/textSize"/>
+                        android:textStyle="bold"
+                        android:textColor="#646464"
+                        android:textSize="35sp"/>
 
                 </RelativeLayout>
 

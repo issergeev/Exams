@@ -21,7 +21,7 @@
                 android:layout_marginBottom="@dimen/averageMargin"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/user_icon"
+                android:src="@drawable/user"
                 android:contentDescription="@string/todo"/>
 
             <RelativeLayout
@@ -84,7 +84,7 @@
                 android:layout_marginStart="@dimen/startMargin"
                 android:layout_marginEnd="@dimen/startMargin"
                 android:layout_below="@id/info_container"
-                android:background="@drawable/home_screen_button_style"
+                android:background="@drawable/button_shape_advanced"
                 android:text="@string/add"/>
 
         </RelativeLayout>

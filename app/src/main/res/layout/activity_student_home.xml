@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#b67d28">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -62,12 +63,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
                     android:layout_marginTop="@dimen/averagePadding"
-                    android:layout_marginStart="@dimen/cardviewMargin"
-                    android:layout_marginEnd="@dimen/cardviewMargin"
+                    android:layout_marginStart="@dimen/cardViewMargin"
+                    android:layout_marginEnd="@dimen/cardViewMargin"
                     android:layout_marginBottom="@dimen/bottomMargin"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@id/title_layout"
-                    app:cardCornerRadius="10dp">
+                    app:cardCornerRadius="10dp"
+                    app:cardBackgroundColor="#844518">
 
 
                     <LinearLayout
@@ -80,7 +82,7 @@
                             android:orientation="vertical"
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:layout_margin="@dimen/cardviewMargin"
+                            android:layout_margin="@dimen/cardViewMargin"
                             android:layout_height="match_parent"
                             android:gravity="center">
 
@@ -89,7 +91,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="@string/exams_available"
-                                android:textColor="@android:color/secondary_text_light"
+                                android:textColor="@android:color/white"
                                 android:textSize="20sp"/>
 
                             <TextView
@@ -99,7 +101,7 @@
                                 android:textStyle="bold"
                                 android:textSize="20sp"
                                 android:paddingTop="10dp"
-                                android:textColor="@color/textColor"/>
+                                android:textColor="@android:color/holo_red_light"/>
 
                         </LinearLayout>
 
@@ -107,7 +109,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:layout_margin="@dimen/cardviewMargin"
+                            android:layout_margin="@dimen/cardViewMargin"
                             android:gravity="center"
                             android:orientation="vertical">
 
@@ -116,7 +118,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="@string/exams_passed"
-                                android:textColor="@android:color/secondary_text_light"
+                                android:textColor="@android:color/white"
                                 android:textSize="20sp" />
 
                             <TextView
@@ -124,7 +126,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingTop="10dp"
                                 android:text="0"
-                                android:textColor="@color/textColor"
+                                android:textColor="@android:color/holo_green_light"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
 
@@ -146,7 +148,8 @@
                 android:layout_marginTop="@dimen/startMargin"
                 android:layout_below="@id/heading"
                 app:cardCornerRadius="5dp"
-                style="@style/CardView.Dark">
+                style="@style/CardView.Dark"
+                app:cardBackgroundColor="#995f22">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -185,7 +188,8 @@
                 android:elevation="@dimen/standardElevation"
                 android:layout_margin="@dimen/startMargin"
                 app:cardCornerRadius="5dp"
-                style="@style/CardView.Dark">
+                style="@style/CardView.Dark"
+                app:cardBackgroundColor="#995f22">
 
                 <RelativeLayout
                     android:layout_width="match_parent"

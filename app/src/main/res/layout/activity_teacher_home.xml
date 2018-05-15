@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context="com.issergeev.exams.TeacherHomeActivity"
     android:orientation="vertical"
-    android:background="#e9e9e9">
+    android:background="#416684">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -73,7 +73,8 @@
                     android:layout_marginTop="@dimen/startMargin"
                     android:layout_below="@id/heading"
                     app:cardCornerRadius="5dp"
-                    style="@style/CardView.Dark">
+                    style="@style/CardView.Dark"
+                    app:cardBackgroundColor="#87c6da">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -112,7 +113,8 @@
                     android:elevation="@dimen/standardElevation"
                     android:layout_margin="@dimen/startMargin"
                     app:cardCornerRadius="5dp"
-                    style="@style/CardView.Dark">
+                    style="@style/CardView.Dark"
+                    app:cardBackgroundColor="#87c6da">
 
                     <RelativeLayout
                         android:layout_width="match_parent"

@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/exams_selector"
                 android:text="@string/add"
-                android:background="@drawable/home_screen_button_style"/>
+                android:background="@drawable/button_shape_advanced"/>
 
         </RelativeLayout>
 

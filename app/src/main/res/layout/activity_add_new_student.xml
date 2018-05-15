@@ -16,64 +16,77 @@
             android:id="@+id/image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/averageMargin"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/logo_drawable_advanced"
+            android:src="@drawable/user"
             android:contentDescription="@string/todo"/>
 
-    <EditText
-        android:id="@+id/studentIDNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/minMargin"
-        android:layout_below="@id/image"
-        android:hint="@string/student_id_number"
-        android:lines="2"
-        android:background="@drawable/custom_edit_text_background"/>
+        <EditText
+            android:id="@+id/studentIDNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/minMargin"
+            android:layout_below="@id/image"
+            android:hint="@string/student_id_number"
+            android:lines="2"
+            android:background="@drawable/custom_edit_text_background"/>
 
-    <EditText
-        android:id="@+id/lastName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/minMargin"
-        android:layout_below="@id/studentIDNumber"
-        android:lines="2"
-        android:background="@drawable/custom_edit_text_background"/>
+        <EditText
+            android:id="@+id/lastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/minMargin"
+            android:layout_below="@id/studentIDNumber"
+            android:lines="2"
+            android:background="@drawable/custom_edit_text_background"/>
 
-    <EditText
-        android:id="@+id/firstName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/minMargin"
-        android:layout_below="@id/lastName"
-        android:lines="2"
-        android:background="@drawable/custom_edit_text_background"/>
+        <EditText
+            android:id="@+id/firstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/minMargin"
+            android:layout_below="@id/lastName"
+            android:lines="2"
+            android:background="@drawable/custom_edit_text_background"/>
 
-    <EditText
-        android:id="@+id/patronymic"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/minMargin"
-        android:layout_below="@id/firstName"
-        android:lines="2"
-        android:background="@drawable/custom_edit_text_background"/>
+        <EditText
+            android:id="@+id/patronymic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/minMargin"
+            android:layout_below="@id/firstName"
+            android:lines="2"
+            android:background="@drawable/custom_edit_text_background"/>
 
-    <Spinner
-        android:id="@+id/groupSelector"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/patronymic"/>
+        <TextView
+            android:id="@+id/helpText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/averageMargin"
+            android:layout_below="@id/patronymic"
+            android:text="Select group"
+            android:textStyle="italic"
+            android:textSize="@dimen/textSize"/>
 
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/add"/>
+        <Spinner
+            android:id="@+id/groupSelector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/helpText"/>
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/add"
+            android:background="@drawable/button_shape_advanced"/>
 
     </RelativeLayout>
 
     <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

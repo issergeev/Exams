@@ -24,7 +24,6 @@
                 android:layout_marginTop="@dimen/averagePadding"
                 android:layout_marginStart="@dimen/cardViewMargin"
                 android:layout_marginEnd="@dimen/cardViewMargin"
-                android:layout_marginBottom="@dimen/bottomMargin"
                 android:layout_centerHorizontal="true"
                 app:cardCornerRadius="10dp"
                 app:cardBackgroundColor="#844518">
@@ -89,7 +88,7 @@
                     android:layout_marginTop="@dimen/averagePadding"
                     android:layout_marginStart="@dimen/cardViewMargin"
                     android:layout_marginEnd="@dimen/cardViewMargin"
-                    android:layout_marginBottom="@dimen/bottomMargin"
+                    android:layout_marginBottom="@dimen/averageMargin"
                     android:layout_centerHorizontal="true"
                     app:cardCornerRadius="10dp"
                     app:cardBackgroundColor="#844518">
@@ -114,14 +113,14 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/exams_available"
                                 android:textColor="@android:color/white"
-                                android:textSize="20sp"/>
+                                android:textSize="@dimen/normal_text"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="1"
                                 android:textStyle="bold"
-                                android:textSize="20sp"
+                                android:textSize="@dimen/headingsSize"
                                 android:paddingTop="10dp"
                                 android:textColor="@android:color/holo_red_light"/>
 
@@ -140,7 +139,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/exams_passed"
                                 android:textColor="@android:color/white"
-                                android:textSize="20sp" />
+                                android:textSize="@dimen/normal_text" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -148,7 +147,7 @@
                                 android:paddingTop="10dp"
                                 android:text="0"
                                 android:textColor="@android:color/holo_green_light"
-                                android:textSize="20sp"
+                                android:textSize="@dimen/headingsSize"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -189,13 +188,13 @@
                         android:id="@+id/descriptionText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginStart="30dp"
                         android:layout_toEndOf="@id/src"
                         android:text="@string/pass_exams_text"
-                        android:textStyle="normal"
+                        android:textStyle="bold"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/textSize"/>
+                        android:textSize="@dimen/normal_text"/>
 
                 </RelativeLayout>
 
@@ -229,13 +228,13 @@
                         android:id="@+id/descriptionText1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginStart="30dp"
                         android:layout_toEndOf="@id/src1"
                         android:text="@string/result_card_text"
-                        android:textStyle="normal"
+                        android:textStyle="bold"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/textSize"/>
+                        android:textSize="@dimen/normal_text"/>
 
                 </RelativeLayout>
 
@@ -254,7 +253,6 @@
         android:layout_margin="@dimen/topMargin"
         app:fabSize="normal"
         android:src="@drawable/test"
-        app:backgroundTint="@color/colorMainLight"
-        android:visibility="gone"/>
+        app:backgroundTint="@color/colorMainLight"/>
 
 </RelativeLayout>

@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="@string/add"
-        android:background="@drawable/home_screen_button_style"/>
+        android:background="@drawable/button_shape_advanced"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

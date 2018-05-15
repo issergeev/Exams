@@ -90,8 +90,8 @@ public class AddQuestion extends AppCompatActivity {
         });
 
         addButton.setOnClickListener(listener);
-        question.setOnFocusChangeListener(listener);
-        answer.setOnFocusChangeListener(listener);
+        question.setOnClickListener(listener);
+        answer.setOnClickListener(listener);
     }
 
     private void check() {
@@ -119,7 +119,7 @@ public class AddQuestion extends AppCompatActivity {
         }
     }
 
-    private class Listener implements View.OnClickListener, View.OnFocusChangeListener {
+    private class Listener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
@@ -127,12 +127,11 @@ public class AddQuestion extends AppCompatActivity {
                     correct = true;
                     check();
                     break;
+                default :
+                    question.setBackground(getResources().getDrawable(R.drawable.edit_text_background));
+                    answer.setBackground(getResources().getDrawable(R.drawable.edit_text_background));
+                    break;
             }
-        }
-
-        @Override
-        public void onFocusChange(View view, boolean b) {
-            view.setBackground(getResources().getDrawable(R.drawable.edit_text_background));
         }
     }
 

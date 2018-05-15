@@ -28,7 +28,7 @@
         <item name="colorAccent">@color/colorMainNewDark</item>
     </style>
 
-    <style name="BackgroudTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="BackgroundTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowBackground">@drawable/exams_drawable</item>
 
         <item name="colorPrimary">@color/colorMainNew</item>

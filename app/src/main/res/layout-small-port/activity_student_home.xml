@@ -5,54 +5,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#b67d28">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/headding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/title_layout"
+            <RelativeLayout
+                android:id="@+id/heading"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/minMargin">
+                android:layout_height="wrap_content">
 
-                <ImageView
-                    android:layout_marginTop="45dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/user_icon"
-                    android:contentDescription="@string/todo"/>
-
-                <TextView
-                    android:id="@+id/FaL_name"
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/title_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/secondary_text_light"
-                    android:textSize="21sp"/>
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/minMargin">
 
-                <TextView
-                    android:id="@+id/patronymic"
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/secondary_text_light"
-                    android:textSize="21sp"/>
+                    <ImageView
+                        android:layout_marginTop="45dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:src="@drawable/user_icon"
+                        android:contentDescription="@string/todo"/>
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/FaL_name"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/secondary_text_light"
+                        android:textSize="21sp"/>
+
+                    <TextView
+                        android:id="@+id/patronymic"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/secondary_text_light"
+                        android:textSize="21sp"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
             <android.support.v7.widget.CardView
                 android:id="@+id/exams_view"
@@ -62,9 +69,10 @@
                 android:layout_marginStart="@dimen/startMargin"
                 android:layout_marginEnd="@dimen/startMargin"
                 android:layout_marginTop="@dimen/startMargin"
-                android:layout_below="@id/title_layout"
+                android:layout_below="@id/heading"
                 app:cardCornerRadius="5dp"
-                style="@style/CardView.Dark">
+                style="@style/CardView.Dark"
+                app:cardBackgroundColor="#995f22">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -103,7 +111,8 @@
                 android:elevation="@dimen/standardElevation"
                 android:layout_margin="@dimen/startMargin"
                 app:cardCornerRadius="5dp"
-                style="@style/CardView.Dark">
+                style="@style/CardView.Dark"
+                app:cardBackgroundColor="#995f22">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -145,8 +154,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/topMargin"
-        app:fabSize="normal"
+        app:fabSize="mini"
         android:src="@drawable/test"
-        app:backgroundTint="@color/colorMainLight"/>
+        app:backgroundTint="@color/colorMainLight"
+        android:visibility="gone"/>
 
 </RelativeLayout>

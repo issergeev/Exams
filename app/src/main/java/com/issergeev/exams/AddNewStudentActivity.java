@@ -98,39 +98,44 @@ public class AddNewStudentActivity extends AppCompatActivity {
 
         addButton.setOnClickListener(listener);
 
-        SIDInput.setOnFocusChangeListener(listener);
-        firstNameInput.setOnFocusChangeListener(listener);
-        lastNameInput.setOnFocusChangeListener(listener);
-        patronymicInput.setOnFocusChangeListener(listener);
+        SIDInput.setOnClickListener(listener);
+        firstNameInput.setOnClickListener(listener);
+        lastNameInput.setOnClickListener(listener);
+        patronymicInput.setOnClickListener(listener);
     }
 
-    private class Listener implements View.OnFocusChangeListener, View.OnClickListener {
-        @Override
-        public void onFocusChange(View view, boolean b) {
-            view.setBackground(null);
-        }
+    private class Listener implements View.OnClickListener {
 
         @Override
         public void onClick(View view) {
-            addButton.setEnabled(false);
-            progressBar.setVisibility(View.VISIBLE);
-            correct = true;
+            switch (view.getId()) {
+                case R.id.addButton :
+                    addButton.setEnabled(false);
+                    progressBar.setVisibility(View.VISIBLE);
+                    correct = true;
 
-            SIDText = SIDInput.getText().toString();
+                    SIDText = SIDInput.getText().toString();
 
-            for (int i = 0; i < SIDText.length(); i++) {
-                Character SIDChar = SIDText.charAt(i);
-                Character maskChar = TEXT_MASK.charAt(i);
+                    for (int i = 0; i < SIDText.length(); i++) {
+                        Character SIDChar = SIDText.charAt(i);
+                        Character maskChar = TEXT_MASK.charAt(i);
 
-                if (maskChar.compareTo('#') != 0 && SIDChar.compareTo(maskChar) != 0) {
-                    Snackbar.make(rootLayout, R.string.sid_length, Snackbar.LENGTH_LONG).show();
-                    return;
-                }
+                        if (maskChar.compareTo('#') != 0 && SIDChar.compareTo(maskChar) != 0) {
+                            Snackbar.make(rootLayout, R.string.sid_length, Snackbar.LENGTH_LONG).show();
+                            return;
+                        }
+                    }
+
+                    check();
+
+                    new Adder().execute();
+                    break;
+                default :
+                    SIDInput.setBackground(getResources().getDrawable(R.drawable.custom_edit_text_background));
+                    firstNameInput.setBackground(getResources().getDrawable(R.drawable.custom_edit_text_background));
+                    lastNameInput.setBackground(getResources().getDrawable(R.drawable.custom_edit_text_background));
+                    patronymicInput.setBackground(getResources().getDrawable(R.drawable.custom_edit_text_background));
             }
-
-            check();
-
-            new Adder().execute();
         }
     }
 
@@ -138,7 +143,7 @@ public class AddNewStudentActivity extends AppCompatActivity {
         for (int i = 0; i < container.getChildCount(); i++) {
             view = container.getChildAt(i);
             if (view instanceof EditText && ((EditText) view).getText().toString().trim().equals("")) {
-                view.setBackground(getResources().getDrawable(android.R.drawable.edit_text));
+                view.setBackground(getResources().getDrawable(R.drawable.error_background));
                 correct = false;
             }
         }

@@ -35,7 +35,7 @@
     <string name="password_long">Input password is too long. Please, reduce it to 64 symbols</string>
     <string name="signout_text">Sign Out</string>
     <string name="result_card_text">View results</string>
-    <string name="pass_exams_text">Pass exams</string>
+    <string name="pass_exams_text">Take exams</string>
     <string name="todo">TODO</string>
     <string name="exit_text">Exit</string>
     <string name="exit_message">Do you want to log out from your account?</string>

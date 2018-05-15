@@ -12,7 +12,7 @@
     <dimen name="startMargin">10dp</dimen>
     <dimen name="elementsPadding">20dp</dimen>
     <dimen name="averagePadding">25dp</dimen>
-    <dimen name="cardviewMargin">6dp</dimen>
+    <dimen name="cardViewMargin">6dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="list_view_margin">10dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
@@ -24,4 +24,7 @@
     <dimen name="image_margin">5dp</dimen>
     <dimen name="image_width">100dp</dimen>
     <dimen name="image_height">100dp</dimen>
+    <dimen name="extra_large_text">50sp</dimen>
+    <dimen name="large_text">42sp</dimen>
+    <dimen name="normal_text">35sp</dimen>
 </resources>
