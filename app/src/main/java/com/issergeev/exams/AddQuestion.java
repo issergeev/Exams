@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,26 +32,23 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-public class AddNewStudentActivity extends AppCompatActivity {
-    private final String TEXT_MASK = "###-##/##";
-
-    private TextMask mask;
-    private String SIDText, firstNameText, lastNameText, patronymicText, groupNumberText;
+public class AddQuestion extends AppCompatActivity {
+    private String questionText, answerText, examText;
+    private ArrayList<String> examsList;
+    private ArrayAdapter<String> adapter;
 
     private View view;
     private boolean correct;
 
-    RelativeLayout rootLayout, container;
-    EditText SIDInput, firstNameInput, lastNameInput, patronymicInput;
-    Spinner groupNumberInput;
+    RelativeLayout rootLayout;
+    EditText question, answer;
     Button addButton;
+    Spinner exams;
     ProgressBar progressBar;
 
     AlertDialog.Builder alert;
-
-    ArrayList<String> groupsList;
-    ArrayAdapter<String> adapter;
 
     Intent intent;
 
@@ -59,86 +57,48 @@ public class AddNewStudentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_student);
+        setContentView(R.layout.activity_add_question);
 
         listener = new Listener();
 
         intent = getIntent();
-        Bundle data = intent.getBundleExtra("GroupsList");
+        Bundle data = intent.getBundleExtra("ExamsList");
 
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
-        container = (RelativeLayout) findViewById(R.id.info_container);
-        SIDInput = (EditText) findViewById(R.id.studentIDNumber);
-        firstNameInput = (EditText) findViewById(R.id.firstName);
-        lastNameInput = (EditText) findViewById(R.id.lastName);
-        patronymicInput = (EditText) findViewById(R.id.patronymic);
-        groupNumberInput = (Spinner) findViewById(R.id.groupSelector);
+        question = (EditText) findViewById(R.id.question_text);
+        answer = (EditText) findViewById(R.id.answer_text);
         addButton = (Button) findViewById(R.id.addButton);
+        exams = (Spinner) findViewById(R.id.exams_selector);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        mask = new TextMask(SIDInput, TEXT_MASK);
+        examsList = new ArrayList<>(5);
+        examsList.addAll((Collection<? extends String>) data.getSerializable("Exams"));
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, examsList);
 
-        groupsList = new ArrayList<>(5);
-        groupsList.addAll((Collection<? extends String>) data.getSerializable("Groups"));
+        exams.setAdapter(adapter);
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, groupsList);
-        groupNumberInput.setAdapter(adapter);
-
-        groupNumberInput.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        exams.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                groupNumberText = adapterView.getSelectedItem().toString();
+                examText = adapterView.getSelectedItem().toString();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                groupNumberText = null;
+                examText = null;
             }
         });
 
         addButton.setOnClickListener(listener);
-
-        SIDInput.setOnFocusChangeListener(listener);
-        firstNameInput.setOnFocusChangeListener(listener);
-        lastNameInput.setOnFocusChangeListener(listener);
-        patronymicInput.setOnFocusChangeListener(listener);
-    }
-
-    private class Listener implements View.OnFocusChangeListener, View.OnClickListener {
-        @Override
-        public void onFocusChange(View view, boolean b) {
-            view.setBackground(null);
-        }
-
-        @Override
-        public void onClick(View view) {
-            addButton.setEnabled(false);
-            progressBar.setVisibility(View.VISIBLE);
-            correct = true;
-
-            SIDText = SIDInput.getText().toString();
-
-            for (int i = 0; i < SIDText.length(); i++) {
-                Character SIDChar = SIDText.charAt(i);
-                Character maskChar = TEXT_MASK.charAt(i);
-
-                if (maskChar.compareTo('#') != 0 && SIDChar.compareTo(maskChar) != 0) {
-                    Snackbar.make(rootLayout, R.string.sid_length, Snackbar.LENGTH_LONG).show();
-                    return;
-                }
-            }
-
-            check();
-
-            new Adder().execute();
-        }
+        question.setOnFocusChangeListener(listener);
+        answer.setOnFocusChangeListener(listener);
     }
 
     private void check() {
-        for (int i = 0; i < container.getChildCount(); i++) {
-            view = container.getChildAt(i);
+        for (int i = 0; i < rootLayout.getChildCount(); i++) {
+            view = rootLayout.getChildAt(i);
             if (view instanceof EditText && ((EditText) view).getText().toString().trim().equals("")) {
-                view.setBackground(getResources().getDrawable(android.R.drawable.edit_text));
+                view.setBackground(getResources().getDrawable(R.drawable.error_background));
                 correct = false;
             }
         }
@@ -147,9 +107,9 @@ public class AddNewStudentActivity extends AppCompatActivity {
             new Adder().execute();
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                alert = new AlertDialog.Builder(AddNewStudentActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                alert = new AlertDialog.Builder(AddQuestion.this, android.R.style.Theme_Material_Dialog_Alert);
             } else {
-                alert = new AlertDialog.Builder(AddNewStudentActivity.this);
+                alert = new AlertDialog.Builder(AddQuestion.this);
             }
             alert.setCancelable(true)
                     .setTitle(R.string.warning_title_text)
@@ -159,14 +119,31 @@ public class AddNewStudentActivity extends AppCompatActivity {
         }
     }
 
+    private class Listener implements View.OnClickListener, View.OnFocusChangeListener {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.addButton :
+                    correct = true;
+                    check();
+                    break;
+            }
+        }
+
+        @Override
+        public void onFocusChange(View view, boolean b) {
+            view.setBackground(getResources().getDrawable(R.drawable.edit_text_background));
+        }
+    }
+
     @SuppressLint("StaticFieldLeak")
     private class Adder extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String CREATE_URL = "http://exams-online.online/add_new_student.php";
+            final String CREATE_URL = "http://exams-online.online/add_question.php";
 
-            RequestQueue request = Volley.newRequestQueue(AddNewStudentActivity.this);
+            RequestQueue request = Volley.newRequestQueue(AddQuestion.this);
             StringRequest query = new StringRequest(Request.Method.POST, CREATE_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -177,10 +154,10 @@ public class AddNewStudentActivity extends AppCompatActivity {
 
                         switch (response) {
                             case "Success" :
-                                Snackbar.make(rootLayout, R.string.student_added, Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(rootLayout, R.string.question_added, Snackbar.LENGTH_SHORT).show();
                                 break;
-                            case "User exists" :
-                                Snackbar.make(rootLayout, R.string.student_exists_text, Snackbar.LENGTH_LONG).show();
+                            case "Question exists" :
+                                Snackbar.make(rootLayout, R.string.question_exists, Snackbar.LENGTH_LONG).show();
                                 break;
                             default :
                                 Log.i("net", response);
@@ -205,9 +182,9 @@ public class AddNewStudentActivity extends AppCompatActivity {
                         }
                     } else {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            alert = new AlertDialog.Builder(AddNewStudentActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                            alert = new AlertDialog.Builder(AddQuestion.this, android.R.style.Theme_Material_Dialog_Alert);
                         } else {
-                            alert = new AlertDialog.Builder(AddNewStudentActivity.this);
+                            alert = new AlertDialog.Builder(AddQuestion.this);
                         }
                         alert.setCancelable(true)
                                 .setTitle(R.string.warning_title_text)
@@ -228,17 +205,12 @@ public class AddNewStudentActivity extends AppCompatActivity {
                 protected Map<String, String> getParams() {
                     HashMap<String, String> data = new HashMap<>();
 
-                    SIDText = SIDInput.getText().toString()
-                            .replace("/", "").replace("-","");
-                    firstNameText = firstNameInput.getText().toString();
-                    lastNameText = lastNameInput.getText().toString();
-                    patronymicText = patronymicInput.getText().toString();
+                    questionText = question.getText().toString().trim();
+                    answerText = answer.getText().toString().trim();
 
-                    data.put("student_studentid_number", SIDText);
-                    data.put("student_firstName", firstNameText);
-                    data.put("student_lastName", lastNameText);
-                    data.put("student_patronymic", patronymicText);
-                    data.put("group_number", groupNumberText);
+                    data.put("exam_name", examText);
+                    data.put("question", questionText);
+                    data.put("answer", answerText);
 
                     return data;
                 }

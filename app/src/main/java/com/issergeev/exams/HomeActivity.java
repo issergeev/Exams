@@ -61,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
                 examsData.getString("lastName", "Last Name"));
         patronymic.setText(examsData.getString("patronymic", "Patronymic"));
 
-        if (examsData.getBoolean("isFirstStart", true)) {
+        if (examsData.getBoolean("isEmailNull", false)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 alert = new AlertDialog.Builder(HomeActivity.this, android.R.style.Theme_Material_Dialog_Alert);
             } else {
@@ -103,7 +103,6 @@ public class HomeActivity extends AppCompatActivity {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
                                                 new EmailSender().execute(email_new.getText().toString());
-                                                editor.putBoolean("isFirstStart", false);
                                                 editor.apply();
                                             }
                                         })
@@ -111,13 +110,11 @@ public class HomeActivity extends AppCompatActivity {
                                             @Override
                                             public void onCancel(DialogInterface dialogInterface) {
                                                 new EmailSender().execute(email_new.getText().toString());
-                                                editor.putBoolean("isFirstStart", false);
                                                 editor.apply();
                                             }
                                         }).show();
                             } else {
                                 new EmailSender().execute(email.getText().toString());
-                                editor.putBoolean("isFirstStart", false);
                                 editor.apply();
                             }
                         }
@@ -169,14 +166,6 @@ public class HomeActivity extends AppCompatActivity {
                 })
                 .setNegativeButton(android.R.string.no, null)
                 .show();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        editor.putBoolean("isFirstStart", false);
-        editor.apply();
     }
 
     @SuppressLint("StaticFieldLeak")

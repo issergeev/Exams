@@ -54,8 +54,17 @@
         <activity
             android:name=".TeacherHomeSplashActivity"
             android:theme="@style/LoadingTheme" />
-        <activity android:name=".StudentsActivity" />
-        <activity android:name=".AddNewStudentActivity"></activity>
+        <activity
+            android:name=".StudentsActivity"
+            android:theme="@style/BackgroudTheme" />
+        <activity
+            android:name=".AddNewStudentActivity"
+            android:theme="@style/BackgroudTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ExamsActivity"
+            android:theme="@style/BackgroudTheme" />
+        <activity android:name=".AddQuestion"></activity>
     </application>
 
 </manifest>

@@ -12,7 +12,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Surface;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -34,7 +33,7 @@ import java.util.Map;
 
 public class RegActivity extends AppCompatActivity implements View.OnLongClickListener {
     private static final String DATA_PREFS_NAME = "Data";
-    private final String maskText = "###-##/##";
+    private final String TEXT_MASK = "###-##/##";
 
     private String SIDText = "", loginText = "", passwordText = "", appendixText = "";
     static String[] passData = new String[2];
@@ -98,9 +97,8 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
 
                 for (int i = 0; i < SIDText.length(); i++) {
                     Character SIDChar = SIDText.charAt(i);
-                    Character maskChar = maskText.charAt(i);
+                    Character maskChar = TEXT_MASK.charAt(i);
 
-                    Log.d("s", maskChar + " " + SIDChar);
                     if (maskChar.compareTo('#') != 0 && SIDChar.compareTo(maskChar) != 0) {
                         Snackbar.make(rootLayout, R.string.sid_length, Snackbar.LENGTH_LONG).show();
                         return;
@@ -122,7 +120,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
             }
         });
 
-        mask = new TextMask(SIDInput, maskText);
+        mask = new TextMask(SIDInput, TEXT_MASK);
         shakeAnimation = AnimationUtils.loadAnimation(this, R.anim.forbid_anim);
     }
 

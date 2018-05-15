@@ -28,6 +28,14 @@
         <item name="colorAccent">@color/colorMainNewDark</item>
     </style>
 
+    <style name="BackgroudTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground">@drawable/exams_drawable</item>
+
+        <item name="colorPrimary">@color/colorMainNew</item>
+        <item name="colorPrimaryDark">@color/colorMainNewDark</item>
+        <item name="colorAccent">@color/colorMainNewDark</item>
+    </style>
+
     <style name="CardView.Dark">
         <item name="cardBackgroundColor">@android:color/darker_gray</item>
     </style>

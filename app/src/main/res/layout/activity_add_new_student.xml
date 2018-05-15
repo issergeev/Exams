@@ -4,85 +4,76 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/bottomMargin"
     android:orientation="vertical">
 
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/info_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo_drawable_advanced"
+            android:contentDescription="@string/todo"/>
 
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/averageMargin"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/user_icon"
-                android:contentDescription="@string/todo"/>
+    <EditText
+        android:id="@+id/studentIDNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/minMargin"
+        android:layout_below="@id/image"
+        android:hint="@string/student_id_number"
+        android:lines="2"
+        android:background="@drawable/custom_edit_text_background"/>
 
-            <RelativeLayout
-                android:id="@+id/info_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/image">
+    <EditText
+        android:id="@+id/lastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/minMargin"
+        android:layout_below="@id/studentIDNumber"
+        android:lines="2"
+        android:background="@drawable/custom_edit_text_background"/>
 
-                <EditText
-                    android:id="@+id/student_student_id_number"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/student_id_number"/>
+    <EditText
+        android:id="@+id/firstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/minMargin"
+        android:layout_below="@id/lastName"
+        android:lines="2"
+        android:background="@drawable/custom_edit_text_background"/>
 
-                <EditText
-                    android:id="@+id/student_last_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/student_student_id_number"
-                    android:hint="@string/last_name"/>
+    <EditText
+        android:id="@+id/patronymic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/minMargin"
+        android:layout_below="@id/firstName"
+        android:lines="2"
+        android:background="@drawable/custom_edit_text_background"/>
 
-                <EditText
-                    android:id="@+id/student_first_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/student_last_name"
-                    android:hint="@string/first_name"/>
+    <Spinner
+        android:id="@+id/groupSelector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/patronymic"/>
 
-                <EditText
-                    android:id="@+id/student_patronymic"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/student_first_name"
-                    android:hint="@string/patronymic"/>
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/add"/>
 
-                <Spinner
-                    android:id="@+id/group_selector"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/student_patronymic"/>
-
-            </RelativeLayout>
-
-            <Button
-                android:id="@+id/addButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/averageMargin"
-                android:layout_marginBottom="@dimen/bottomMargin"
-                android:layout_marginStart="@dimen/startMargin"
-                android:layout_marginEnd="@dimen/startMargin"
-                android:layout_below="@id/info_container"
-                android:background="@drawable/home_screen_button_style"
-                android:text="@string/add"/>
-
-        </RelativeLayout>
-
-    </ScrollView>
+    </RelativeLayout>
 
     <ProgressBar
-        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

@@ -61,7 +61,7 @@ public class StudentsListFragment extends Fragment {
     }
 
     @SuppressLint("StaticFieldLeak")
-    class LoadStudents extends AsyncTask<Void, Void, Void> {
+    private class LoadStudents extends AsyncTask<Void, Void, Void> {
         private final String BASE_URL = "http://exams-online.online/";
 
         @Override
