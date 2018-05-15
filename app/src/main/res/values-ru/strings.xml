@@ -56,4 +56,21 @@
     <string name="no">Нет</string>
     <string name="yes">Да</string>
     <string name="email_added">Ваш Email был успешно добавлен в аккаунт</string>
+    <string name="no_groups_found">У вас нет групп, которыми вы можете управлять</string>
+    <string name="student_added">Студент успешно добавлен</string>
+    <string name="student_exists_text">Студент с введенным номером студенческого билета уже существует</string>
+    <string name="unknown_response">От сервера получен неизвестный ответ</string>
+    <string name="student_id_number">Номер студенческого билета</string>
+    <string name="last_name">Фамилия</string>
+    <string name="first_name">Имя</string>
+    <string name="patronymic">Отчество</string>
+    <string name="add">Добавить</string>
+    <string name="available_groups">Доступные группы:</string>
+    <string name="students">Студенты</string>
+    <string name="no_group_number_selected">Номер группы не указан</string>
+    <string name="available_exams">Доступные экзамены:</string>
+    <string name="no_exams_found">Нет доступных экзаменов</string>
+    <string name="question_added">Вопрос добавлен</string>
+    <string name="question_exists">Этот вопрос уже добавлен</string>
+    <string name="fieldsMissed">Некоторые поля не заполнены, пожалуйста, заполните их чтобы продолжить</string>
 </resources>

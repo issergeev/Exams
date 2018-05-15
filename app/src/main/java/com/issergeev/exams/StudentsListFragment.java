@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
@@ -26,6 +28,8 @@ public class StudentsListFragment extends Fragment {
 
     private ListView studentsList;
     private View parentView;
+
+    RelativeLayout noStudentsLayout;
     CardView heading;
     ProgressBar progressBar;
 
@@ -38,6 +42,7 @@ public class StudentsListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.students_fragment, container, false);
 
         parentView = rootView.findViewById(R.id.rootLayout);
+        noStudentsLayout = (RelativeLayout) rootView.findViewById(R.id.noStudents);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         heading = (CardView) getActivity().findViewById(R.id.heading);
         studentsList = (ListView) rootView.findViewById(R.id.students_list);
@@ -55,9 +60,12 @@ public class StudentsListFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
 
-        heading.setVisibility(View.VISIBLE);
-        adapter.clear();
-        adapter.notifyDataSetChanged();
+        try {
+            heading.setVisibility(View.VISIBLE);
+            adapter.clear();
+            adapter.notifyDataSetChanged();
+            noStudentsLayout.setVisibility(View.GONE);
+        } catch (NullPointerException e) {}
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -78,10 +86,17 @@ public class StudentsListFragment extends Fragment {
                 public void onResponse(Call<StudentList> call, Response<StudentList> response) {
                     progressBar.setVisibility(View.GONE);
 
-                    arrayListStudent = response.body().getStudents();
+                    try {
+                        arrayListStudent = response.body().getStudents();
+                        adapter = new StudentsAdapter(parentView.getContext(), arrayListStudent);
+                        studentsList.setAdapter(adapter);
 
-                    adapter = new StudentsAdapter(parentView.getContext(), arrayListStudent);
-                    studentsList.setAdapter(adapter);
+                        if (arrayListStudent.size() == 0) {
+                            noStudentsLayout.setVisibility(View.VISIBLE);
+                        }
+                    } catch (NullPointerException e) {
+                        Snackbar.make(parentView, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+                    }
                 }
 
                 @Override

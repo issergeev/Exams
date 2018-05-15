@@ -76,4 +76,5 @@
     <string name="question_added">Question added</string>
     <string name="question_exists">This question has already been added</string>
     <string name="fieldsMissed">Some of fields has been missed, please, fill them to continue</string>
+    <string name="no_students_found">There are no students added in this group yet</string>
 </resources>

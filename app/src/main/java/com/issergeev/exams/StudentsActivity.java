@@ -139,16 +139,15 @@ public class StudentsActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                     progressBar.setVisibility(View.GONE);
-
-                    if (!response.body().toString().equals("[]")) {
-                        try {
+                    try {
+                        if (!response.body().toString().equals("[]")) {
                             adapter.addAll(response.body());
                             adapter.notifyDataSetChanged();
-                        } catch (NullPointerException e) {
-                            Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
-                        }
-                    } else {
+                        } else {
                         noGroupsLayout.setVisibility(View.VISIBLE);
+                        }
+                    } catch (NullPointerException e) {
+                        Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
                     }
                 }
 
