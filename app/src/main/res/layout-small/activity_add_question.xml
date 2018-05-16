@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="@dimen/averageMargin"
-    tools:context=".AddQuestion">
+    tools:context=".AddQuestion"
+    android:background="#416684">
 
     <ScrollView
         android:layout_height="match_parent"
@@ -15,7 +15,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/averageMargin">
 
             <ImageView
                 android:id="@+id/image"
@@ -31,6 +32,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/bottomMargin"
                 android:hint="Question"
+                android:textColorHint="@android:color/white"
+                android:textColor="@android:color/white"
                 android:layout_below="@id/image"
                 android:inputType="textMultiLine"
                 android:lines="4"
@@ -42,16 +45,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/bottomMargin"
                 android:hint="Answer"
+                android:textColorHint="@android:color/white"
+                android:textColor="@android:color/white"
                 android:lines="2"
                 android:layout_below="@id/question_text"
                 android:background="@drawable/edit_text_background"/>
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/answer_text"
+                android:text="Select exam"
+                android:textStyle="italic"
+                android:textSize="15sp"/>
 
             <Spinner
                 android:id="@+id/exams_selector"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/bottomMargin"
-                android:layout_below="@id/answer_text"/>
+                android:layout_below="@id/heading"/>
 
             <Button
                 android:id="@+id/addButton"

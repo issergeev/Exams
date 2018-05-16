@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/question_separator">
+    android:background="@drawable/gradient">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,7 +15,10 @@
         android:id="@+id/question_heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Question:"/>
+        android:text="Question:"
+        android:textSize="@dimen/textSize"
+        android:textColor="@android:color/white"
+        android:textStyle="italic"/>
 
     <TextView
         android:id="@+id/question_text"
@@ -24,6 +27,7 @@
         android:layout_marginBottom="@dimen/bottomMargin"
         android:layout_below="@id/question_heading"
         android:text="Question"
+        android:textColor="@android:color/white"
         android:gravity="center"
         android:textSize="@dimen/textSize"
         android:lines="4"
@@ -34,7 +38,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/question_text"
-        android:text="Answer:"/>
+        android:text="Answer:"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textSize"
+        android:textStyle="italic"/>
 
     <TextView
         android:id="@+id/answer_text"
@@ -43,6 +50,7 @@
         android:layout_marginBottom="@dimen/bottomMargin"
         android:layout_below="@id/answer_heading"
         android:text="Answer"
+        android:textColor="@android:color/white"
         android:gravity="center"
         android:textSize="@dimen/textSize"
         android:lines="2"

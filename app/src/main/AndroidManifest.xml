@@ -64,14 +64,18 @@
         <activity
             android:name=".ExamsActivity"
             android:theme="@style/AppThemeAdvanced" />
-        <activity android:name=".AddQuestion"
+        <activity
+            android:name=".AddQuestion"
             android:theme="@style/AppThemeAdvanced"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".QuestionEditActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".QuestionEditActivity"
             android:theme="@style/AppThemeAdvanced"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".StudentsExamsActivity"
-            android:theme="@style/AppTheme"/>
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".StudentsExamsActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".PassActivity"></activity>
     </application>
 
 </manifest>

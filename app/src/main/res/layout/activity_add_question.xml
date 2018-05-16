@@ -6,65 +6,93 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="@dimen/averageMargin"
-    tools:context=".AddQuestion">
+    tools:context=".AddQuestion"
+    android:background="#416684">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/question_text">
-
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/logo_drawable_advanced"
-            android:contentDescription="@string/todo"/>
+            android:layout_margin="@dimen/averageMargin">
 
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/viewHolder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <EditText
-        android:id="@id/question_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="@dimen/bottomMargin"
-        android:hint="Question"
-        android:inputType="textMultiLine"
-        android:lines="4"
-        android:background="@drawable/edit_text_background"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/question_text">
 
-    <EditText
-        android:id="@+id/answer_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/bottomMargin"
-        android:hint="Answer"
-        android:lines="2"
-        android:layout_below="@id/question_text"
-        android:background="@drawable/edit_text_background"/>
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/question_mark_image"
+                        android:contentDescription="@string/todo"/>
 
-    <Spinner
-        android:id="@+id/exams_selector"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/bottomMargin"
-        android:layout_below="@id/answer_text"/>
+                </RelativeLayout>
 
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="@string/add"
-        android:background="@drawable/button_shape_advanced"/>
+                <EditText
+                    android:id="@id/question_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="@dimen/bottomMargin"
+                    android:textColorHint="@android:color/white"
+                    android:hint="Question"
+                    android:textColor="@android:color/white"
+                    android:inputType="textMultiLine"
+                    android:lines="4"
+                    android:background="@drawable/edit_text_background"/>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"/>
+                <EditText
+                    android:id="@+id/answer_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/bottomMargin"
+                    android:hint="Answer"
+                    android:textColorHint="@android:color/white"
+                    android:textColor="@android:color/white"
+                    android:lines="2"
+                    android:layout_below="@id/question_text"
+                    android:background="@drawable/edit_text_background"/>
+
+                <TextView
+                    android:id="@+id/heading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/answer_text"
+                    android:text="Select exam"
+                    android:textStyle="italic"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp"/>
+
+                <Spinner
+                    android:id="@+id/exams_selector"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/bottomMargin"
+                    android:layout_below="@id/heading"/>
+
+                <Button
+                    android:id="@+id/addButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/add"
+                    android:background="@drawable/button_shape_advanced"/>
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
 
 </RelativeLayout>

@@ -12,13 +12,14 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class QuestionsAdapter extends ArrayAdapter<Question> {
+public class QuestionsStudentAdapter extends ArrayAdapter<Question> {
     private LayoutInflater layoutInflater;
 
     private List<Question> questionList;
+
     Context context;
 
-    public QuestionsAdapter(@NonNull Context context, List<Question> questions) {
+    public QuestionsStudentAdapter(@NonNull Context context, List<Question> questions) {
         super(context, 0, questions);
 
         this.context = context;
@@ -35,6 +36,7 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
         final ViewHolder viewHolder;
 
         if (convertView == null) {
@@ -45,11 +47,11 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Question item = getItem(position);
+        final Question item = getItem(position);
 
         if (item != null) {
             viewHolder.question.setText(item.getQuestion());
-            viewHolder.answer.setText(item.getAnswer());
+            viewHolder.studentAnswer.setText(item.getAnswer());
         }
 
         return viewHolder.parentLayout;
@@ -58,19 +60,19 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
     private static class ViewHolder {
         private final RelativeLayout parentLayout;
         private final TextView question;
-        private final TextView answer;
+        private final TextView studentAnswer;
 
-        private ViewHolder(RelativeLayout parentLayout, TextView question, TextView answer) {
+        private ViewHolder(RelativeLayout parentLayout, TextView question, TextView studentAnswer) {
             this.parentLayout = parentLayout;
             this.question = question;
-            this.answer = answer;
+            this.studentAnswer = studentAnswer;
         }
 
         private static ViewHolder create(RelativeLayout parentLayout) {
             TextView question = parentLayout.findViewById(R.id.question_text);
-            TextView answer = parentLayout.findViewById(R.id.answer_text);
+            TextView answerText = parentLayout.findViewById(R.id.answer_text);
 
-            return new ViewHolder(parentLayout, question, answer);
+            return new ViewHolder(parentLayout, question, answerText);
         }
     }
 }

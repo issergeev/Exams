@@ -135,6 +135,7 @@ public class HomeActivity extends AppCompatActivity {
                             }
                         }
                     })
+                    .setNegativeButton(R.string.no, null)
                     .show();
         }
     }

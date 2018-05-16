@@ -42,7 +42,7 @@ public class QuestionsListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.questions_fragment, container, false);
+        final View rootView = inflater.inflate(R.layout.questions_fragment, container, false);
 
         parentView = rootView.findViewById(R.id.rootLayout);
         noQuestionLayout = (RelativeLayout) rootView.findViewById(R.id.noQuestions);
@@ -58,13 +58,17 @@ public class QuestionsListFragment extends Fragment {
         questionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.i("num", String.valueOf(i));
+                try {
+                    Intent intent = new Intent(getActivity(), QuestionEditActivity.class)
+                            .putExtra("question", adapter.getItem(i).getQuestion())
+                            .putExtra("answer", adapter.getItem(i).getAnswer())
+                            .putExtra("question_number", adapter.getItem(i).getQuestionNumber());
+                    startActivity(intent);
+                } catch (NullPointerException e) {
+                    Snackbar.make(rootView, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
 
-                Intent intent = new Intent(getActivity(), QuestionEditActivity.class)
-                        .putExtra("question", adapter.getItem(i).getQuestion())
-                        .putExtra("answer", adapter.getItem(i).getAnswer())
-                        .putExtra("question_number", adapter.getItem(i).getQuestionNumber());
-                startActivity(intent);
+                    Log.i("press", e.getMessage());
+                }
             }
         });
 
