@@ -1,12 +1,15 @@
 package com.issergeev.exams;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -30,10 +33,14 @@ public class QuestionEditActivity extends AppCompatActivity {
 
     RelativeLayout rootLayout;
     EditText question, answer;
-    Button updateButton;
+    Button updateButton, deleteButton;
     ProgressBar progressBar;
 
     Intent intent;
+
+    AlertDialog.Builder alert;
+
+    Listener listener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,24 +52,60 @@ public class QuestionEditActivity extends AppCompatActivity {
         answerText = intent.getStringExtra("answer");
         questionNumber = intent.getIntExtra("question_number", -1);
 
+        listener = new Listener();
+
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
         question = (EditText) findViewById(R.id.question);
         answer = (EditText) findViewById(R.id.answer);
         updateButton = (Button) findViewById(R.id.updateButton);
+        deleteButton = (Button) findViewById(R.id.deleteButton);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         question.setText(questionText);
         answer.setText(answerText);
 
-        updateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateButton.setEnabled(false);
-                progressBar.setVisibility(View.VISIBLE);
+        updateButton.setOnClickListener(listener);
 
-                new QuestionUpdater().execute();
+        deleteButton.setOnClickListener(listener);
+
+
+    }
+
+    class Listener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.updateButton :
+                    updateButton.setEnabled(false);
+                    progressBar.setVisibility(View.VISIBLE);
+
+                    new QuestionUpdater().execute();
+                    break;
+                case R.id.deleteButton :
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        alert = new AlertDialog.Builder(QuestionEditActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                    } else {
+                        alert = new AlertDialog.Builder(QuestionEditActivity.this);
+                    }
+                    alert.setCancelable(true)
+                            .setTitle(R.string.warning_title_text)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setMessage(R.string.deleteMessage)
+                            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    deleteButton.setEnabled(false);
+                                    progressBar.setVisibility(View.VISIBLE);
+
+                                    new QuestionDeleter().execute();
+                                }
+                            })
+                            .setNegativeButton(R.string.no, null)
+                            .show();
+                    break;
             }
-        });
+        }
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -73,7 +116,8 @@ public class QuestionEditActivity extends AppCompatActivity {
             final String CREATE_URL = "http://exams-online.online/update_question.php";
 
             RequestQueue request = Volley.newRequestQueue(QuestionEditActivity.this);
-            StringRequest query = new StringRequest(Request.Method.POST, CREATE_URL, new com.android.volley.Response.Listener<String>() {
+            StringRequest query = new StringRequest(Request.Method.POST, CREATE_URL,
+                    new com.android.volley.Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     if (response != null) {
@@ -83,7 +127,9 @@ public class QuestionEditActivity extends AppCompatActivity {
 
                         switch (response) {
                             case "Success" :
-                                Snackbar.make(rootLayout, R.string.question_updated, Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(QuestionsListFragment.parentView, R.string.question_updated,
+                                        Snackbar.LENGTH_SHORT).show();
+                                finish();
                                 break;
                             default :
                                 Log.i("net", response);
@@ -118,12 +164,70 @@ public class QuestionEditActivity extends AppCompatActivity {
                     questionText = question.getText().toString();
                     answerText = answer.getText().toString();
 
-                    Log.i("info", "Number : " + questionNumber + "; Question: "
-                            + questionText + "; Answer: " + answerText);
-
                     questionData.put("number", String.valueOf(questionNumber));
                     questionData.put("question", questionText);
                     questionData.put("answer", answerText);
+
+                    return questionData;
+                }
+            };
+            request.add(query);
+
+            return null;
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class QuestionDeleter extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            final String CREATE_URL = "http://exams-online.online/delete_question.php";
+
+            final RequestQueue request = Volley.newRequestQueue(QuestionEditActivity.this);
+            StringRequest query = new StringRequest(Request.Method.POST, CREATE_URL,
+                    new com.android.volley.Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    if (response != null) {
+                        updateButton.setEnabled(true);
+                        progressBar.setVisibility(View.GONE);
+                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+
+                        if (!response.equals("0")) {
+                            Snackbar.make(QuestionsListFragment.parentView, R.string.question_deleted,
+                                    Snackbar.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+                        }
+                    }
+                }
+            }, new com.android.volley.Response.ErrorListener()
+
+            {
+                @Override
+                public void onErrorResponse (VolleyError error){
+                    if (error.networkResponse != null) {
+                        updateButton.setEnabled(true);
+
+                        int errorCode = error.networkResponse.statusCode;
+
+                        if (errorCode == 423) {
+                            Snackbar.make(rootLayout, R.string.server_sleeping_text, Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    progressBar.setVisibility(View.GONE);
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    HashMap<String, String> questionData = new HashMap<>();
+
+                    questionData.put("number", String.valueOf(questionNumber));
 
                     return questionData;
                 }

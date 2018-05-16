@@ -160,7 +160,8 @@ public class AddNewStudentActivity extends AppCompatActivity {
                     .setTitle(R.string.warning_title_text)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setMessage(R.string.fieldsMissed)
-                    .setPositiveButton(R.string.accept_text, null).show();
+                    .setPositiveButton(R.string.accept_text, null)
+                    .show();
         }
     }
 

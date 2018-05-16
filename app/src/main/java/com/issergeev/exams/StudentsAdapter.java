@@ -56,7 +56,7 @@ public class StudentsAdapter extends ArrayAdapter<Student> {
         } else {
             viewHolder.emailAddress.setText("No email address added");
         }
-        viewHolder.photo.setImageDrawable(parent.getResources().getDrawable(R.drawable.exams_icon));
+        viewHolder.photo.setImageDrawable(parent.getResources().getDrawable(R.drawable.student_icon));
 
         return viewHolder.parentLayout;
     }

@@ -2,10 +2,7 @@ package com.issergeev.exams;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -29,8 +26,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class QuestionsListFragment extends Fragment {
-    public static int position = 0;
-
     private String exam;
 
     private ListView questionList;
@@ -41,11 +36,8 @@ public class QuestionsListFragment extends Fragment {
     CardView heading;
     ProgressBar progressBar;
 
-    private View parentView;
+    public static View parentView;
     private QuestionsAdapter adapter;
-
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
 
     @Nullable
     @Override
@@ -84,6 +76,13 @@ public class QuestionsListFragment extends Fragment {
         super.onResume();
 
         new LoadQuestions().execute();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        noQuestionLayout.setVisibility(View.GONE);
     }
 
     @Override

@@ -58,7 +58,6 @@
             android:text="@string/login_button_text"
             android:textSize="@dimen/textSize"
             android:textStyle="italic"
-            android:foreground="?selectableItemBackground"
             android:background="@drawable/button_shape_standard"/>
 
         <LinearLayout

@@ -3,6 +3,7 @@ package com.issergeev.exams;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -144,6 +145,12 @@ public class HomeActivity extends AppCompatActivity {
                             })
                             .setNegativeButton(android.R.string.no, null)
                             .show();
+                    break;
+                case R.id.exams_view :
+                    startActivity(new Intent(HomeActivity.this, StudentsExamsActivity.class));
+                    break;
+                case R.id.results_view :
+                    break;
             }
         }
     }

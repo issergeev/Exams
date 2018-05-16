@@ -45,7 +45,16 @@
         android:background="@drawable/edit_text_background"/>
 
     <Button
-        android:id="@+id/updateButton"
+        android:id="@+id/deleteButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/bottomMargin"
+        android:layout_above="@+id/updateButton"
+        android:text="@string/delete"
+        android:background="@drawable/button_shape_delete"/>
+
+    <Button
+        android:id="@id/updateButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
