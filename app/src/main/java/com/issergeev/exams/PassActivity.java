@@ -3,7 +3,6 @@ package com.issergeev.exams;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ProgressBar;
 import android.content.Intent;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -92,8 +90,6 @@ public class PassActivity extends AppCompatActivity {
                         }
                     } catch (NullPointerException e) {
                         Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
-
-                        Log.i("net", "Error " + e.getMessage());
                     }
                 }
 
@@ -101,8 +97,6 @@ public class PassActivity extends AppCompatActivity {
                 public void onFailure(Call<QuestionList> call, Throwable t) {
                     progressBar.setVisibility(View.GONE);
                     Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
-
-                    Log.i("net", "Failture " + t.getMessage());
                 }
             });
 

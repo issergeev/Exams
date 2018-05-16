@@ -10,7 +10,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -160,8 +159,7 @@ public class AddNewStudentActivity extends AppCompatActivity {
                     .setTitle(R.string.warning_title_text)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setMessage(R.string.fieldsMissed)
-                    .setPositiveButton(R.string.accept_text, null)
-                    .show();
+                    .setPositiveButton(R.string.accept_text, null).show();
         }
     }
 
@@ -189,7 +187,7 @@ public class AddNewStudentActivity extends AppCompatActivity {
                                 Snackbar.make(rootLayout, R.string.student_exists_text, Snackbar.LENGTH_LONG).show();
                                 break;
                             default :
-                                Log.i("net", response);
+                                Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
                                 break;
                         }
                     }

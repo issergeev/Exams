@@ -73,4 +73,12 @@
     <string name="question_added">Вопрос добавлен</string>
     <string name="question_exists">Этот вопрос уже добавлен</string>
     <string name="fieldsMissed">Некоторые поля не заполнены, пожалуйста, заполните их чтобы продолжить</string>
+    <string name="no_students_found">В данную группу не добавлен ни один студент</string>
+    <string name="no_questions_found">В данном экзамене нет вопросов</string>
+    <string name="questions">Вопросы</string>
+    <string name="update">Обновить</string>
+    <string name="question_updated">Вопрос был успешно обновлен</string>
+    <string name="delete">Удалить</string>
+    <string name="question_deleted">Вопрос был успешно удален</string>
+    <string name="deleteMessage">Вы уверены, что хотите удалить этот вопрос. Данное действие не может быть отменено</string>
 </resources>

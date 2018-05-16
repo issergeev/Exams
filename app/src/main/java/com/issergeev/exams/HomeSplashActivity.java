@@ -12,7 +12,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.android.volley.Request;
@@ -104,7 +103,7 @@ public class HomeSplashActivity extends AppCompatActivity {
                             finish();
                             startActivity(new Intent(HomeSplashActivity.this, HomeActivity.class));
                         } catch (JSONException e) {
-                            Log.d("login", e.getMessage());
+                            Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
                         }
                     } else {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -145,7 +144,6 @@ public class HomeSplashActivity extends AppCompatActivity {
                             Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_SHORT).show();
                             break;
                     }
-                    Log.d("login", error.getMessage());
                 }
             }){
                 @Override

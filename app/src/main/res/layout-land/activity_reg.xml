@@ -8,7 +8,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".RegActivity"
     android:orientation="vertical"
-    android:background="@drawable/background">
+    android:background="@color/secondMainBackground">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -11,7 +11,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -201,9 +200,8 @@ public class LoginAdminActivity extends AppCompatActivity {
 
                             //finish();
                             //startActivity(new Intent(LoginAdminActivity.this, HomeActivity.class));
-                            Log.d("net", "SignIn successfully");
                         } catch (JSONException e) {
-                            Log.d("login", e.getMessage());
+                            Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
                         }
                     } else {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -226,7 +224,7 @@ public class LoginAdminActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.d("login", error.getMessage());
+                    Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
                 }
             }){
                 @Override

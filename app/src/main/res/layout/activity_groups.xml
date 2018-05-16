@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/noGroupsText"
             android:layout_centerHorizontal="true"
-            android:src="@android:drawable/ic_notification_clear_all"
+            android:src="@drawable/forbid_icon"
             android:contentDescription="@string/todo"/>
 
         <TextView
@@ -58,8 +58,8 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:text="@string/no_groups_found"
-            android:textSize="@dimen/textSize"
-            android:textStyle="italic"/>
+            android:textSize="@dimen/headingsSize"
+            android:textStyle="italic|bold"/>
 
     </RelativeLayout>
 

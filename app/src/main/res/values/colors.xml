@@ -5,7 +5,7 @@
     <color name="colorPrimaryDark">#b65b00</color>
     <color name="ic_launcher_background">#A6754B</color>
     <color name="colorMain">#ffbe7e</color>
-    <color name="colorMainDark">#ffb061</color>
+    <color name="colorMainDark">#9b5b11</color>
     <color name="colorRipple">#ff8005</color>
     <color name="colorAccent">#ff7f00</color>
     <color name="colorButton">#ffea00</color>
@@ -23,4 +23,7 @@
     <color name="colorNewLight">#79d3e2</color>
 
     <color name="design_snackbar_background_color" tools:override="true">@color/colorSnackbar</color>
+    <color name="cardBackgroundColor">#2d60b1</color>
+    <color name="secondBackgroundColor">#64ace2</color>
+    <color name="secondMainBackground">#9e690d</color>
 </resources>

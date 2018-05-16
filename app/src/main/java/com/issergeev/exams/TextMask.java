@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 
 public class TextMask implements View.OnKeyListener, TextWatcher {
-    EditText text;
-    String mask;
+    private EditText text;
+    private String mask;
 
     private int length;
     private boolean isDeletePressed = false;

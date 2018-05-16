@@ -3,7 +3,6 @@ package com.issergeev.exams;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
 
 public class PassFragment extends Fragment {
     private static int questionNumber = 0;
@@ -36,8 +36,6 @@ public class PassFragment extends Fragment {
 
         maxQuestion = PassActivity.questionArrayList.size();
         inflateQuestion(0);
-
-        Log.i("num", String.valueOf(maxQuestion));
 
         next.setOnClickListener(listener);
         previous.setOnClickListener(listener);

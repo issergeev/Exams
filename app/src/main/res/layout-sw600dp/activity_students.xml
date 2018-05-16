@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".StudentsActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/secondBackgroundColor">
 
     <android.support.v7.widget.CardView
         android:id="@+id/heading"
@@ -17,7 +18,8 @@
         android:layout_margin="@dimen/minMargin"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/title_layout"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="@dimen/corner_radius"
+        app:cardBackgroundColor="@color/cardBackgroundColor">
 
 
         <LinearLayout
@@ -31,6 +33,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/available_groups"
+                android:textColor="@android:color/white"
                 android:textSize="@dimen/textSize"/>
 
         </LinearLayout>

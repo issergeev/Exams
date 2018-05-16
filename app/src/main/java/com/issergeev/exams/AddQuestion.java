@@ -10,7 +10,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class AddQuestion extends AppCompatActivity {
     private String questionText, answerText, examText;
@@ -42,7 +39,7 @@ public class AddQuestion extends AppCompatActivity {
     private View view;
     private boolean correct;
 
-    RelativeLayout rootLayout;
+    RelativeLayout rootLayout, viewHolder;
     EditText question, answer;
     Button addButton;
     Spinner exams;
@@ -65,6 +62,7 @@ public class AddQuestion extends AppCompatActivity {
         Bundle data = intent.getBundleExtra("ExamsList");
 
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
+        viewHolder = (RelativeLayout) findViewById(R.id.mainViewHolder);
         question = (EditText) findViewById(R.id.question_text);
         answer = (EditText) findViewById(R.id.answer_text);
         addButton = (Button) findViewById(R.id.addButton);
@@ -95,8 +93,8 @@ public class AddQuestion extends AppCompatActivity {
     }
 
     private void check() {
-        for (int i = 0; i < rootLayout.getChildCount(); i++) {
-            view = rootLayout.getChildAt(i);
+        for (int i = 0; i < viewHolder.getChildCount(); i++) {
+            view = viewHolder.getChildAt(i);
             if (view instanceof EditText && ((EditText) view).getText().toString().trim().equals("")) {
                 view.setBackground(getResources().getDrawable(R.drawable.error_background));
                 correct = false;
@@ -159,7 +157,7 @@ public class AddQuestion extends AppCompatActivity {
                                 Snackbar.make(rootLayout, R.string.question_exists, Snackbar.LENGTH_LONG).show();
                                 break;
                             default :
-                                Log.i("net", response);
+                                Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
                                 break;
                         }
                     }

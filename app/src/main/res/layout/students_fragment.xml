@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".StudentsActivity"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="@color/secondBackgroundColor">
 
     <RelativeLayout
         android:id="@+id/noStudents"
@@ -44,7 +44,8 @@
         android:layout_margin="@dimen/minMargin"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/title_layout"
-        app:cardCornerRadius="@dimen/corner_radius">
+        app:cardCornerRadius="@dimen/corner_radius"
+        app:cardBackgroundColor="@color/cardBackgroundColor">
 
         <TextView
             android:layout_width="match_parent"

@@ -14,7 +14,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -26,8 +25,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -206,8 +203,7 @@ public class HomeActivity extends AppCompatActivity {
                             Snackbar.make(rootLayout, R.string.email_added, Snackbar.LENGTH_SHORT).show();
                             break;
                         default :
-                            Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
-                            Log.d("net", response);
+                            Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
                             break;
                     }
                 }
@@ -227,7 +223,6 @@ public class HomeActivity extends AppCompatActivity {
                             Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
                             break;
                     }
-                    Log.d("login", error.getMessage());
                 }
             }){
                 @Override

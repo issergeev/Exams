@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/background">
+    android:background="#9e690d">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -44,6 +44,7 @@
             android:layout_marginStart="@dimen/buttonMargin"
             android:layout_marginEnd="@dimen/buttonMargin"
             android:layout_marginBottom="@dimen/minMargin"
+            android:layout_marginTop="@dimen/topMargin"
             android:layout_alignParentBottom="true"
             android:text="@string/start_button_teacher_text"
             android:textSize="@dimen/textSize"

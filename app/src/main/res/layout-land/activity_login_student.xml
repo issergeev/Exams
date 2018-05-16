@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/background">
+    android:background="#9e690d">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,6 +20,7 @@
             android:layout_above="@id/passwordContainrt_LA"
             android:hint="@string/login_text"
             android:inputType="text"
+            android:textColor="@android:color/black"
             android:gravity="start"/>
 
         <android.support.design.widget.TextInputLayout
@@ -37,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:hint="@string/password_text"
+                android:textColor="@android:color/black"
                 android:gravity="start"/>
 
         </android.support.design.widget.TextInputLayout>
