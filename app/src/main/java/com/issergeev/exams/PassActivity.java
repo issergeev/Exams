@@ -1,6 +1,9 @@
 package com.issergeev.exams;
 
 import android.annotation.SuppressLint;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +16,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PassActivity extends AppCompatActivity {
     private String exam;
+    public static HashMap<String, Boolean> examList;
 
     public static ArrayList<Question> questionArrayList;
 
@@ -31,6 +36,9 @@ public class PassActivity extends AppCompatActivity {
 
     Intent intent;
 
+    Fragment fragment;
+    FragmentManager fragmentManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +46,9 @@ public class PassActivity extends AppCompatActivity {
 
         intent = getIntent();
         exam = intent.getStringExtra("ExamName");
+
+        fragmentManager = getFragmentManager();
+        fragment = new PassFragment();
 
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
         heading = (TextView) findViewById(R.id.examName);
@@ -47,6 +58,7 @@ public class PassActivity extends AppCompatActivity {
         heading.setText(exam);
 
         questionArrayList = new ArrayList<>(10);
+        examList = new HashMap<>(10);
 
         new LoadQuestions().execute();
     }
@@ -71,9 +83,9 @@ public class PassActivity extends AppCompatActivity {
 
                     try {
                         questionArrayList = response.body().getQuestions();
-                        for (int i = 0; i < questionArrayList.size(); i++) {
-                            Log.i("array", questionArrayList.get(i).getQuestion());
-                        }
+
+                        fragmentManager.beginTransaction().add(R.id.rootLayout, fragment)
+                            .commit();
 
                         if (questionArrayList.size() == 0) {
                             noQuestionLayout.setVisibility(View.VISIBLE);
