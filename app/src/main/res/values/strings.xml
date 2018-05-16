@@ -84,4 +84,5 @@
     <string name="delete">Delete question</string>
     <string name="question_deleted">The question has been successfully deleted</string>
     <string name="deleteMessage">Are you sure you want ot delete this question? This action cannot be canceled</string>
+    <string name="not_detected">NOT DETECTED</string>
 </resources>

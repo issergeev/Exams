@@ -117,9 +117,10 @@
                                 android:textSize="20sp"/>
 
                             <TextView
+                                android:id="@+id/exams_to_pass"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1"
+                                android:text="@string/not_detected"
                                 android:textStyle="bold"
                                 android:textSize="20sp"
                                 android:paddingTop="10dp"
@@ -143,10 +144,11 @@
                                 android:textSize="20sp" />
 
                             <TextView
+                                android:id="@+id/exams_passed"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingTop="10dp"
-                                android:text="0"
+                                android:text="@string/not_detected"
                                 android:textColor="@android:color/holo_green_light"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />

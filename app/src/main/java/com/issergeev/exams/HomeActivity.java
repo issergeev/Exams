@@ -13,6 +13,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -26,6 +27,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,9 +41,11 @@ public class HomeActivity extends AppCompatActivity {
     private Listener listener;
 
     RelativeLayout rootLayout;
-    AlertDialog.Builder alert, alert_email;
+    CardView examsView, resultsView;
+    TextView fullName, patronymic, passedExams, examsToPass;
     FloatingActionButton logoutButton;
-    TextView fullName, patronymic;
+
+    AlertDialog.Builder alert, alert_email;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,16 +58,26 @@ public class HomeActivity extends AppCompatActivity {
         listener = new Listener();
 
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
-        logoutButton = (FloatingActionButton) findViewById(R.id.logoutButton);
-        logoutButton.setOnClickListener(listener);
-
+        examsView = (CardView) findViewById(R.id.exams_view);
+        resultsView = (CardView) findViewById(R.id.results_view);
+        examsToPass = (TextView) findViewById(R.id.exams_to_pass);
+        passedExams = (TextView) findViewById(R.id.exams_passed);
         fullName = (TextView) findViewById(R.id.FaL_name);
         patronymic = (TextView) findViewById(R.id.patronymic);
+        logoutButton = (FloatingActionButton) findViewById(R.id.logoutButton);
+
+        logoutButton.setOnClickListener(listener);
+
         fullName.setText(examsData.getString("firstName", "First Name") + " " +
                 examsData.getString("lastName", "Last Name"));
         patronymic.setText(examsData.getString("patronymic", "Patronymic"));
+        examsToPass.setText(examsData.getString("ExamsToPass", getResources().getString(R.string.not_detected)));
+        passedExams.setText(examsData.getString("PassedExams", getResources().getString(R.string.not_detected)));
 
-        if (examsData.getBoolean("isEmailNull", false)) {
+        examsView.setOnClickListener(listener);
+        resultsView.setOnClickListener(listener);
+
+        if (examsData.getString("Email", "").equals("")) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 alert = new AlertDialog.Builder(HomeActivity.this, android.R.style.Theme_Material_Dialog_Alert);
             } else {

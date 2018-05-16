@@ -35,9 +35,9 @@ public class HomeSplashActivity extends AppCompatActivity {
     private static SharedPreferences examsData;
     private static SharedPreferences.Editor editor;
 
-    private String loginText, passwordText, firstName, lastName, patronymic, groupNumber, email, salt;
+    private String loginText, passwordText, firstName, lastName, patronymic,
+            groupNumber, email, examsToPass, passedExams, salt;
     private int studentIDNumber;
-    private boolean emailNull = false;
 
     RelativeLayout rootLayout;
     AlertDialog.Builder alert;
@@ -86,10 +86,8 @@ public class HomeSplashActivity extends AppCompatActivity {
                             patronymic = data.getString("student_patronymic");
                             groupNumber = data.getString("group_number");
                             email = data.getString("email");
-
-                            if (email == null || email == "null") {
-                                emailNull = true;
-                            }
+                            examsToPass = data.getString("exams_to_pass");
+                            passedExams = data.getString("exams_passed");
 
                             editor.putString("Login", loginText);
                             editor.putString("Password", passwordText);
@@ -98,7 +96,9 @@ public class HomeSplashActivity extends AppCompatActivity {
                             editor.putString("patronymic", patronymic);
                             editor.putInt("SIDNumber", studentIDNumber);
                             editor.putString("GroupNumber", groupNumber);
-                            editor.putBoolean("isEmailNull", emailNull);
+                            editor.putString("Email", email);
+                            editor.putString("ExamsToPass", examsToPass);
+                            editor.putString("PassedExams", passedExams);
                             editor.apply();
 
                             finish();

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/rootLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/heading_activity"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/minMargin"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/title_layout"
+        app:cardCornerRadius="@dimen/corner_radius">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/available_exams"
+                android:textSize="@dimen/textSize"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/noExams"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/noExamsText"
+            android:layout_centerHorizontal="true"
+            android:src="@android:drawable/ic_notification_clear_all"
+            android:contentDescription="@string/todo"/>
+
+        <TextView
+            android:id="@id/noExamsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/no_exams_found"
+            android:textSize="@dimen/textSize"
+            android:textStyle="italic"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/exams_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/list_view_margin"
+        android:layout_below="@id/heading_activity"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>
