@@ -105,8 +105,8 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                     }
                 }
 
-                loginText = loginInput.getText().toString();
-                passwordText = passwordInput.getText().toString();
+                loginText = loginInput.getText().toString().trim();
+                passwordText = passwordInput.getText().toString().trim();
                 SIDText = SIDInput.getText().toString().replaceAll("-", "")
                         .replaceAll("/", "");
 
@@ -146,8 +146,27 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         final String[] UNSAFE_PASSWORDS = new String[] {"qwerty", "password", "p@ssw0rd", "12345"};
 
         if (SIDText.length() != 7) {
-            Log.d("length", String.valueOf(SIDText.length()));
             Snackbar.make(rootLayout, R.string.sid_length, Snackbar.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (loginText.length() < 4) {
+            Snackbar.make(rootLayout, R.string.login_short, Snackbar.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (loginText.length() > 32) {
+            Snackbar.make(rootLayout, R.string.login_long, Snackbar.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (passwordText.length() < 5) {
+            Snackbar.make(rootLayout, R.string.password_short, Snackbar.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (passwordText.length() > 64) {
+            Snackbar.make(rootLayout, R.string.password_long, Snackbar.LENGTH_LONG).show();
             return false;
         }
 
@@ -156,29 +175,11 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
             return false;
         }
 
-        if (loginText.length() < 4) {
-            Snackbar.make(rootLayout, R.string.login_short, Toast.LENGTH_LONG).show();
-            return false;
-        }
-
-        if (loginText.length() > 32) {
-            Snackbar.make(rootLayout, R.string.login_long, Snackbar.LENGTH_LONG).show();
-        }
-
         for (String s : UNAVALIABLE_LOGINS) {
             if (loginText.toLowerCase().contains(s)) {
                 Snackbar.make(rootLayout, R.string.unavailable_login, Snackbar.LENGTH_LONG).show();
                 return false;
             }
-        }
-
-        if (passwordText.length() < 5) {
-            Snackbar.make(rootLayout, R.string.password_short, Toast.LENGTH_LONG).show();
-            return false;
-        }
-
-        if (passwordText.length() > 64) {
-            Snackbar.make(rootLayout, R.string.password_long, Snackbar.LENGTH_LONG).show();
         }
 
         for (String s : UNSAFE_PASSWORDS) {

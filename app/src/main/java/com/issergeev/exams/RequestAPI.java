@@ -19,4 +19,8 @@ public interface RequestAPI {
     @POST("get_list_of_exams.php")
     @FormUrlEncoded
     Call<List<String>> getExams(@Field("teacher_ID") Integer teacherID);
+
+    @POST("get_list_of_questions.php")
+    @FormUrlEncoded
+    Call<QuestionList> getQuestions(@Field("exam_name") String examName);
 }

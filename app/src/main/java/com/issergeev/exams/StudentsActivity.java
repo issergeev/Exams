@@ -42,7 +42,7 @@ public class StudentsActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
 
     RelativeLayout rootLayout, noGroupsLayout;
-    ListView studentsList;
+    ListView groupList;
     CardView heading;
     ProgressBar progressBar;
 
@@ -96,16 +96,17 @@ public class StudentsActivity extends AppCompatActivity {
         noGroupsLayout = (RelativeLayout) findViewById(R.id.noGroups);
         heading = (CardView) findViewById(R.id.heading);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        studentsList = (ListView) findViewById(R.id.groups_list);
+        groupList = (ListView) findViewById(R.id.groups_list);
 
-        fragment = new StudentsListFragment();
         fragmentManager = getFragmentManager();
+        fragment = new StudentsListFragment();
 
-        studentsList.setAdapter(adapter);
-        studentsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        groupList.setAdapter(adapter);
+        groupList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 heading.setVisibility(View.GONE);
+                groupList.setVisibility(View.GONE);
 
                 Bundle bundle = new Bundle();
                 bundle.putString("groupNumber", adapter.getItem(i));

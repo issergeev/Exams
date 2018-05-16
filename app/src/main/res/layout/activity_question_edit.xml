@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/rootLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/topMargin"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/question_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="Question"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/averageMargin"
+        android:layout_below="@id/question_heading"
+        android:textSize="@dimen/textSize"
+        android:lines="4"
+        android:inputType="text"
+        android:background="@drawable/edit_text_background"/>
+
+    <TextView
+        android:id="@+id/answer_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question"
+        android:text="Answer"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/answer_heading"
+        android:textSize="@dimen/textSize"
+        android:lines="2"
+        android:inputType="text"
+        android:background="@drawable/edit_text_background"/>
+
+    <Button
+        android:id="@+id/updateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/update"
+        android:background="@drawable/button_shape_advanced"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+</RelativeLayout>

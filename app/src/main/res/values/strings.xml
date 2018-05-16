@@ -77,4 +77,8 @@
     <string name="question_exists">This question has already been added</string>
     <string name="fieldsMissed">Some of fields has been missed, please, fill them to continue</string>
     <string name="no_students_found">There are no students added in this group yet</string>
+    <string name="no_questions_found">There are no questions added in this exam</string>
+    <string name="questions">Questions</string>
+    <string name="update">Update question</string>
+    <string name="question_updated">The question has been successfully updated</string>
 </resources>

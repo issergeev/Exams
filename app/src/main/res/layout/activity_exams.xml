@@ -9,7 +9,7 @@
     tools:context=".ExamsActivity">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/heading"
+        android:id="@+id/heading_activity"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height"
         android:layout_alignParentTop="true"
@@ -68,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/list_view_margin"
-        android:layout_below="@id/heading"/>
+        android:layout_below="@id/heading_activity"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

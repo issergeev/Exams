@@ -1,6 +1,9 @@
 package com.issergeev.exams;
 
 import android.annotation.SuppressLint;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,14 +12,20 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -39,7 +48,13 @@ public class ExamsActivity extends AppCompatActivity {
 
     RelativeLayout rootLayout, noExamsLayout;
     ListView list;
+    CardView heading;
     ProgressBar progressBar;
+
+    private FragmentManager fragmentManager;
+    private FragmentTransaction transaction;
+
+    private Fragment fragment;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -79,8 +94,12 @@ public class ExamsActivity extends AppCompatActivity {
         examsData = getSharedPreferences(DATA_PREFS_NAME, Context.MODE_PRIVATE);
         editor = examsData.edit();
 
+        fragmentManager = getFragmentManager();
+        fragment = new QuestionsListFragment();
+
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
         noExamsLayout = (RelativeLayout) findViewById(R.id.noExams);
+        heading = (CardView) findViewById(R.id.heading_activity);
         list = (ListView) findViewById(R.id.exams_list);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -88,6 +107,24 @@ public class ExamsActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
 
         list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                heading.setVisibility(View.GONE);
+                list.setVisibility(View.GONE);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("examName", adapter.getItem(i));
+
+                fragment.setArguments(bundle);
+
+                transaction = fragmentManager.beginTransaction()
+                        .add(R.id.rootLayout, fragment)
+                        .addToBackStack(null);
+                transaction.commit();
+            }
+        });
 
         new LoadExams().execute();
     }

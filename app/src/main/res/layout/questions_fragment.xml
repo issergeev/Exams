@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:id="@+id/rootLayout"
+<RelativeLayout
+    android:id="@+id/rootLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,7 +11,7 @@
     android:background="@android:color/white">
 
     <RelativeLayout
-        android:id="@+id/noStudents"
+        android:id="@+id/noQuestions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
@@ -19,25 +20,25 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/noStudentsText"
+            android:layout_above="@+id/noQuestionsText"
             android:layout_centerHorizontal="true"
             android:src="@android:drawable/ic_notification_clear_all"
             android:contentDescription="@string/todo"/>
 
         <TextView
-            android:id="@id/noStudentsText"
+            android:id="@id/noQuestionsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="@string/no_students_found"
+            android:text="@string/no_questions_found"
             android:textSize="@dimen/textSize"
             android:textStyle="italic"/>
 
     </RelativeLayout>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/title"
+        android:id="@+id/heading_fragment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height"
         android:layout_alignParentTop="true"
@@ -51,16 +52,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/students"
+            android:text="@string/questions"
             android:textSize="@dimen/textSize"/>
 
     </android.support.v7.widget.CardView>
 
     <ListView
-        android:id="@+id/students_list"
+        android:id="@+id/exams_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/title"/>
+        android:layout_margin="@dimen/topMargin"
+        android:layout_below="@id/heading_fragment"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -39,7 +39,7 @@ public class StudentsAdapter extends ArrayAdapter<Student> {
         final ViewHolder viewHolder;
 
         if (convertView == null) {
-            View view = layoutInflater.inflate(R.layout.students_card, parent, false);
+            View view = layoutInflater.inflate(R.layout.student_card, parent, false);
             viewHolder = ViewHolder.create((RelativeLayout) view);
             view.setTag(viewHolder);
         } else {

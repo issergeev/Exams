@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +29,7 @@ public class StudentsListFragment extends Fragment {
     private View parentView;
 
     RelativeLayout noStudentsLayout;
+    ListView groupList;
     CardView heading;
     ProgressBar progressBar;
 
@@ -46,6 +46,7 @@ public class StudentsListFragment extends Fragment {
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         heading = (CardView) getActivity().findViewById(R.id.heading);
         studentsList = (ListView) rootView.findViewById(R.id.students_list);
+        groupList = (ListView) getActivity().findViewById(R.id.groups_list);
         studentsList.setAdapter(adapter);
         arrayListStudent = new ArrayList<>(10);
 
@@ -62,6 +63,7 @@ public class StudentsListFragment extends Fragment {
 
         try {
             heading.setVisibility(View.VISIBLE);
+            groupList.setVisibility(View.VISIBLE);
             adapter.clear();
             adapter.notifyDataSetChanged();
             noStudentsLayout.setVisibility(View.GONE);
