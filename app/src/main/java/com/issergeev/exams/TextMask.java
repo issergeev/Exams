@@ -4,14 +4,17 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.BaseInputConnection;
 import android.widget.EditText;
 
 public class TextMask implements View.OnKeyListener, TextWatcher {
-    private EditText text;
-    private String mask;
+    EditText text;
+    String mask;
 
     private int length;
     private boolean isDeletePressed = false;
+
+    private BaseInputConnection inputConnection;
 
     public TextMask(EditText text, String mask) {
         this.text = text;
@@ -19,6 +22,8 @@ public class TextMask implements View.OnKeyListener, TextWatcher {
 
         text.setOnKeyListener(this);
         text.addTextChangedListener(this);
+
+        inputConnection = new BaseInputConnection(text, true);
     }
 
     @Override
@@ -48,10 +53,12 @@ public class TextMask implements View.OnKeyListener, TextWatcher {
             text.setSelection(text.getText().length());
         }
 
-        if (mask.charAt(length + 1) != '#' && isDeletePressed) {
-            text.setText(text.getText().toString().substring(0, length));
-            text.setSelection(text.getText().length());
-        }
+        try {
+            if (mask.charAt(length + 1) != '#' && isDeletePressed) {
+                inputConnection.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL));
+                text.setSelection(text.getText().length());
+            }
+        } catch (StringIndexOutOfBoundsException e) {}
     }
 
     @Override
