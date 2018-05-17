@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Question:"
+            android:gravity="start"
             android:textSize="@dimen/textSize"
             android:textColor="#494949"
             android:textStyle="italic"/>
@@ -27,11 +28,10 @@
             android:layout_marginBottom="@dimen/bottomMargin"
             android:layout_below="@id/question_heading"
             android:text="Question"
+            android:inputType="textMultiLine"
             android:textColor="@android:color/black"
-            android:gravity="center"
-            android:textSize="@dimen/textSize"
-            android:lines="4"
-            android:background="@drawable/edit_text_background"/>
+            android:gravity="start"
+            android:textSize="@dimen/textSize"/>
 
         <TextView
             android:id="@+id/answer_heading"
@@ -39,22 +39,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/question_text"
             android:text="Answer:"
+            android:gravity="start"
             android:textColor="#494949"
             android:textSize="@dimen/textSize"
             android:textStyle="italic"/>
-
-        <TextView
-            android:id="@+id/answer_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/bottomMargin"
-            android:layout_below="@id/answer_heading"
-            android:text="Answer"
-            android:textColor="@android:color/white"
-            android:gravity="center"
-            android:textSize="@dimen/textSize"
-            android:lines="2"
-            android:background="@drawable/edit_text_background"/>
 
         <TextView
             android:id="@+id/answer_text"
@@ -63,11 +51,8 @@
             android:layout_marginBottom="@dimen/bottomMargin"
             android:layout_below="@id/answer_heading"
             android:textColor="@android:color/white"
-            android:gravity="center"
-            android:textSize="@dimen/textSize"
-            android:lines="2"
-            android:background="@drawable/edit_text_background"
-            android:visibility="gone"/>
+            android:gravity="start"
+            android:textSize="@dimen/textSize"/>
 
     </RelativeLayout>
 

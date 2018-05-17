@@ -23,7 +23,7 @@
         android:text="@string/loading_text"
         android:textStyle="italic"
         android:textSize="20sp"
-        android:textColor="@android:color/black"/>
+        android:textColor="#e1e1e1"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

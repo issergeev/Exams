@@ -15,7 +15,7 @@
     <color name="colorSnackbar">@android:color/darker_gray</color>
     <color name="colorMainNew">#559AA6</color>
     <color name="ic_launcher_background_advanced">#559AA6</color>
-    <color name="colorMainNewDark">#407680</color>
+    <color name="colorMainNewDark">#27466b</color>
     <color name="colorMainNewAccent">#ab7cf7</color>
     <color name="textColor">#000000</color>
     <color name="colorLightRed">#ff7f7f</color>

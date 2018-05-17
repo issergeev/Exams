@@ -8,15 +8,16 @@ import android.view.inputmethod.BaseInputConnection;
 import android.widget.EditText;
 
 public class TextMask implements View.OnKeyListener, TextWatcher {
-    EditText text;
-    String mask;
+    private EditText text;
+    private String mask;
 
+    private String edit;
     private int length;
     private boolean isDeletePressed = false;
 
     private BaseInputConnection inputConnection;
 
-    public TextMask(EditText text, String mask) {
+    protected TextMask(EditText text, String mask) {
         this.text = text;
         this.mask = mask + "#";
 
@@ -49,7 +50,7 @@ public class TextMask implements View.OnKeyListener, TextWatcher {
         }
 
         if (mask.charAt(length + 1) != '#' && !isDeletePressed) {
-            text.setText(text.getText() + mask.substring(length + 1, length + 2));
+            text.setText(text.getText() + String.valueOf(mask.charAt(length + 1)));
             text.setSelection(text.getText().length());
         }
 
@@ -59,6 +60,8 @@ public class TextMask implements View.OnKeyListener, TextWatcher {
                 text.setSelection(text.getText().length());
             }
         } catch (StringIndexOutOfBoundsException e) {}
+
+        isDeletePressed = false;
     }
 
     @Override
