@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.util.Log;
 
@@ -33,13 +34,18 @@ public class PassFragment extends Fragment {
     private final String DATA_PREFS_NAME = "Data";
 
     private int questionNumber = 0;
-    private  static int maxQuestion;
+    private  int maxQuestion;
+
+    private int correct = 0;
+    private String answerText;
+    private String questionText;
 
     private String key;
 
-    private static HashMap<String, String> examList;
-    private static ArrayList<? extends Question> questionArrayList;
+    private HashMap<String, String> examList;
+    private ArrayList<? extends Question> questionArrayList;
 
+    RelativeLayout rootLayout;
     TextView question;
     EditText answer;
     Button next, previous;
@@ -64,6 +70,7 @@ public class PassFragment extends Fragment {
         examList = new HashMap<>(10);
         questionArrayList = getArguments().getParcelableArrayList("questionList");
 
+        rootLayout = (RelativeLayout) getActivity().findViewById(R.id.rootLayout);
         question = (TextView) rootView.findViewById(R.id.question);
         answer = (EditText) rootView.findViewById(R.id.answer);
         next = (Button) rootView.findViewById(R.id.nextButton);
@@ -100,7 +107,6 @@ public class PassFragment extends Fragment {
                     questionNumber++;
 
                     if (questionNumber < maxQuestion) {
-                        examList.put(question.getText().toString(), answer.getText().toString());
 
                         examList.put(question.getText().toString(), answer.getText().toString());
 
@@ -121,8 +127,20 @@ public class PassFragment extends Fragment {
                                 .setPositiveButton(R.string.continue_text, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-//                                    Toast.makeText(getActivity(), "Results saved", Toast.LENGTH_SHORT).show();
-                                    new SaveResults().execute(heading.getText().toString());
+                                        for (int c = 0; c < questionArrayList.size(); c++) {
+                                            answerText = questionArrayList.get(c).getAnswer();
+                                            questionText = questionArrayList.get(c).getQuestion();
+
+                                            if (examList.get(questionText).compareToIgnoreCase(answerText) == 0) {
+                                                correct++;
+                                            }
+
+                                            Log.i("array", "\nStudent answer : " + examList.get(questionText) +  " = " + answerText);
+
+                                            i++;
+                                        }
+
+                                        new SaveResults().execute(heading.getText().toString());
                                     }
                                 })
                                 .setNegativeButton(R.string.return_to_attempt, null)
@@ -137,15 +155,6 @@ public class PassFragment extends Fragment {
                         examList.put(question.getText().toString(), answer.getText().toString());
 
                         inflateQuestion(questionNumber);
-
-//                        if (questionArrayList.get(questionNumber).getQuestion()
-//                                .compareToIgnoreCase(answer.getText().toString()) == 0) {
-//                            examList.put(question.getText().toString(), true);
-//                        } else {
-//                            examList.put(question.getText().toString(), false);
-//                        }
-
-                        examList.put(question.getText().toString(), answer.getText().toString());
                     } else {
                         questionNumber = 0;
 
@@ -181,30 +190,6 @@ public class PassFragment extends Fragment {
 
     @SuppressLint("StaticFieldLeak")
     class SaveResults extends AsyncTask<String, Void, Void> {
-        private int correct = 0;
-        private String answerText;
-        private String question;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            for (int i = 0; i < questionArrayList.size(); i++) {
-                answerText = questionArrayList.get(i).getAnswer();
-                question = questionArrayList.get(i).getQuestion();
-
-                if (examList.get(question).compareToIgnoreCase(answerText) == 0) {
-                    correct++;
-                }
-
-                Log.i("array", "\nStudent answer : " + examList.get(question) +  " = " + questionArrayList.get(i)
-                        .getAnswer());
-
-                i++;
-            }
-
-            Log.i("array", String.valueOf(correct));
-        }
 
         @Override
         protected Void doInBackground(final String... strings) {
@@ -215,10 +200,10 @@ public class PassFragment extends Fragment {
                 public void onResponse(String response) {
                     switch (response) {
                         case "Success" :
-                            Snackbar.make(getView().getRootView(), R.string.email_added, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout, R.string.email_added, Snackbar.LENGTH_SHORT).show();
                             break;
                         default :
-                            Snackbar.make(getView().getRootView(), R.string.unknown_response, Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
                             Log.i("net", response);
                             break;
                     }
