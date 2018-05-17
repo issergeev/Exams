@@ -14,6 +14,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -45,6 +46,14 @@ public class HomeActivity extends AppCompatActivity {
     AlertDialog.Builder alert, alert_email;
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        editor.putBoolean("firstStart", true);
+        editor.apply();
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_home);
@@ -74,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
         examsView.setOnClickListener(listener);
         resultsView.setOnClickListener(listener);
 
-        if (examsData.getString("Email", "").equals("")) {
+        if (examsData.getString("Email", "null").equals("null") && examsData.getBoolean("firstStart", true)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 alert = new AlertDialog.Builder(HomeActivity.this, android.R.style.Theme_Material_Dialog_Alert);
             } else {
@@ -115,8 +124,11 @@ public class HomeActivity extends AppCompatActivity {
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
-                                                new EmailSender().execute(email_new.getText().toString());
-                                                editor.apply();
+                                                if (!email_new.getText().toString().trim().equals("")) {
+                                                    new EmailSender().execute(email_new.getText().toString());
+                                                } else {
+                                                    Snackbar.make(rootLayout, R.string.email_not_added, Snackbar.LENGTH_LONG).show();
+                                                }
                                             }
                                         })
                                         .setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -125,9 +137,15 @@ public class HomeActivity extends AppCompatActivity {
                                                 new EmailSender().execute(email_new.getText().toString());
                                                 editor.apply();
                                             }
-                                        }).show();
+                                        })
+                                        .show();
+
+                                editor.putBoolean("firstStart", false);
+                                editor.apply();
                             } else {
                                 new EmailSender().execute(email.getText().toString());
+
+                                editor.putBoolean("firstStart", false);
                                 editor.apply();
                             }
                         }
@@ -202,6 +220,8 @@ public class HomeActivity extends AppCompatActivity {
                         case "Success" :
                             Snackbar.make(rootLayout, R.string.email_added, Snackbar.LENGTH_SHORT).show();
                             break;
+                        case "Error sending email" :
+                            Snackbar.make(rootLayout, R.string.emailError, Snackbar.LENGTH_LONG).show();
                         default :
                             Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
                             break;
@@ -210,7 +230,15 @@ public class HomeActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    int errorCode = error.networkResponse.statusCode;
+                    int errorCode = 0;
+
+                    try {
+                        errorCode = error.networkResponse.statusCode;
+                    } catch (NullPointerException e) {
+                        Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+                    }
+
+                    Log.i("net", error.getMessage());
 
                     switch (errorCode) {
                         case 302 :
@@ -229,7 +257,7 @@ public class HomeActivity extends AppCompatActivity {
                 protected Map<String, String> getParams() {
                     HashMap<String, String> userData = new HashMap<>();
 
-                    userData.put("studentID_number", String.valueOf(examsData.getInt("SIDNumber", 0)));
+                    userData.put("studentID_number", examsData.getString("SIDNumber", "0"));
                     userData.put("student_email", strings[0]);
 
                     return userData;

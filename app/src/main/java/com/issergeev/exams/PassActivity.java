@@ -3,6 +3,7 @@ package com.issergeev.exams;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,9 @@ import android.widget.TextView;
 import android.widget.ProgressBar;
 import android.content.Intent;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,23 +28,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PassActivity extends AppCompatActivity {
     private String exam;
-    public static HashMap<String, Boolean> examList;
 
     public static ArrayList<Question> questionArrayList;
 
-    RelativeLayout rootLayout, noQuestionLayout;
+    public RelativeLayout rootLayout, noQuestionLayout;
     TextView heading;
     ProgressBar progressBar;
 
     Intent intent;
 
-    Fragment fragment;
-    FragmentManager fragmentManager;
+    public static Fragment fragment;
+    public static FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pass);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
         intent = getIntent();
         exam = intent.getStringExtra("ExamName");
@@ -56,7 +61,6 @@ public class PassActivity extends AppCompatActivity {
         heading.setText(exam);
 
         questionArrayList = new ArrayList<>(10);
-        examList = new HashMap<>(10);
 
         new LoadQuestions().execute();
     }
@@ -81,6 +85,10 @@ public class PassActivity extends AppCompatActivity {
 
                     try {
                         questionArrayList = response.body().getQuestions();
+
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("questionList", questionArrayList);
+                        fragment.setArguments(bundle);
 
                         fragmentManager.beginTransaction().add(R.id.rootLayout, fragment)
                             .commit();

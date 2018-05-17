@@ -12,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.android.volley.Request;
@@ -34,9 +35,8 @@ public class HomeSplashActivity extends AppCompatActivity {
     private static SharedPreferences examsData;
     private static SharedPreferences.Editor editor;
 
-    private String loginText, passwordText, firstName, lastName, patronymic,
+    private String loginText, passwordText, studentIDNumber, firstName, lastName, patronymic,
             groupNumber, email, examsToPass, passedExams, salt;
-    private int studentIDNumber;
 
     RelativeLayout rootLayout;
     AlertDialog.Builder alert;
@@ -79,7 +79,7 @@ public class HomeSplashActivity extends AppCompatActivity {
                             JSONArray user = serverResponse.getJSONArray("User");
                             JSONObject data = user.getJSONObject(0);
 
-                            studentIDNumber = data.getInt("studentID_number");
+                            studentIDNumber = data.getString("studentID_number");
                             firstName = data.getString("first_name");
                             lastName = data.getString("last_name");
                             patronymic = data.getString("student_patronymic");
@@ -93,12 +93,14 @@ public class HomeSplashActivity extends AppCompatActivity {
                             editor.putString("firstName", firstName);
                             editor.putString("lastName", lastName);
                             editor.putString("patronymic", patronymic);
-                            editor.putInt("SIDNumber", studentIDNumber);
+                            editor.putString("SIDNumber", studentIDNumber);
                             editor.putString("GroupNumber", groupNumber);
                             editor.putString("Email", email);
                             editor.putString("ExamsToPass", examsToPass);
                             editor.putString("PassedExams", passedExams);
                             editor.apply();
+
+                            Log.i("net", email);
 
                             finish();
                             startActivity(new Intent(HomeSplashActivity.this, HomeActivity.class));

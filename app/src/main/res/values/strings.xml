@@ -85,4 +85,10 @@
     <string name="question_deleted">The question has been successfully deleted</string>
     <string name="deleteMessage">Are you sure you want ot delete this question? This action cannot be canceled</string>
     <string name="not_detected">NOT DETECTED</string>
+    <string name="minimalQuestionMessage">This is the first question. You can finish the test now, however, you results will not
+    be saved. Are you sure you want ot finish the attempt?</string>
+    <string name="maximalQuestionMessage">This is the last question. If you continue you results will be saved. Are you sure that you want to finish the attempt?</string>
+    <string name="return_to_attempt">Return to attempt</string>
+    <string name="emailError">Error adding an email</string>
+    <string name="email_not_added">Adding email rejected</string>
 </resources>
