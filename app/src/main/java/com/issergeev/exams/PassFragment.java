@@ -11,12 +11,15 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.widget.ImageView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -49,12 +52,14 @@ public class PassFragment extends Fragment {
     TextView question;
     EditText answer;
     Button next, previous;
-
     TextView heading;
+    ImageView progressBar;
 
     AlertDialog.Builder alert;
 
     SharedPreferences examsData;
+
+    Animation rotationAnimation;
 
     Listener listener;
 
@@ -76,6 +81,12 @@ public class PassFragment extends Fragment {
         next = (Button) rootView.findViewById(R.id.nextButton);
         previous = (Button) rootView.findViewById(R.id.previousButton);
         heading = (TextView) getActivity().findViewById(R.id.examName);
+        progressBar = (ImageView) getActivity().findViewById(R.id.rotationProgressBar);
+
+        rotationAnimation = AnimationUtils.loadAnimation(rootView.getContext(), R.anim.rotation_anim);
+        rotationAnimation.setRepeatCount(Animation.INFINITE);
+
+        progressBar.startAnimation(rotationAnimation);
 
         maxQuestion = PassActivity.questionArrayList.size();
         inflateQuestion(questionNumber);
@@ -127,19 +138,6 @@ public class PassFragment extends Fragment {
                                 .setPositiveButton(R.string.continue_text, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        for (int c = 0; c < questionArrayList.size(); c++) {
-                                            answerText = questionArrayList.get(c).getAnswer();
-                                            questionText = questionArrayList.get(c).getQuestion();
-
-                                            if (examList.get(questionText).compareToIgnoreCase(answerText) == 0) {
-                                                correct++;
-                                            }
-
-                                            Log.i("array", "\nStudent answer : " + examList.get(questionText) +  " = " + answerText);
-
-                                            i++;
-                                        }
-
                                         new SaveResults().execute(heading.getText().toString());
                                     }
                                 })
@@ -192,6 +190,22 @@ public class PassFragment extends Fragment {
     class SaveResults extends AsyncTask<String, Void, Void> {
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressBar.setVisibility(View.VISIBLE);
+
+            for (int c = 0; c < questionArrayList.size(); c++) {
+                answerText = questionArrayList.get(c).getAnswer();
+                questionText = questionArrayList.get(c).getQuestion();
+
+                if (examList.get(questionText).compareToIgnoreCase(answerText) == 0) {
+                    correct++;
+                }
+            }
+        }
+
+        @Override
         protected Void doInBackground(final String... strings) {
             final String LOGIN_URL = "http://exams-online.online/save_results.php";
             final RequestQueue request = Volley.newRequestQueue(getActivity());
@@ -207,6 +221,9 @@ public class PassFragment extends Fragment {
                             Log.i("net", response);
                             break;
                     }
+
+                    progressBar.setVisibility(View.INVISIBLE);
+                    correct = 0;
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -224,6 +241,8 @@ public class PassFragment extends Fragment {
                             Snackbar.make(getView().getRootView(), R.string.unknown_error, Snackbar.LENGTH_LONG).show();
                             break;
                     }
+
+                    correct = 0;
                 }
             }){
                 @Override

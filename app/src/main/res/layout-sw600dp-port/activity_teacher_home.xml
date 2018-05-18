@@ -47,7 +47,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textColor="@android:color/secondary_text_light"
-                        android:textSize="@dimen/extra_large_text"/>
+                        android:textSize="@dimen/headingsSize"/>
 
                     <TextView
                         android:id="@+id/patronymic"
@@ -57,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textColor="@android:color/secondary_text_light"
-                        android:textSize="@dimen/large_text"/>
+                        android:textSize="@dimen/textSize"/>
 
                 </LinearLayout>
 
@@ -157,7 +157,7 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/topMargin"
         app:fabSize="normal"
-        android:src="@drawable/test"
+        android:src="@drawable/exit_icon"
         app:backgroundTint="@color/colorNewLight"/>
 
 </RelativeLayout>

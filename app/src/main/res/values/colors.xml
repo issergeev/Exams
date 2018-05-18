@@ -10,7 +10,7 @@
     <color name="colorAccent">#ff7f00</color>
     <color name="colorButton">#ffea00</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorOpacue">#00000000</color>
+    <color name="colorOpaque">#00000000</color>
     <color name="colorProgressbar">#e3a43c00</color>
     <color name="colorSnackbar">@android:color/darker_gray</color>
     <color name="colorMainNew">#559AA6</color>
@@ -26,4 +26,6 @@
     <color name="cardBackgroundColor">#2d60b1</color>
     <color name="secondBackgroundColor">#64ace2</color>
     <color name="secondMainBackground">#9e690d</color>
+    <color name="colorError">#d61515</color>
+    <color name="colorHint">#434343</color>
 </resources>

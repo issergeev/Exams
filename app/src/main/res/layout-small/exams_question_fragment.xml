@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/corner_radius"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:text="Question"/>
 
             <ScrollView
@@ -67,7 +67,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/averageMargin"
                     android:textStyle="bold"
-                    android:textSize="40sp"
+                    android:textSize="18sp"
                     android:text="Question"
                     android:gravity="start"/>
 
@@ -86,15 +86,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/corner_radius"
                 android:text="Answer"
-                android:textSize="20sp"/>
+                android:textSize="15sp"/>
 
             <EditText
                 android:id="@+id/answer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/averageMargin"
+                android:textSize="20sp"
                 android:inputType="text"
-                android:textSize="@dimen/textSize"
                 android:gravity="start"/>
 
         </LinearLayout>

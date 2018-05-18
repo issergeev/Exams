@@ -24,7 +24,7 @@
 
         <Button
             android:id="@+id/startButtonStudent"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:elevation="@dimen/standardElevation"
             android:layout_marginStart="@dimen/buttonMargin"
@@ -40,8 +40,9 @@
 
         <Button
             android:id="@+id/startButtonTeacher"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:elevation="@dimen/standardElevation"
             android:layout_marginStart="@dimen/buttonMargin"
             android:layout_marginEnd="@dimen/buttonMargin"

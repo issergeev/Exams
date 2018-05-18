@@ -10,167 +10,181 @@
     android:orientation="vertical"
     android:background="#416684">
 
-    <ScrollView
+    <android.support.v7.widget.CardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/averagePadding"
+        android:layout_marginStart="@dimen/cardViewMargin"
+        android:layout_marginEnd="@dimen/cardViewMargin"
+        android:layout_marginBottom="@dimen/bottomMargin"
+        android:layout_centerHorizontal="true"
+        app:cardCornerRadius="25dp"
+        app:cardBackgroundColor="#224550">
 
-        <RelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <RelativeLayout
-                android:id="@+id/heading"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <android.support.v7.widget.CardView
-                    android:id="@+id/profile_bar"
+                <RelativeLayout
+                    android:id="@+id/heading"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/averagePadding"
-                    android:layout_marginStart="@dimen/cardViewMargin"
-                    android:layout_marginEnd="@dimen/cardViewMargin"
-                    android:layout_marginBottom="@dimen/bottomMargin"
-                    android:layout_centerHorizontal="true"
-                    app:cardCornerRadius="10dp"
-                    app:cardBackgroundColor="#87c6da">
+                    android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:id="@+id/title_layout"
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/profile_bar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:orientation="horizontal"
-                        android:layout_margin="@dimen/minMargin">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/user_icon"
-                            android:contentDescription="@string/todo"/>
+                        android:layout_marginTop="@dimen/averagePadding"
+                        android:layout_marginStart="@dimen/cardViewMargin"
+                        android:layout_marginEnd="@dimen/cardViewMargin"
+                        android:layout_marginBottom="@dimen/bottomMargin"
+                        android:layout_centerHorizontal="true"
+                        app:cardCornerRadius="30dp"
+                        app:cardBackgroundColor="#87c6da">
 
                         <LinearLayout
+                            android:id="@+id/title_layout"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:orientation="horizontal"
+                            android:layout_margin="@dimen/minMargin">
 
-                            <TextView
-                                android:id="@+id/FaL_name"
+                            <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="top|end"
-                                android:layout_marginEnd="@dimen/averageMargin"
-                                android:gravity="end"
-                                android:textStyle="bold"
-                                android:textColor="@android:color/secondary_text_light"
-                                android:textSize="@dimen/extra_large_text"/>
+                                android:layout_gravity="center"
+                                android:src="@drawable/user_icon"
+                                android:contentDescription="@string/todo"/>
 
-                            <TextView
-                                android:id="@+id/patronymic"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginEnd="@dimen/averageMargin"
-                                android:layout_gravity="end"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textColor="#636363"
-                                android:textSize="@dimen/large_text"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/FaL_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="top|end"
+                                    android:layout_marginEnd="@dimen/averageMargin"
+                                    android:gravity="end"
+                                    android:textStyle="bold"
+                                    android:textColor="@android:color/secondary_text_light"
+                                    android:textSize="@dimen/extra_large_text"/>
+
+                                <TextView
+                                    android:id="@+id/patronymic"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginEnd="@dimen/averageMargin"
+                                    android:layout_gravity="end"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textStyle="bold"
+                                    android:textColor="#636363"
+                                    android:textSize="@dimen/large_text"/>
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
-                    </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/exams_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/standardElevation"
+                    android:layout_marginStart="@dimen/startMargin"
+                    android:layout_marginEnd="@dimen/startMargin"
+                    android:layout_marginTop="@dimen/startMargin"
+                    android:layout_below="@id/heading"
+                    app:cardCornerRadius="25dp"
+                    style="@style/CardView.Dark"
+                    app:cardBackgroundColor="#87c6da">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/averagePadding">
+
+                        <ImageView
+                            android:id="@+id/src"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/exams_icon"
+                            android:layout_alignParentStart="true"
+                            android:contentDescription="@string/todo" />
+
+                        <TextView
+                            android:id="@+id/descriptionText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginStart="30dp"
+                            android:layout_toEndOf="@id/src"
+                            android:text="@string/exams"
+                            android:textStyle="bold"
+                            android:textColor="#646464"
+                            android:textSize="@dimen/normal_text"/>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/students_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/exams_view"
+                    android:elevation="@dimen/standardElevation"
+                    android:layout_margin="@dimen/startMargin"
+                    app:cardCornerRadius="25dp"
+                    style="@style/CardView.Dark"
+                    app:cardBackgroundColor="#87c6da">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/averagePadding">
+
+                        <ImageView
+                            android:id="@+id/src1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/students_icon"
+                            android:layout_alignParentStart="true"
+                            android:contentDescription="@string/todo" />
+
+                        <TextView
+                            android:id="@+id/descriptionText1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginStart="30dp"
+                            android:layout_toEndOf="@id/src1"
+                            android:text="@string/students"
+                            android:textStyle="bold"
+                            android:textColor="#646464"
+                            android:textSize="@dimen/normal_text"/>
+
+                    </RelativeLayout>
 
                 </android.support.v7.widget.CardView>
 
             </RelativeLayout>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/exams_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="@dimen/standardElevation"
-                android:layout_marginStart="@dimen/startMargin"
-                android:layout_marginEnd="@dimen/startMargin"
-                android:layout_marginTop="@dimen/startMargin"
-                android:layout_below="@id/heading"
-                app:cardCornerRadius="5dp"
-                style="@style/CardView.Dark"
-                app:cardBackgroundColor="#87c6da">
+        </ScrollView>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/averagePadding">
-
-                    <ImageView
-                        android:id="@+id/src"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/exams_icon"
-                        android:layout_alignParentStart="true"
-                        android:contentDescription="@string/todo" />
-
-                    <TextView
-                        android:id="@+id/descriptionText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginStart="30dp"
-                        android:layout_toEndOf="@id/src"
-                        android:text="@string/exams"
-                        android:textStyle="bold"
-                        android:textColor="#646464"
-                        android:textSize="@dimen/normal_text"/>
-
-                </RelativeLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/students_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/exams_view"
-                android:elevation="@dimen/standardElevation"
-                android:layout_margin="@dimen/startMargin"
-                app:cardCornerRadius="5dp"
-                style="@style/CardView.Dark"
-                app:cardBackgroundColor="#87c6da">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/averagePadding">
-
-                    <ImageView
-                        android:id="@+id/src1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/students_icon"
-                        android:layout_alignParentStart="true"
-                        android:contentDescription="@string/todo" />
-
-                    <TextView
-                        android:id="@+id/descriptionText1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginStart="30dp"
-                        android:layout_toEndOf="@id/src1"
-                        android:text="@string/students"
-                        android:textStyle="bold"
-                        android:textColor="#646464"
-                        android:textSize="@dimen/normal_text"/>
-
-                </RelativeLayout>
-
-            </android.support.v7.widget.CardView>
-
-        </RelativeLayout>
-
-    </ScrollView>
+    </android.support.v7.widget.CardView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/logoutButton"
@@ -180,7 +194,7 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/topMargin"
         app:fabSize="normal"
-        android:src="@drawable/test"
+        android:src="@drawable/exit_icon"
         app:backgroundTint="@color/colorNewLight"/>
 
 </RelativeLayout>

@@ -91,4 +91,5 @@
     <string name="return_to_attempt">Return to attempt</string>
     <string name="emailError">Error adding an email</string>
     <string name="email_not_added">Adding email rejected</string>
+    <string name="SIDText">Student ID number</string>
 </resources>

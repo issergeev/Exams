@@ -11,6 +11,7 @@
         android:id="@+id/info_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_centerInParent="true"
         android:layout_margin="@dimen/bottomMargin">
 
         <ImageView
@@ -25,52 +26,42 @@
 
         <EditText
             android:id="@+id/studentIDNumber"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/minMargin"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/averageMargin"
             android:layout_below="@id/image"
-            android:hint="@string/student_id_number"
-            android:textColorHint="@color/colorHint"
-            android:lines="2"
-            android:background="@drawable/custom_edit_text_background"/>
+            android:hint="@string/student_id_number" />
 
         <EditText
             android:id="@+id/lastName"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/minMargin"
+            android:layout_centerHorizontal="true"
             android:layout_below="@id/studentIDNumber"
-            android:hint="@string/last_name"
-            android:textColorHint="@color/colorHint"
-            android:lines="2"
-            android:background="@drawable/custom_edit_text_background"/>
+            android:hint="@string/last_name" />
 
         <EditText
             android:id="@+id/firstName"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/minMargin"
+            android:layout_centerHorizontal="true"
             android:layout_below="@id/lastName"
-            android:hint="@string/first_name"
-            android:textColorHint="@color/colorHint"
-            android:lines="2"
-            android:background="@drawable/custom_edit_text_background"/>
+            android:hint="@string/first_name" />
 
         <EditText
             android:id="@+id/patronymic"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/minMargin"
+            android:layout_centerHorizontal="true"
             android:layout_below="@id/firstName"
-            android:hint="@string/patronymic"
-            android:textColorHint="@color/colorHint"
-            android:lines="2"
-            android:background="@drawable/custom_edit_text_background"/>
+            android:hint="@string/patronymic" />
 
         <TextView
             android:id="@+id/helpText"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/averageMargin"
             android:layout_below="@id/patronymic"
             android:text="Select group"
@@ -79,15 +70,22 @@
 
         <Spinner
             android:id="@+id/groupSelector"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/minMargin"
+            android:layout_marginTop="@dimen/minMargin"
+            android:layout_marginEnd="@dimen/minMargin"
+            android:layout_marginBottom="@dimen/averageMargin"
+            android:layout_centerHorizontal="true"
             android:layout_below="@id/helpText"/>
 
         <Button
             android:id="@+id/addButton"
-            android:layout_width="match_parent"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_marginTop="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/groupSelector"
             android:text="@string/add"
             android:textColor="@android:color/darker_gray"
             android:background="@drawable/button_shape_advanced"/>

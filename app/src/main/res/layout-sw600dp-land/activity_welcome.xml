@@ -33,8 +33,9 @@
 
         <Button
             android:id="@+id/startButtonStudent"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_marginStart="@dimen/buttonMargin"
             android:layout_marginEnd="@dimen/buttonMargin"
             android:layout_marginBottom="@dimen/averageMargin"
@@ -48,8 +49,9 @@
 
         <Button
             android:id="@id/startButtonTeacher"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_marginStart="@dimen/buttonMargin"
             android:layout_marginEnd="@dimen/buttonMargin"
             android:layout_marginBottom="@dimen/minMargin"

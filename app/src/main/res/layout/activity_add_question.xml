@@ -41,12 +41,10 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginBottom="@dimen/bottomMargin"
-                    android:textColorHint="@android:color/white"
+                    android:textColorHint="@android:color/darker_gray"
                     android:hint="Question"
                     android:textColor="@android:color/white"
-                    android:inputType="textMultiLine"
-                    android:lines="4"
-                    android:background="@drawable/edit_text_background"/>
+                    android:inputType="text"/>
 
                 <EditText
                     android:id="@+id/answer_text"
@@ -54,11 +52,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/bottomMargin"
                     android:hint="Answer"
-                    android:textColorHint="@android:color/white"
+                    android:textColorHint="@android:color/darker_gray"
                     android:textColor="@android:color/white"
-                    android:lines="2"
-                    android:layout_below="@id/question_text"
-                    android:background="@drawable/edit_text_background"/>
+                    android:layout_below="@id/question_text"/>
 
                 <TextView
                     android:id="@+id/heading"

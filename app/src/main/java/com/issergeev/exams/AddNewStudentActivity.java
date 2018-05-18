@@ -101,9 +101,13 @@ public class AddNewStudentActivity extends AppCompatActivity {
         firstNameInput.setOnClickListener(listener);
         lastNameInput.setOnClickListener(listener);
         patronymicInput.setOnClickListener(listener);
+        SIDInput.setOnFocusChangeListener(listener);
+        firstNameInput.setOnFocusChangeListener(listener);
+        lastNameInput.setOnFocusChangeListener(listener);
+        patronymicInput.setOnFocusChangeListener(listener);
     }
 
-    private class Listener implements View.OnClickListener {
+    private class Listener implements View.OnClickListener, View.OnFocusChangeListener {
 
         @Override
         public void onClick(View view) {
@@ -130,10 +134,29 @@ public class AddNewStudentActivity extends AppCompatActivity {
                     new Adder().execute();
                     break;
                 default :
-                    SIDInput.setBackground(getResources().getDrawable(R.drawable.custom_edit_text_background));
-                    firstNameInput.setBackground(getResources().getDrawable(R.drawable.custom_edit_text_background));
-                    lastNameInput.setBackground(getResources().getDrawable(R.drawable.custom_edit_text_background));
-                    patronymicInput.setBackground(getResources().getDrawable(R.drawable.custom_edit_text_background));
+                    for (int i = 0; i < container.getChildCount(); i++) {
+                        view = container.getChildAt(i);
+                        if (view instanceof EditText && ((EditText) view).getText().toString().trim().equals("")) {
+                            ((EditText) view).setText("");
+                            ((EditText) view).setHintTextColor(getResources().getColor(R.color.colorHint));
+                            correct = false;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        @Override
+        public void onFocusChange(View view, boolean b) {
+            if (firstNameInput.getCurrentHintTextColor() != getResources().getColor(R.color.colorHint)) {
+                for (int i = 0; i < container.getChildCount(); i++) {
+                    view = container.getChildAt(i);
+                    if (view instanceof EditText && ((EditText) view).getText().toString().trim().equals("")) {
+                        ((EditText) view).setText("");
+                        ((EditText) view).setHintTextColor(getResources().getColor(R.color.colorHint));
+                        correct = false;
+                    }
+                }
             }
         }
     }
@@ -142,7 +165,8 @@ public class AddNewStudentActivity extends AppCompatActivity {
         for (int i = 0; i < container.getChildCount(); i++) {
             view = container.getChildAt(i);
             if (view instanceof EditText && ((EditText) view).getText().toString().trim().equals("")) {
-                view.setBackground(getResources().getDrawable(R.drawable.error_background));
+                ((EditText) view).setText("");
+                ((EditText) view).setHintTextColor(getResources().getColor(R.color.colorError));
                 correct = false;
             }
         }

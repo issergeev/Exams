@@ -18,7 +18,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/SIDInput">
+            android:layout_above="@+id/SIDContainer_LA">
 
             <ImageView
                 android:id="@+id/logo"
@@ -30,34 +30,52 @@
 
         </RelativeLayout>
 
-
-        <EditText
-            android:id="@id/SIDInput"
-            android:layout_width="match_parent"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/SIDContainer_LA"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_above="@id/loginInput"
-            android:gravity="start"
-            android:hint="@string/id_number"
-            android:inputType="numberDecimal"
-            android:digits="1234567890"
-            android:maxLength="9"/>
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/loginContainrt_LA"
+            android:gravity="start">
 
-        <EditText
-            android:id="@+id/loginInput"
-            android:layout_width="match_parent"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/SIDInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:hint="@string/SIDText"
+                android:digits="1234567890"
+                android:maxLength="9"
+                android:gravity="start"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/loginContainrt_LA"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:gravity="start"
-            android:hint="@string/login_text"
-            android:inputType="text"
-            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"/>
+            android:gravity="start">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/loginInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="@string/login_text"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+                android:gravity="start"/>
+
+        </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/passwordContainer_RA"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/loginInput"
-            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/loginContainrt_LA"
+            android:gravity="start"
+            android:layout_marginBottom="@dimen/bottomMargin"
             app:passwordToggleEnabled="true">
 
             <android.support.design.widget.TextInputEditText
@@ -73,8 +91,9 @@
         <Button
             android:id="@+id/regButton"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
+            android:layout_width="230dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/passwordContainer_RA"
             android:layout_margin="@dimen/bottomMargin"
             android:text="@string/reg_button_text"
             android:textStyle="italic"

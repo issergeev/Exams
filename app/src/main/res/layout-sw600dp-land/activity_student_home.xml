@@ -6,151 +6,78 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#b67d28">
+    android:background="#805311">
 
-    <ScrollView
+    <android.support.v7.widget.CardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/corner_radius"
+        android:layout_centerHorizontal="true"
+        app:cardCornerRadius="30dp"
+        app:cardBackgroundColor="#b67d28">
 
-        <RelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/profile_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/averagePadding"
-                android:layout_marginStart="@dimen/cardViewMargin"
-                android:layout_marginEnd="@dimen/cardViewMargin"
-                android:layout_centerHorizontal="true"
-                app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="#844518">
-
-                <LinearLayout
-                    android:id="@+id/title_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:orientation="horizontal"
-                    android:layout_margin="@dimen/minMargin">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/user_icon"
-                        android:contentDescription="@string/todo"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/FaL_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top|end"
-                            android:layout_marginEnd="@dimen/averageMargin"
-                            android:gravity="end"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/secondary_text_light"
-                            android:textSize="@dimen/extra_large_text"/>
-
-                        <TextView
-                            android:id="@+id/patronymic"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="@dimen/averageMargin"
-                            android:layout_gravity="end"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textColor="#636363"
-                            android:textSize="@dimen/large_text"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
+            android:layout_height="match_parent">
 
             <RelativeLayout
-                android:id="@+id/heading"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profile_bar">
+                android:orientation="horizontal">
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/profile_bar"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/averagePadding"
                     android:layout_marginStart="@dimen/cardViewMargin"
                     android:layout_marginEnd="@dimen/cardViewMargin"
-                    android:layout_marginBottom="@dimen/averageMargin"
                     android:layout_centerHorizontal="true"
-                    app:cardCornerRadius="10dp"
-                    app:cardBackgroundColor="#844518">
-
+                    app:cardCornerRadius="20dp"
+                    app:cardBackgroundColor="#975a33">
 
                     <LinearLayout
+                        android:id="@+id/title_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
                         android:orientation="horizontal"
-                        android:weightSum="2">
+                        android:layout_margin="@dimen/minMargin">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/user_icon"
+                            android:contentDescription="@string/todo"/>
 
                         <LinearLayout
-                            android:gravity="center"
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:layout_margin="@dimen/cardViewMargin"
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/FaL_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/exams_available"
-                                android:textColor="@android:color/white"
-                                android:textSize="@dimen/normal_text"/>
-
-                            <TextView
-                                android:id="@+id/exams_to_pass"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/not_detected"
+                                android:layout_gravity="top|end"
+                                android:layout_marginEnd="@dimen/averageMargin"
+                                android:gravity="end"
                                 android:textStyle="bold"
-                                android:textSize="@dimen/headingsSize"
-                                android:paddingTop="10dp"
-                                android:textColor="@android:color/holo_red_light"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:layout_margin="@dimen/cardViewMargin"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                                android:textColor="@android:color/secondary_text_light"
+                                android:textSize="@dimen/extra_large_text"/>
 
                             <TextView
+                                android:id="@+id/patronymic"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="@dimen/averageMargin"
+                                android:layout_gravity="end"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/exams_passed"
-                                android:textColor="@android:color/white"
-                                android:textSize="@dimen/normal_text" />
-
-                            <TextView
-                                android:id="@+id/exams_passed"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingTop="10dp"
-                                android:text="@string/not_detected"
-                                android:textColor="@android:color/holo_green_light"
-                                android:textSize="@dimen/headingsSize"
-                                android:textStyle="bold" />
+                                android:textStyle="bold|italic"
+                                android:textColor="#333333"
+                                android:textSize="@dimen/large_text"/>
 
                         </LinearLayout>
 
@@ -158,93 +85,175 @@
 
                 </android.support.v7.widget.CardView>
 
+                <RelativeLayout
+                    android:id="@+id/heading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_bar">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_marginTop="@dimen/averagePadding"
+                        android:layout_marginStart="@dimen/cardViewMargin"
+                        android:layout_marginEnd="@dimen/cardViewMargin"
+                        android:layout_marginBottom="@dimen/averageMargin"
+                        android:layout_centerHorizontal="true"
+                        app:cardCornerRadius="10dp"
+                        app:cardBackgroundColor="#844518">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <LinearLayout
+                                android:gravity="center"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:layout_margin="@dimen/cardViewMargin"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/exams_available"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="@dimen/normal_text"/>
+
+                                <TextView
+                                    android:id="@+id/exams_to_pass"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/not_detected"
+                                    android:textStyle="bold"
+                                    android:textSize="@dimen/headingsSize"
+                                    android:paddingTop="10dp"
+                                    android:textColor="@android:color/holo_red_light"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:layout_margin="@dimen/cardViewMargin"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/exams_passed"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="@dimen/normal_text" />
+
+                                <TextView
+                                    android:id="@+id/exams_passed"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingTop="10dp"
+                                    android:text="@string/not_detected"
+                                    android:textColor="@android:color/holo_green_light"
+                                    android:textSize="@dimen/headingsSize"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/exams_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="@dimen/standardElevation"
+                    android:layout_marginStart="@dimen/startMargin"
+                    android:layout_marginEnd="@dimen/startMargin"
+                    android:layout_marginTop="@dimen/startMargin"
+                    android:layout_below="@id/heading"
+                    app:cardCornerRadius="25dp"
+                    style="@style/CardView.Dark"
+                    app:cardBackgroundColor="#995f22">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/averagePadding">
+
+                        <ImageView
+                            android:id="@+id/src"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/pass_icon"
+                            android:layout_alignParentStart="true"
+                            android:contentDescription="@string/todo" />
+
+                        <TextView
+                            android:id="@+id/descriptionText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:layout_toEndOf="@id/src"
+                            android:text="@string/pass_exams_text"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/normal_text"/>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/results_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/exams_view"
+                    android:elevation="@dimen/standardElevation"
+                    android:layout_margin="@dimen/startMargin"
+                    app:cardCornerRadius="25dp"
+                    style="@style/CardView.Dark"
+                    app:cardBackgroundColor="#995f22">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/averagePadding">
+
+                        <ImageView
+                            android:id="@+id/src1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/results_icon"
+                            android:layout_alignParentStart="true"
+                            android:contentDescription="@string/todo" />
+
+                        <TextView
+                            android:id="@+id/descriptionText1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:layout_toEndOf="@id/src1"
+                            android:text="@string/result_card_text"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/normal_text"/>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
             </RelativeLayout>
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/exams_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="@dimen/standardElevation"
-                android:layout_marginStart="@dimen/startMargin"
-                android:layout_marginEnd="@dimen/startMargin"
-                android:layout_marginTop="@dimen/startMargin"
-                android:layout_below="@id/heading"
-                app:cardCornerRadius="5dp"
-                style="@style/CardView.Dark"
-                app:cardBackgroundColor="#995f22">
+        </ScrollView>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/averagePadding">
-
-                    <ImageView
-                        android:id="@+id/src"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/pass_icon"
-                        android:layout_alignParentStart="true"
-                        android:contentDescription="@string/todo" />
-
-                    <TextView
-                        android:id="@+id/descriptionText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginStart="30dp"
-                        android:layout_toEndOf="@id/src"
-                        android:text="@string/pass_exams_text"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"/>
-
-                </RelativeLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:id="@+id/results_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/exams_view"
-                android:elevation="@dimen/standardElevation"
-                android:layout_margin="@dimen/startMargin"
-                app:cardCornerRadius="5dp"
-                style="@style/CardView.Dark"
-                app:cardBackgroundColor="#995f22">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/averagePadding">
-
-                    <ImageView
-                        android:id="@+id/src1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/results_icon"
-                        android:layout_alignParentStart="true"
-                        android:contentDescription="@string/todo" />
-
-                    <TextView
-                        android:id="@+id/descriptionText1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginStart="30dp"
-                        android:layout_toEndOf="@id/src1"
-                        android:text="@string/result_card_text"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/normal_text"/>
-
-                </RelativeLayout>
-
-            </android.support.v7.widget.CardView>
-
-        </RelativeLayout>
-
-    </ScrollView>
+    </android.support.v7.widget.CardView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/logoutButton"
@@ -254,7 +263,7 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/topMargin"
         app:fabSize="normal"
-        android:src="@drawable/test"
+        android:src="@drawable/exit_icon_student"
         app:backgroundTint="@color/colorMainLight"/>
 
 </RelativeLayout>

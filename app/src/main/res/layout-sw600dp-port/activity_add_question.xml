@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/rootLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddQuestion"
+    android:background="#416684">
+
+    <RelativeLayout
+        android:id="@+id/mainViewHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/averageMargin">
+
+        <RelativeLayout
+            android:id="@+id/viewHolder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/question_text">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/question_mark_image"
+                    android:contentDescription="@string/todo"/>
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@id/question_text"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/bottomMargin"
+                android:textColorHint="@android:color/darker_gray"
+                android:hint="Question"
+                android:textColor="@android:color/white"
+                android:textSize="23sp"
+                android:inputType="text"/>
+
+            <EditText
+                android:id="@+id/answer_text"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/bottomMargin"
+                android:hint="Answer"
+                android:layout_centerHorizontal="true"
+                android:textColorHint="@android:color/darker_gray"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:layout_below="@id/question_text"/>
+
+            <TextView
+                android:id="@+id/heading"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/answer_text"
+                android:text="Select exam:"
+                android:textStyle="italic"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="18sp"/>
+
+            <Spinner
+                android:id="@+id/exams_selector"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/bottomMargin"
+                android:layout_below="@id/heading"/>
+
+            <Button
+                android:id="@+id/addButton"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:text="@string/add"
+                android:background="@drawable/button_shape_advanced"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

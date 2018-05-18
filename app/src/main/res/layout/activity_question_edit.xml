@@ -43,10 +43,11 @@
             android:id="@+id/answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/corner_radius"
             android:layout_below="@id/answer_heading"
             android:textSize="@dimen/textSize"
             android:textColor="@android:color/white"
-            android:lines="2"
+            android:lines="3"
             android:inputType="text"
             android:background="@drawable/edit_text_background"/>
 
@@ -57,7 +58,7 @@
             android:layout_marginBottom="@dimen/bottomMargin"
             android:layout_above="@+id/updateButton"
             android:text="@string/delete"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:background="@drawable/button_shape_delete"/>
 
         <Button

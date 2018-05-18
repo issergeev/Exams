@@ -155,7 +155,7 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/topMargin"
         app:fabSize="mini"
-        android:src="@drawable/test"
+        android:src="@drawable/exit_icon_student"
         app:backgroundTint="@color/colorMainLight"
         android:visibility="gone"/>
 

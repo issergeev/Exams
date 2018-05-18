@@ -180,7 +180,7 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/topMargin"
         app:fabSize="normal"
-        android:src="@drawable/test"
+        android:src="@drawable/exit_icon"
         app:backgroundTint="@color/colorNewLight"
         android:visibility="gone"/>
 

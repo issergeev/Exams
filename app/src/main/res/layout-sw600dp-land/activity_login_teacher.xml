@@ -15,7 +15,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/login">
+            android:layout_above="@id/loginContainrt_LA">
 
             <ImageView
                 android:id="@+id/logo"
@@ -27,26 +27,36 @@
 
         </RelativeLayout>
 
-        <EditText
-            android:id="@+id/login"
-            android:layout_width="300dp"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/loginContainrt_LA"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
-            android:layout_above="@id/passwordContainrt_LA"
+            android:layout_marginBottom="@dimen/bottomMargin"
             android:layout_centerHorizontal="true"
-            android:hint="@string/login_text"
-            android:textColorHint="#bebebe"
-            android:textColor="#bebebe"
-            android:inputType="text"
-            android:gravity="center"/>
+            android:layout_above="@id/passwordContainrt_LA"
+            android:gravity="start"
+            android:textColorHint="#bebebe">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="@string/login_text"
+                android:textColorHint="#bebebe"
+                android:textColor="#bebebe"
+                android:gravity="start"/>
+
+        </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/passwordContainrt_LA"
-            android:layout_width="300dp"
+            android:id="@id/passwordContainrt_LA"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/bottomMargin"
             android:layout_centerInParent="true"
-            android:gravity="center"
+            android:gravity="start"
             android:textColorHint="#bebebe"
-            android:layout_marginBottom="80dp"
             app:passwordToggleEnabled="true">
 
             <android.support.design.widget.TextInputEditText
@@ -64,7 +74,7 @@
         <Button
             android:id="@+id/loginButton"
             android:layout_width="300dp"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:layout_margin="@dimen/bottomMargin"
             android:layout_below="@id/passwordContainrt_LA"
             android:layout_centerHorizontal="true"

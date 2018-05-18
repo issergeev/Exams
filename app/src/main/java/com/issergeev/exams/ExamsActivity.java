@@ -96,7 +96,7 @@ public class ExamsActivity extends AppCompatActivity {
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
         noExamsLayout = (RelativeLayout) findViewById(R.id.noExams);
         heading = (CardView) findViewById(R.id.heading_activity);
-        list = (ListView) findViewById(R.id.exams_list);
+        list = (ListView) findViewById(R.id.exams_list_activity);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         examsList = new ArrayList<>(5);

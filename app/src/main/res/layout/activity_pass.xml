@@ -8,7 +8,7 @@
     tools:context=".StudentsActivity"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/secondBackgroundColor">
+    android:background="@color/colorMain">
 
     <android.support.v7.widget.CardView
         android:id="@+id/heading"
@@ -19,7 +19,8 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/title_layout"
         app:cardCornerRadius="@dimen/corner_radius"
-        app:cardBackgroundColor="@color/cardBackgroundColor">
+        app:cardBackgroundColor="@color/cardBackgroundColor"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"

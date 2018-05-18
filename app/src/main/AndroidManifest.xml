@@ -62,8 +62,7 @@
             android:theme="@style/AppThemeAdvanced"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ExamsActivity"
-            android:theme="@style/AppThemeAdvanced" />
+            android:name=".ExamsActivity"/>
         <activity
             android:name=".AddQuestion"
             android:theme="@style/AppThemeAdvanced"
@@ -75,7 +74,7 @@
         <activity
             android:name=".StudentsExamsActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".PassActivity"></activity>
+        <activity android:name=".PassActivity"/>
     </application>
 
 </manifest>
