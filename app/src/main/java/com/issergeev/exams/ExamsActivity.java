@@ -47,7 +47,7 @@ public class ExamsActivity extends AppCompatActivity {
     CardView heading;
     ProgressBar progressBar;
 
-    private FragmentManager fragmentManager;
+    private static FragmentManager fragmentManager;
     private FragmentTransaction transaction;
 
     private Fragment fragment;
@@ -96,7 +96,7 @@ public class ExamsActivity extends AppCompatActivity {
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
         noExamsLayout = (RelativeLayout) findViewById(R.id.noExams);
         heading = (CardView) findViewById(R.id.heading_activity);
-        list = (ListView) findViewById(R.id.exams_list_activity);
+        list = (ListView) findViewById(R.id.resultsList);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         examsList = new ArrayList<>(5);

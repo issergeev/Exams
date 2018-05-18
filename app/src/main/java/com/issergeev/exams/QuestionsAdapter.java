@@ -23,7 +23,7 @@ public class QuestionsAdapter extends ArrayAdapter<Question> {
 
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
-        questionList = questions;
+        this.questionList = questions;
     }
 
     @Nullable

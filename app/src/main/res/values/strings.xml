@@ -92,4 +92,7 @@
     <string name="emailError">Error adding an email</string>
     <string name="email_not_added">Adding email rejected</string>
     <string name="SIDText">Student ID number</string>
+    <string name="results_saved">You results have been saved</string>
+    <string name="available_results">Available results</string>
+    <string name="no_results_found">There are no results available for you</string>
 </resources>

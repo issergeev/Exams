@@ -30,7 +30,8 @@ public class StudentsExamsActivity extends AppCompatActivity {
 
     private ArrayAdapter<String> adapter;
 
-    RelativeLayout rootLayout, noExamsLayout;
+    public static RelativeLayout rootLayout;
+    RelativeLayout noExamsLayout;
     ListView examsList;
     CardView heading;
     ProgressBar progressBar;

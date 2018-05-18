@@ -81,12 +81,10 @@ public class PassFragment extends Fragment {
         next = (Button) rootView.findViewById(R.id.nextButton);
         previous = (Button) rootView.findViewById(R.id.previousButton);
         heading = (TextView) getActivity().findViewById(R.id.examName);
-        progressBar = (ImageView) getActivity().findViewById(R.id.rotationProgressBar);
+        progressBar = (ImageView) rootView.findViewById(R.id.rotationProgressBar);
 
         rotationAnimation = AnimationUtils.loadAnimation(rootView.getContext(), R.anim.rotation_anim);
         rotationAnimation.setRepeatCount(Animation.INFINITE);
-
-        progressBar.startAnimation(rotationAnimation);
 
         maxQuestion = PassActivity.questionArrayList.size();
         inflateQuestion(questionNumber);
@@ -138,6 +136,9 @@ public class PassFragment extends Fragment {
                                 .setPositiveButton(R.string.continue_text, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
+                                        progressBar.startAnimation(rotationAnimation);
+                                        progressBar.setVisibility(View.VISIBLE);
+
                                         new SaveResults().execute(heading.getText().toString());
                                     }
                                 })
@@ -193,8 +194,6 @@ public class PassFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressBar.setVisibility(View.VISIBLE);
-
             for (int c = 0; c < questionArrayList.size(); c++) {
                 answerText = questionArrayList.get(c).getAnswer();
                 questionText = questionArrayList.get(c).getQuestion();
@@ -214,7 +213,9 @@ public class PassFragment extends Fragment {
                 public void onResponse(String response) {
                     switch (response) {
                         case "Success" :
-                            Snackbar.make(rootLayout, R.string.email_added, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(StudentsExamsActivity.rootLayout, R.string.results_saved, Snackbar.LENGTH_SHORT).show();
+
+                            getActivity().finish();
                             break;
                         default :
                             Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
@@ -222,7 +223,7 @@ public class PassFragment extends Fragment {
                             break;
                     }
 
-                    progressBar.setVisibility(View.INVISIBLE);
+                    progressBar.setVisibility(View.GONE);
                     correct = 0;
                 }
             }, new Response.ErrorListener() {

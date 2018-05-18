@@ -181,6 +181,7 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(new Intent(HomeActivity.this, StudentsExamsActivity.class));
                     break;
                 case R.id.results_view :
+                    startActivity(new Intent(HomeActivity.this, ResultsActivity.class));
                     break;
             }
         }

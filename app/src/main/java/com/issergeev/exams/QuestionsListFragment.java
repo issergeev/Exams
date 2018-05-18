@@ -47,9 +47,9 @@ public class QuestionsListFragment extends Fragment {
         noQuestionLayout = (RelativeLayout) rootView.findViewById(R.id.noQuestions);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
         heading = (CardView) getActivity().findViewById(R.id.heading_activity);
-        examList = (ListView) getActivity().findViewById(R.id.exams_list_activity);
+        examList = (ListView) getActivity().findViewById(R.id.resultsList);
         questionList = (ListView) rootView.findViewById(R.id.questions_list);
-        questionList.setAdapter(adapter);
+//        questionList.setAdapter(adapter);
         arrayListQuestions = new ArrayList<>(10);
 
         exam = getArguments().getString("examName");
