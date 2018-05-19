@@ -32,8 +32,7 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
     private static final String DATA_PREFS_NAME = "Data";
 
     private String firstName, lastName, patronymic;
-    private String loginText, passwordText, salt;
-    private int teacherIDNumber;
+    private String loginText, passwordText, teacherIDNumber, salt;
 
     private static SharedPreferences examsData;
     private static SharedPreferences.Editor editor;
@@ -84,15 +83,17 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
                             JSONArray user = serverResponse.getJSONArray("Teacher");
                             JSONObject data = user.getJSONObject(0);
 
-                            teacherIDNumber = data.getInt("teacher_id");
+                            teacherIDNumber = data.getString("teacher_id");
                             firstName = data.getString("teacher_firstName");
                             lastName = data.getString("teacher_lastName");
                             patronymic = data.getString("teacher_patronymic");
 
+                            editor.putString("LoginTeacher", loginText);
+                            editor.putString("PasswordTeacher", passwordText);
                             editor.putString("firstName", firstName);
                             editor.putString("lastName", lastName);
                             editor.putString("patronymic", patronymic);
-                            editor.putInt("TeacherIDNumber", teacherIDNumber);
+                            editor.putString("TeacherIDNumber", teacherIDNumber);
                             editor.apply();
 
                             finish();
@@ -101,6 +102,10 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
                             Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
                         }
                     } else {
+                        editor.putString("LoginTeacher", "");
+                        editor.putString("PasswordTeacher", "");
+                        editor.apply();
+
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             alert = new AlertDialog.Builder(TeacherHomeSplashActivity.this, android.R.style.Theme_Material_Dialog_Alert);
                         } else {

@@ -74,7 +74,7 @@
             android:name=".StudentsExamsActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".PassActivity" />
-        <activity android:name=".ResultsActivity"></activity>
+        <activity android:name=".ResultsActivity" />
     </application>
 
 </manifest>

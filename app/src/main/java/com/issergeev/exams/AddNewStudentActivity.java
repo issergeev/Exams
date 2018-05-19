@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -130,8 +131,6 @@ public class AddNewStudentActivity extends AppCompatActivity {
                     }
 
                     check();
-
-                    new Adder().execute();
                     break;
                 default :
                     for (int i = 0; i < container.getChildCount(); i++) {
@@ -162,13 +161,29 @@ public class AddNewStudentActivity extends AppCompatActivity {
     }
 
     private void check() {
+        SIDText = SIDInput.getText().toString().trim();
+        firstNameText = firstNameInput.getText().toString().trim();
+        lastNameText = lastNameInput.getText().toString().trim();
+        patronymicText = patronymicInput.getText().toString().trim();
+
         for (int i = 0; i < container.getChildCount(); i++) {
             view = container.getChildAt(i);
-            if (view instanceof EditText && ((EditText) view).getText().toString().trim().equals("")) {
+            if ((view instanceof EditText && ((EditText) view).getText().toString().trim().equals("") ||
+                    view instanceof EditText && ((EditText) view).getText().toString().trim().length() < 2) &&
+                    view.getId() != R.id.patronymic) {
                 ((EditText) view).setText("");
                 ((EditText) view).setHintTextColor(getResources().getColor(R.color.colorError));
+
+                Log.i("happy", String.valueOf(view.getId()));
+
                 correct = false;
             }
+        }
+
+        if (SIDText.length() == 9 && firstNameText.length() > 2 && lastNameInput.length() > 2) {
+            correct = true;
+        } else {
+            correct = false;
         }
 
         if (correct) {
@@ -183,7 +198,21 @@ public class AddNewStudentActivity extends AppCompatActivity {
                     .setTitle(R.string.warning_title_text)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setMessage(R.string.fieldsMissed)
-                    .setPositiveButton(R.string.accept_text, null).show();
+                    .setPositiveButton(R.string.accept_text, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            addButton.setEnabled(true);
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    })
+                    .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialogInterface) {
+                            addButton.setEnabled(true);
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    })
+                    .show();
         }
     }
 

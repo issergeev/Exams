@@ -8,21 +8,25 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
         android:layout_margin="@dimen/topMargin">
 
         <TextView
             android:id="@+id/question_heading"
-            android:layout_width="match_parent"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_alignParentTop="true"
             android:text="Question"
             android:textSize="20sp"/>
 
         <EditText
             android:id="@+id/question"
-            android:layout_width="match_parent"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/averagePadding"
             android:layout_marginStart="@dimen/averageMargin"
             android:layout_marginEnd="@dimen/minMargin"
@@ -33,8 +37,9 @@
 
         <TextView
             android:id="@+id/answer_heading"
-            android:layout_width="match_parent"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/minMargin"
             android:layout_below="@id/question"
             android:text="Answer"
@@ -42,10 +47,12 @@
 
         <EditText
             android:id="@+id/answer"
-            android:layout_width="match_parent"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_marginStart="@dimen/averageMargin"
             android:layout_marginEnd="@dimen/minMargin"
+            android:layout_marginBottom="@dimen/averagePadding"
             android:layout_below="@id/answer_heading"
             android:textSize="@dimen/textSize"
             android:textColor="@android:color/white"
@@ -53,19 +60,21 @@
 
         <Button
             android:id="@+id/deleteButton"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/bottomMargin"
-            android:layout_above="@+id/updateButton"
+            android:layout_below="@id/answer"
             android:text="@string/delete"
             android:textColor="@android:color/white"
             android:background="@drawable/button_shape_delete"/>
 
         <Button
             android:id="@id/updateButton"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/deleteButton"
             android:text="@string/update"
             android:textColor="@android:color/white"
             android:background="@drawable/button_shape_advanced"/>

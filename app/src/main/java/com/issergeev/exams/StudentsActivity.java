@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -69,11 +70,15 @@ public class StudentsActivity extends AppCompatActivity {
                     groupsList.add(adapter.getItem(i));
                 }
 
-                Bundle data = new Bundle();
-                data.putSerializable("Groups", (Serializable) groupsList);
-                intent.putExtra("GroupsList", data);
+                if (groupsList.size() > 0) {
+                    Bundle data = new Bundle();
+                    data.putSerializable("Groups", (Serializable) groupsList);
+                    intent.putExtra("GroupsList", data);
 
-                startActivity(intent);
+                    startActivity(intent);
+                } else {
+                    Snackbar.make(rootLayout, R.string.no_groups_to_manage, Snackbar.LENGTH_LONG).show();
+                }
                 break;
         }
 
@@ -135,7 +140,7 @@ public class StudentsActivity extends AppCompatActivity {
                     .build();
             RequestAPI api = retrofit.create(RequestAPI.class);
 
-            final Call<List<String>> groups = api.getGroups(examsData.getInt("TeacherIDNumber", 0));
+            final Call<List<String>> groups = api.getGroups(examsData.getString("TeacherIDNumber", "0"));
             groups.enqueue(new Callback<List<String>>() {
                 @Override
                 public void onResponse(Call<List<String>> call, Response<List<String>> response) {

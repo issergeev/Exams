@@ -108,6 +108,10 @@ public class HomeSplashActivity extends AppCompatActivity {
                             Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
                         }
                     } else {
+                        editor.putString("Login", "");
+                        editor.putString("Password", "");
+                        editor.apply();
+
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             alert = new AlertDialog.Builder(HomeSplashActivity.this, android.R.style.Theme_Material_Dialog_Alert);
                         } else {

@@ -13,6 +13,18 @@ public class Result {
     @Expose
     private String result;
 
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
+
+    @SerializedName("Total_Questions")
+    @Expose
+    private String total;
+
     public String getExamName() {
         return examName;
     }

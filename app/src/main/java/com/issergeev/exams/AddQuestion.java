@@ -1,8 +1,10 @@
 package com.issergeev.exams;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -32,6 +34,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddQuestion extends AppCompatActivity {
+    private static final String DATA_PREFS_NAME = "Data";
+
+    private SharedPreferences examsData;
+
     private String questionText, answerText, examText;
     private ArrayList<String> examsList;
     private ArrayAdapter<String> adapter;
@@ -56,13 +62,15 @@ public class AddQuestion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_question);
 
+        examsData = getSharedPreferences(DATA_PREFS_NAME, Context.MODE_PRIVATE);
+
         listener = new Listener();
 
         intent = getIntent();
         Bundle data = intent.getBundleExtra("ExamsList");
 
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
-        viewHolder = (RelativeLayout) findViewById(R.id.mainViewHolder);
+        viewHolder = (RelativeLayout) findViewById(R.id.viewHolder);
         question = (EditText) findViewById(R.id.question_text);
         answer = (EditText) findViewById(R.id.answer_text);
         addButton = (Button) findViewById(R.id.addButton);
@@ -90,13 +98,18 @@ public class AddQuestion extends AppCompatActivity {
         addButton.setOnClickListener(listener);
         question.setOnClickListener(listener);
         answer.setOnClickListener(listener);
+        question.setOnFocusChangeListener(listener);
     }
 
     private void check() {
+        questionText = question.getText().toString().trim();
+        answerText = answer.getText().toString().trim();
+
         for (int i = 0; i < viewHolder.getChildCount(); i++) {
             view = viewHolder.getChildAt(i);
             if (view instanceof EditText && ((EditText) view).getText().toString().trim().equals("")) {
-                view.setBackground(getResources().getDrawable(R.drawable.error_background));
+                ((EditText) view).setText("");
+                ((EditText) view).setHintTextColor(getResources().getColor(R.color.colorError));
                 correct = false;
             }
         }
@@ -113,11 +126,24 @@ public class AddQuestion extends AppCompatActivity {
                     .setTitle(R.string.warning_title_text)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setMessage(R.string.fieldsMissed)
-                    .setPositiveButton(R.string.accept_text, null).show();
+                    .setPositiveButton(R.string.accept_text, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            addButton.setEnabled(true);
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    })
+                    .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialogInterface) {
+                            addButton.setEnabled(true);
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }).show();
         }
     }
 
-    private class Listener implements View.OnClickListener {
+    private class Listener implements View.OnClickListener, View.OnFocusChangeListener {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
@@ -126,9 +152,27 @@ public class AddQuestion extends AppCompatActivity {
                     check();
                     break;
                 default :
-                    question.setBackground(getResources().getDrawable(R.drawable.edit_text_background));
-                    answer.setBackground(getResources().getDrawable(R.drawable.edit_text_background));
+                    for (int i = 0; i < viewHolder.getChildCount(); i++) {
+                        view = viewHolder.getChildAt(i);
+                        if (view instanceof EditText && ((EditText) view).getText().toString().trim().equals("")) {
+                            ((EditText) view).setText("");
+                            ((EditText) view).setHintTextColor(getResources().getColor(R.color.colorHint));
+                            correct = false;
+                        }
+                    }
                     break;
+            }
+        }
+
+        @Override
+        public void onFocusChange(View view, boolean b) {
+            for (int i = 0; i < viewHolder.getChildCount(); i++) {
+                view = viewHolder.getChildAt(i);
+                if (view instanceof EditText && ((EditText) view).getText().toString().trim().equals("")) {
+                    ((EditText) view).setText("");
+                    ((EditText) view).setHintTextColor(getResources().getColor(R.color.colorHint));
+                    correct = false;
+                }
             }
         }
     }

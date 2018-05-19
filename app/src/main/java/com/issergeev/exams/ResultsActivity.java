@@ -62,7 +62,7 @@ public class ResultsActivity extends AppCompatActivity {
                     .build();
             final RequestAPI api = retrofit.create(RequestAPI.class);
 
-            final Call<ResultList> resultListCall = api.getResults("1111111");
+            final Call<ResultList> resultListCall = api.getResults(examsData.getString("SIDNumber", "0"));
             resultListCall.enqueue(new Callback<ResultList>() {
                 @Override
                 public void onResponse(Call<ResultList> call, Response<ResultList> response) {

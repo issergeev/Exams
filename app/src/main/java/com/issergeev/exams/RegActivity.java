@@ -12,7 +12,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -20,7 +19,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -131,7 +129,6 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
 
         editor.putString("Login", loginText);
         editor.putString("Password", passwordText);
-        editor.putInt("progressBarVisibility", progressBar.getVisibility());
         editor.apply();
     }
 

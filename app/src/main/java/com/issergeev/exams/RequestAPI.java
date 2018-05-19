@@ -10,7 +10,7 @@ import retrofit2.http.POST;
 public interface RequestAPI {
     @POST("get_list_of_groups.php")
     @FormUrlEncoded
-    Call<List<String>> getGroups(@Field("teacher_id") Integer teacherID);
+    Call<List<String>> getGroups(@Field("teacher_id") String teacherID);
 
     @POST("get_list_of_students.php")
     @FormUrlEncoded
@@ -18,11 +18,15 @@ public interface RequestAPI {
 
     @POST("get_list_of_exams.php")
     @FormUrlEncoded
-    Call<List<String>> getExams(@Field("teacher_ID") Integer teacherID);
+    Call<List<String>> getExams(@Field("teacher_ID") String teacherID);
 
     @POST("get_list_of_questions.php")
     @FormUrlEncoded
     Call<QuestionList> getQuestions(@Field("exam_name") String examName);
+
+    @POST("get_list_of_questions_student.php")
+    @FormUrlEncoded
+    Call<QuestionList> getQuestionsStudent(@Field("exam_name") String examName);
 
     @POST("get_list_of_exams_students.php")
     @FormUrlEncoded

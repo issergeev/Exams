@@ -33,6 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/passwordContainrt_LA"
             android:hint="@string/login_text"
+            android:textColorHint="#bebebe"
+            android:textColor="@android:color/white"
             android:inputType="text"
             android:gravity="start"/>
 
@@ -42,6 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
+            android:textColorHint="#bebebe"
+            android:textColor="@android:color/white"
             android:layout_marginBottom="@dimen/bottomMargin"
             app:passwordToggleEnabled="true">
 
@@ -52,6 +56,8 @@
                 android:layout_marginBottom="@dimen/bottomMargin"
                 android:inputType="textPassword"
                 android:hint="@string/password_text"
+                android:textColorHint="#bebebe"
+                android:textColor="@android:color/white"
                 android:gravity="start"/>
 
         </android.support.design.widget.TextInputLayout>

@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/bottomMargin"
             android:layout_centerHorizontal="true"
-            android:layout_above="@id/passwordContainrt_LA"
+            android:layout_above="@+id/passwordContainrt_LA"
             android:gravity="start"
             android:textColorHint="#bebebe">
 
@@ -41,7 +41,7 @@
                 android:id="@+id/login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:hint="@string/login_text"
                 android:textColorHint="#bebebe"
                 android:textColor="#bebebe"

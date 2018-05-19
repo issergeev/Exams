@@ -43,10 +43,25 @@ public class LoginTeacherActivity extends AppCompatActivity {
     AlertDialog.Builder alert;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        login.setText(examsData.getString("LoginTeacher", ""));
+        password.setText(examsData.getString("PasswordTeacher", ""));
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+
+        loginText = login.getText().toString();
+        passwordText = password.getText().toString();
+
+        editor.putString("LoginTeacher", loginText);
+        editor.putString("PasswordTeacher", passwordText);
+        editor.apply();
     }
 
     @Override

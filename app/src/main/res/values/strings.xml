@@ -75,7 +75,8 @@
     <string name="no_exams_found">There are no exams available</string>
     <string name="question_added">Question added</string>
     <string name="question_exists">This question has already been added</string>
-    <string name="fieldsMissed">Some of fields has been missed, please, fill them to continue</string>
+    <string name="fieldsMissed">Some of fields has been missed or has been filled incorrectly,
+        please, ensure you filled the gaps in the right way and try again</string>
     <string name="no_students_found">There are no students added in this group yet</string>
     <string name="no_questions_found">There are no questions added in this exam</string>
     <string name="questions">Questions</string>
@@ -95,4 +96,9 @@
     <string name="results_saved">You results have been saved</string>
     <string name="available_results">Available results</string>
     <string name="no_results_found">There are no results available for you</string>
+    <string name="exit_test_message">You results have not been saved. If you quit from the test now
+        your attempt will not be successful and you will have to redo this test to pass the exam. Exit now?</string>
+    <string name="no_groups_to_manage">You have no groups to manage</string>
+    <string name="no_exams_to_manage">You have no exams to manage</string>
+    <string name="result">Your result:</string>
 </resources>

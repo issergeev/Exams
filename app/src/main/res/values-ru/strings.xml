@@ -72,7 +72,8 @@
     <string name="no_exams_found">Нет доступных экзаменов</string>
     <string name="question_added">Вопрос добавлен</string>
     <string name="question_exists">Этот вопрос уже добавлен</string>
-    <string name="fieldsMissed">Некоторые поля не заполнены, пожалуйста, заполните их чтобы продолжить</string>
+    <string name="fieldsMissed">Некоторые поля не заполнены или заполнены неверно,
+        пожалуйста, проверьте коррекность введенных данных и повторите попытку</string>
     <string name="no_students_found">В данную группу не добавлен ни один студент</string>
     <string name="no_questions_found">В данном экзамене нет вопросов</string>
     <string name="questions">Вопросы</string>
@@ -81,4 +82,22 @@
     <string name="delete">Удалить</string>
     <string name="question_deleted">Вопрос был успешно удален</string>
     <string name="deleteMessage">Вы уверены, что хотите удалить этот вопрос. Данное действие не может быть отменено</string>
+    <string name="not_detected">Не обнаружено</string>
+    <string name="minimalQuestionMessage">Данный вопрос - первый в списке. Вы можете завершить экзамен
+    сейчас, однако ваши результаты не будут созранены, и вам придется повторить
+    попытку сдачи. Завершить попытку без сохранения результатов?</string>
+    <string name="maximalQuestionMessage">Данный вопрос - последний в списке, если вы продолжите,
+    ваш результат будет сохранен, а попытка завершена. Сохранить результат и закончить попытку?</string>
+    <string name="return_to_attempt">Вернуться к попытке</string>
+    <string name="emailError">Ошибка добавения Email-адреса</string>
+    <string name="email_not_added">Добавления Email-адреса отклонено</string>
+    <string name="SIDText">Номер студенческого билета</string>
+    <string name="results_saved">Ваш результат был успешно сохранен</string>
+    <string name="available_results">Результаты</string>
+    <string name="no_results_found">Для вас нет доступных результатов</string>
+    <string name="exit_test_message">Вы не закончили экзамен, если вы завершите попытку сейчас, ваш результат не
+    будет защитан, и вам придется пройти тест заново. Вы уверены, что хотите завершить попытку?</string>
+    <string name="no_groups_to_manage">У вас нет групп</string>
+    <string name="no_exams_to_manage">У вас нет экзаменов</string>
+    <string name="result">Ваш результат:</string>
 </resources>

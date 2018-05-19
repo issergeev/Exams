@@ -1,10 +1,15 @@
 package com.issergeev.exams;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +32,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PassActivity extends AppCompatActivity {
+    private static final String DATA_PREFS_NAME = "Data";
+
+    private SharedPreferences examsData;
+
     private String exam;
 
     public static ArrayList<Question> questionArrayList;
@@ -40,12 +49,16 @@ public class PassActivity extends AppCompatActivity {
     public static Fragment fragment;
     public static FragmentManager fragmentManager;
 
+    AlertDialog.Builder alert;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pass);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+
+        examsData = getSharedPreferences(DATA_PREFS_NAME, Context.MODE_PRIVATE);
 
         intent = getIntent();
         exam = intent.getStringExtra("ExamName");
@@ -55,6 +68,7 @@ public class PassActivity extends AppCompatActivity {
 
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
         heading = (TextView) findViewById(R.id.examName);
+        noQuestionLayout = (RelativeLayout) findViewById(R.id.noQuestions);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -63,6 +77,31 @@ public class PassActivity extends AppCompatActivity {
         questionArrayList = new ArrayList<>(10);
 
         new LoadQuestions().execute();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (questionArrayList.size() > 0) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                alert = new AlertDialog.Builder(PassActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+            } else {
+                alert = new AlertDialog.Builder(PassActivity.this);
+            }
+            alert.setCancelable(true)
+                    .setTitle(R.string.exit_text)
+                    .setMessage(R.string.exit_test_message)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton(R.string.return_to_attempt, null)
+                    .show();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -77,27 +116,38 @@ public class PassActivity extends AppCompatActivity {
                     .build();
             RequestAPI api = retrofit.create(RequestAPI.class);
 
-            final Call<QuestionList> questions = api.getQuestions("Exam");
+            final Call<QuestionList> questions = api
+                    .getQuestionsStudent(exam);
             questions.enqueue(new Callback<QuestionList>() {
                 @Override
                 public void onResponse(Call<QuestionList> call, Response<QuestionList> response) {
                     progressBar.setVisibility(View.GONE);
 
-                    try {
-                        questionArrayList = response.body().getQuestions();
+                    if (response.body() != null) {
+                        if (!response.body().toString().equals("[]") || !response.body().equals("")) {
+                            try {
+                                questionArrayList = response.body().getQuestions();
 
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("questionList", questionArrayList);
-                        fragment.setArguments(bundle);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("questionList", questionArrayList);
 
-                        fragmentManager.beginTransaction().add(R.id.rootLayout, fragment)
-                            .commit();
+                                if (questionArrayList.size() > 0) {
 
-                        if (questionArrayList.size() == 0) {
+                                    fragment.setArguments(bundle);
+
+                                    fragmentManager.beginTransaction().add(R.id.rootLayout, fragment)
+                                            .commit();
+                                } else {
+                                    noQuestionLayout.setVisibility(View.VISIBLE);
+                                }
+                            } catch (NullPointerException e) {
+                                Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+                            }
+                        } else {
                             noQuestionLayout.setVisibility(View.VISIBLE);
                         }
-                    } catch (NullPointerException e) {
-                        Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+                    } else {
+                        noQuestionLayout.setVisibility(View.VISIBLE);
                     }
                 }
 

@@ -71,11 +71,15 @@ public class ExamsActivity extends AppCompatActivity {
                     examsList.add(adapter.getItem(i));
                 }
 
-                Bundle data = new Bundle();
-                data.putSerializable("Exams", (Serializable) examsList);
-                intent.putExtra("ExamsList", data);
+                if (examsList.size() > 0) {
+                    Bundle data = new Bundle();
+                    data.putSerializable("Exams", (Serializable) examsList);
+                    intent.putExtra("ExamsList", data);
 
-                startActivity(intent);
+                    startActivity(intent);
+                } else {
+                    Snackbar.make(rootLayout, R.string.no_exams_to_manage, Snackbar.LENGTH_LONG).show();
+                }
                 break;
         }
 
@@ -137,21 +141,25 @@ public class ExamsActivity extends AppCompatActivity {
                     .build();
             RequestAPI api = retrofit.create(RequestAPI.class);
 
-            final Call<List<String>> exams = api.getExams(examsData.getInt("TeacherIDNumber", 0));
+            final Call<List<String>> exams = api.getExams(examsData.getString("TeacherIDNumber", "0"));
             exams.enqueue(new Callback<List<String>>() {
                 @Override
                 public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                     progressBar.setVisibility(View.GONE);
 
-                    try {
-                        if (!response.body().toString().equals("[]")) {
-                            adapter.addAll(response.body());
-                            adapter.notifyDataSetChanged();
-                        } else {
-                            noExamsLayout.setVisibility(View.VISIBLE);
+                    if (response.body() != null) {
+                        try {
+                            if (!response.body().toString().equals("[]")) {
+                                adapter.addAll(response.body());
+                                adapter.notifyDataSetChanged();
+                            } else {
+                                noExamsLayout.setVisibility(View.VISIBLE);
+                            }
+                        } catch (NullPointerException e) {
+                            Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
                         }
-                    } catch(NullPointerException e){
-                        Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+                    } else {
+                        noExamsLayout.setVisibility(View.VISIBLE);
                     }
                 }
 

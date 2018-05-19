@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_margin="@dimen/averageMargin"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
@@ -31,8 +31,7 @@
             android:layout_below="@id/image"
             android:hint="@string/student_id_number"
             android:textColorHint="@color/colorHint"
-            android:lines="2"
-            android:background="@drawable/custom_edit_text_background"/>
+            android:inputType="numberDecimal"/>
 
         <EditText
             android:id="@+id/lastName"
@@ -41,9 +40,7 @@
             android:layout_margin="@dimen/minMargin"
             android:layout_below="@id/studentIDNumber"
             android:hint="@string/last_name"
-            android:textColorHint="@color/colorHint"
-            android:lines="2"
-            android:background="@drawable/custom_edit_text_background"/>
+            android:textColorHint="@color/colorHint"/>
 
         <EditText
             android:id="@+id/firstName"
@@ -52,9 +49,7 @@
             android:layout_margin="@dimen/minMargin"
             android:layout_below="@id/lastName"
             android:hint="@string/first_name"
-            android:textColorHint="@color/colorHint"
-            android:lines="2"
-            android:background="@drawable/custom_edit_text_background"/>
+            android:textColorHint="@color/colorHint"/>
 
         <EditText
             android:id="@+id/patronymic"
@@ -63,9 +58,7 @@
             android:layout_margin="@dimen/minMargin"
             android:layout_below="@id/firstName"
             android:hint="@string/patronymic"
-            android:textColorHint="@color/colorHint"
-            android:lines="2"
-            android:background="@drawable/custom_edit_text_background"/>
+            android:textColorHint="@color/colorHint" />
 
         <TextView
             android:id="@+id/helpText"

@@ -253,6 +253,7 @@ public class PassFragment extends Fragment {
                     results.put("student_id_number", examsData.getString("SIDNumber", "0"));
                     results.put("exam_name", strings[0]);
                     results.put("result", String.valueOf(correct));
+                    results.put("total_questions", String.valueOf(examList.size()));
 
                     return results;
                 }

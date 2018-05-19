@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Locale;
 
 public class ResultsAdapter extends ArrayAdapter<Result> {
     private LayoutInflater layoutInflater;
@@ -48,8 +49,14 @@ public class ResultsAdapter extends ArrayAdapter<Result> {
         Result item = getItem(position);
 
         if (item != null) {
+            if (Double.valueOf(item.getResult()) >= Double.valueOf(item.getTotal())) {
+                viewHolder.result.setTextColor(context.getResources().getColor(android.R.color.holo_green_light));
+            }
+
             viewHolder.exam.setText(item.getExamName());
-            viewHolder.result.setText(item.getResult());
+            viewHolder.result.setText(context.getResources().getString(R.string.result) +
+                    item.getResult() + "/" + item.getTotal() + "\n" +
+                    String.format("%.2f", Double.valueOf(item.getResult())/Double.valueOf(item.getTotal()) * 100) + "%");
         }
 
         return viewHolder.parentLayout;
