@@ -134,8 +134,7 @@ public class HomeActivity extends AppCompatActivity {
                                         .setOnCancelListener(new DialogInterface.OnCancelListener() {
                                             @Override
                                             public void onCancel(DialogInterface dialogInterface) {
-                                                new EmailSender().execute(email_new.getText().toString());
-                                                editor.apply();
+                                                Snackbar.make(rootLayout, R.string.email_not_added, Snackbar.LENGTH_LONG).show();
                                             }
                                         })
                                         .show();
@@ -150,7 +149,12 @@ public class HomeActivity extends AppCompatActivity {
                             }
                         }
                     })
-                    .setNegativeButton(R.string.no, null)
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Snackbar.make(rootLayout, R.string.email_not_added, Snackbar.LENGTH_LONG).show();
+                        }
+                    })
                     .show();
         }
     }

@@ -71,10 +71,11 @@
             android:theme="@style/AppThemeAdvanced"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".StudentsExamsActivity"
-            android:theme="@style/AppTheme" />
+            android:name=".StudentsExamsActivity" />
         <activity android:name=".PassActivity" />
         <activity android:name=".ResultsActivity" />
+        <activity android:name=".ResultsTeacherMainActivity"
+            android:theme="@style/AppThemeAdvanced"/>
     </application>
 
 </manifest>

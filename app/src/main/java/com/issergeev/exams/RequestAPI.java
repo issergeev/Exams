@@ -35,4 +35,8 @@ public interface RequestAPI {
     @POST("get_list_of_results.php")
     @FormUrlEncoded
     Call<ResultList> getResults(@Field("student_id_number") String studentIDNumber);
+
+    @POST("get_list_of_results_teacher.php")
+    @FormUrlEncoded
+    Call<ResultList> getResultsTeacher(@Field("teacher_id") String teacher_id, @Field("exam_name") String examName);
 }

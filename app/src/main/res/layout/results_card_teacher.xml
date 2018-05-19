@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/rootLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="4"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/SIDText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/topMargin"
+            android:layout_marginTop="@dimen/topMargin"
+            android:text="StudentIDNumber"
+            android:textStyle="bold"
+            android:textSize="@dimen/textSize"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/topMargin"
+            android:layout_marginTop="@dimen/topMargin"
+            android:text="@string/student"
+            android:textStyle="bold"
+            android:textSize="@dimen/headingsSize"/>
+
+        <TextView
+            android:id="@+id/FaL_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/topMargin"
+            android:text="FaLName"
+            android:textStyle="italic"
+            android:textSize="@dimen/textSize"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/corner_radius"
+        android:gravity="center"
+        android:text="Result"
+        android:textColor="#7e1616"
+        android:textSize="22sp"
+        android:textStyle="bold"/>
+
+</LinearLayout>

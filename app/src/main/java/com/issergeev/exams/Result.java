@@ -13,6 +13,46 @@ public class Result {
     @Expose
     private String result;
 
+    @SerializedName("Total_Questions")
+    @Expose
+    private String total;
+
+    @SerializedName("Student_ID")
+    @Expose
+    private String studentID;
+
+    @SerializedName("Student_FirstName")
+    @Expose
+    private String firstName;
+
+    @SerializedName("Student_LastName")
+    @Expose
+    private String lastName;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
+    }
+
     public String getTotal() {
         return total;
     }
@@ -20,10 +60,6 @@ public class Result {
     public void setTotal(String total) {
         this.total = total;
     }
-
-    @SerializedName("Total_Questions")
-    @Expose
-    private String total;
 
     public String getExamName() {
         return examName;

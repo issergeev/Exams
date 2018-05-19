@@ -96,9 +96,12 @@
     <string name="results_saved">You results have been saved</string>
     <string name="available_results">Available results</string>
     <string name="no_results_found">There are no results available for you</string>
+    <string name="no_results_found_teacher">There are no results available for your groups</string>
     <string name="exit_test_message">You results have not been saved. If you quit from the test now
         your attempt will not be successful and you will have to redo this test to pass the exam. Exit now?</string>
     <string name="no_groups_to_manage">You have no groups to manage</string>
     <string name="no_exams_to_manage">You have no exams to manage</string>
     <string name="result">Your result:</string>
+    <string name="result_teacher">Result:</string>
+    <string name="student">Student:</string>
 </resources>

@@ -23,7 +23,7 @@ public class TeacherHomeActivity extends AppCompatActivity {
     private Listener listener;
 
     RelativeLayout rootLayout;
-    CardView examsCard, studentsCard;
+    CardView examsCard, resultsCard, studentsCard;
     FloatingActionButton logoutButton;
     TextView fullName, patronymic;
 
@@ -47,9 +47,11 @@ public class TeacherHomeActivity extends AppCompatActivity {
         logoutButton.setOnClickListener(listener);
         examsCard = (CardView) findViewById(R.id.exams_view);
         studentsCard = (CardView) findViewById(R.id.students_view);
+        resultsCard = (CardView) findViewById(R.id.results_view);
 
         studentsCard.setOnClickListener(listener);
         examsCard.setOnClickListener(listener);
+        resultsCard.setOnClickListener(listener);
 
         fullName.setText(examsData.getString("firstName", "First Name") + " " +
             examsData.getString("patronymic", "Patronymic"));
@@ -104,6 +106,9 @@ public class TeacherHomeActivity extends AppCompatActivity {
                     break;
                 case R.id.exams_view :
                     startActivity(new Intent(TeacherHomeActivity.this, ExamsActivity.class));
+                    break;
+                case R.id.results_view :
+                    startActivity(new Intent(TeacherHomeActivity.this, ResultsTeacherMainActivity.class));
                     break;
             }
         }
