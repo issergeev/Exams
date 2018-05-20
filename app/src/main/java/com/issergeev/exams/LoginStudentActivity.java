@@ -51,7 +51,7 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
     ProgressBar progressBar;
     Button createButton, loginButton;
     EditText login;
-    TextInputEditText password;
+    EditText password;
 
     InputMethodManager inputMethodManager;
     View view;

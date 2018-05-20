@@ -104,4 +104,21 @@
     <string name="result">Your result:</string>
     <string name="result_teacher">Result:</string>
     <string name="student">Student:</string>
+    <string name="title_activity_admin_main">AdminMainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="report">Send report</string>
+    <string name="report_message">Enter you message:</string>
+    <string name="send_button_text">Send</string>
+    <string name="teachers">Teachers</string>
+    <string name="groups">Groups</string>
+    <string name="no_teachers_found">There are no teachers added</string>
+    <string name="delete_student">Delete student</string>
+    <string name="delete_teacher">Delete teahcer</string>
+    <string name="update_teachers">Update teachers</string>
+    <string name="exit_message_advanced">Do you want to exit? All unsave data will be deleted</string>
+    <string name="exit">Edit</string>
+    <string name="teacher_updated">The teacher successfully updated</string>
+    <string name="teacher_deleted">The teacher successfully deleted</string>
 </resources>

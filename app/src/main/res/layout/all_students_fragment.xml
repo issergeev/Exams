@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/noStudentsText"
             android:layout_centerHorizontal="true"
-            android:src="@android:drawable/ic_notification_clear_all"
+            android:src="@drawable/no_drawable"
             android:contentDescription="@string/todo"/>
 
         <TextView
@@ -48,13 +48,14 @@
         app:cardBackgroundColor="@color/cardBackgroundColor">
 
         <TextView
+            android:id="@+id/groupNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/students"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/textSize"/>
+            android:textSize="@dimen/textSize"
+            android:textColor="@android:color/white"/>
 
     </android.support.v7.widget.CardView>
 

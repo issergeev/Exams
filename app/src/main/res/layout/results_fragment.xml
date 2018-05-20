@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/noResultsText"
             android:layout_centerHorizontal="true"
-            android:src="@android:drawable/ic_notification_clear_all"
+            android:src="@drawable/no_drawable"
             android:contentDescription="@string/todo"/>
 
         <TextView

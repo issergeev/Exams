@@ -3,15 +3,22 @@ package com.issergeev.exams;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -24,49 +31,110 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginAdminActivity extends AppCompatActivity {
+public class LoginAdminActivity extends AppCompatActivity implements View.OnLongClickListener {
     private static final String DATA_PREFS_NAME = "Data";
 
     private static SharedPreferences examsData;
     private static SharedPreferences.Editor editor;
 
-    private String firstName, lastName, patronymic;
-    private String loginText, passwordText, salt;
+    private String loginText = "", passwordText = "";
 
-    RelativeLayout rootLayout;
-    EditText login, password;
-    Button loginButton;
-    ProgressBar progressBar;
+    private Listener listener;
 
     AlertDialog.Builder alert;
 
+    RelativeLayout rootLayout;
+    ProgressBar progressBar;
+    Button loginButton;
+    EditText login;
+    EditText password;
+
+    InputMethodManager inputMethodManager;
+    View view;
+    Animation shakeAnimation;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onResume() {
+        super.onResume();
+
+        loginText = examsData.getString("LoginAdmin", "");
+        passwordText = examsData.getString("PasswordAdmin", "");
+        login.setText(loginText);
+        password.setText(passwordText);
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_admin);
 
         examsData = getSharedPreferences(DATA_PREFS_NAME, Context.MODE_PRIVATE);
         editor = examsData.edit();
 
-        rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
-        login = (EditText) findViewById(R.id.login);
-        password = (EditText) findViewById(R.id.password);
-        loginButton = (Button) findViewById(R.id.loginButton);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        listener = new Listener();
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new SignInChecker().execute();
+        rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(listener);
+        login = (EditText) findViewById(R.id.login);
+        password = (TextInputEditText) findViewById(R.id.password);
+
+        login.setOnLongClickListener(this);
+        password.setOnLongClickListener(this);
+
+        inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        view = this.getCurrentFocus();
+
+        if (view != null) {
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+
+        shakeAnimation = AnimationUtils.loadAnimation(this, R.anim.forbid_anim);
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        view.startAnimation(shakeAnimation);
+
+        return true;
+    }
+
+    private class Listener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.loginButton :
+                    loginButton.setEnabled(false);
+                    progressBar.setVisibility(View.VISIBLE);
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+
+                    loginText = login.getText().toString();
+                    passwordText = password.getText().toString();
+
+                    new SignInChecker().execute();
+                    break;
+                case R.id.createButton :
+                    startActivity(new Intent(getApplicationContext(), RegActivity.class));
+                    overridePendingTransition(R.anim.activity_appear_anim, R.anim.activity_disappear_anim);
+                    break;
             }
-        });
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        loginText = login.getText().toString();
+        passwordText = password.getText().toString();
+
+        editor.putString("LoginAdmin", loginText);
+        editor.putString("PasswordAdmin", passwordText);
+        editor.apply();
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -79,37 +147,16 @@ public class LoginAdminActivity extends AppCompatActivity {
             StringRequest query = new StringRequest(Request.Method.POST, APPENDIX_URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(final String response) {
-                    if (response.equals("")) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            alert = new AlertDialog.Builder(LoginAdminActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-                        } else {
-                            alert = new AlertDialog.Builder(LoginAdminActivity.this);
-                        }
-                        alert.setCancelable(false)
-                                .setTitle(R.string.warning_title_text)
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setMessage(R.string.incorrect_identity_data)
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        loginButton.setEnabled(true);
-                                        progressBar.setVisibility(View.GONE);
-                                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
-                                    }
-                                })
-                                .show();
-                    } else {
-                        loginButton.setEnabled(true);
-                        progressBar.setVisibility(View.GONE);
-                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+                    loginButton.setEnabled(true);
+                    progressBar.setVisibility(View.GONE);
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
-                        loginText = login.getText().toString();
-                        passwordText = password.getText().toString();
+                    Log.i("net", "Salt " + passwordText);
 
-                        salt = response;
-
-                        new SignIn().execute();
-                    }
+                    startActivity(new Intent(LoginAdminActivity.this, AdminSplashActivity.class)
+                            .putExtra("Login", loginText)
+                            .putExtra("Password", passwordText)
+                            .putExtra("Salt", response));
                 }
             }, new Response.ErrorListener() {
 
@@ -144,7 +191,7 @@ public class LoginAdminActivity extends AppCompatActivity {
                                 .setPositiveButton(R.string.accept_text, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                                        loginButton.setEnabled(true);
                                     }
                                 }).show();
                     }
@@ -155,86 +202,11 @@ public class LoginAdminActivity extends AppCompatActivity {
             }){
                 @Override
                 protected Map<String, String> getParams() {
-                    HashMap<String, String> data = new HashMap<>();
+                    HashMap<String, String> userData = new HashMap<>();
 
-                    loginText = login.getText().toString();
+                    userData.put("admin_verif", loginText);
 
-                    data.put("admin_verif", loginText);
-
-                    return data;
-                }
-            };
-            request.add(query);
-
-            return null;
-        }
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private class SignIn extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            final String LOGIN_URL = "http://exams-online.online/sign_in_admin.php";
-            final RequestQueue request = Volley.newRequestQueue(LoginAdminActivity.this);
-            StringRequest query = new StringRequest(Request.Method.POST, LOGIN_URL, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
-
-                    if (!response.equals("null")) {
-
-                        try {
-                            JSONObject serverResponse = new JSONObject(response);
-                            JSONArray user = serverResponse.getJSONArray("Admin");
-                            JSONObject data = user.getJSONObject(0);
-
-                            firstName = data.getString("first_name");
-                            lastName = data.getString("last_name");
-                            patronymic = data.getString("patronymic");
-
-                            editor.putString("FirstName", firstName);
-                            editor.putString("LastName", lastName);
-                            editor.putString("Patronymic", patronymic);
-                            editor.commit();
-
-                            //finish();
-                            //startActivity(new Intent(LoginAdminActivity.this, HomeActivity.class));
-                        } catch (JSONException e) {
-                            Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
-                        }
-                    } else {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            alert = new AlertDialog.Builder(LoginAdminActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-                        } else {
-                            alert = new AlertDialog.Builder(LoginAdminActivity.this);
-                        }
-                        alert.setCancelable(true)
-                                .setTitle(R.string.warning_title_text)
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setMessage(R.string.incorrect_identity_data)
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    }
-                                }).show();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
-                }
-            }){
-                @Override
-                protected Map<String, String> getParams() {
-                    HashMap<String, String> adminData = new HashMap<>();
-
-                    adminData.put("admin_verif", loginText);
-                    adminData.put("admin_auth", Encryption.EncryptWithSalt(passwordText, salt));
-
-                    return adminData;
+                    return userData;
                 }
             };
             request.add(query);

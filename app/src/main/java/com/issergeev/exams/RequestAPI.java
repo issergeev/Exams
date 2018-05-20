@@ -39,4 +39,17 @@ public interface RequestAPI {
     @POST("get_list_of_results_teacher.php")
     @FormUrlEncoded
     Call<ResultList> getResultsTeacher(@Field("teacher_id") String teacher_id, @Field("exam_name") String examName);
+
+    @POST("send_report.php")
+    @FormUrlEncoded
+    Call<String> sendReport(@Field("message") String message);
+
+    @POST("get_list_of_teachers.php")
+    Call<TeacherList> getTeachers();
+
+    @POST("get_list_of_all_groups.php")
+    Call<GroupList> getAllGroups();
+
+    @POST("get_list_of_all_groups.php")
+    Call<List<String>> getListOfAllGroups();
 }

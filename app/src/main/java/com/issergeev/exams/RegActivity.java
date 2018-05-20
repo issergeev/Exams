@@ -63,6 +63,15 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        editor.putString("Login", loginInput.getText().toString());
+        editor.putString("Password", passwordInput.getText().toString());
+        editor.apply();
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
 

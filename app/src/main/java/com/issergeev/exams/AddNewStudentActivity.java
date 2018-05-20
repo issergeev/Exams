@@ -63,9 +63,6 @@ public class AddNewStudentActivity extends AppCompatActivity {
 
         listener = new Listener();
 
-        intent = getIntent();
-        Bundle data = intent.getBundleExtra("GroupsList");
-
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
         container = (RelativeLayout) findViewById(R.id.info_container);
         SIDInput = (EditText) findViewById(R.id.studentIDNumber);
@@ -79,6 +76,9 @@ public class AddNewStudentActivity extends AppCompatActivity {
         mask = new TextMask(SIDInput, TEXT_MASK);
 
         groupsList = new ArrayList<>(5);
+
+        intent = getIntent();
+        Bundle data = intent.getBundleExtra("GroupsList");
         groupsList.addAll((Collection<? extends String>) data.getSerializable("Groups"));
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, groupsList);
@@ -106,6 +106,13 @@ public class AddNewStudentActivity extends AppCompatActivity {
         firstNameInput.setOnFocusChangeListener(listener);
         lastNameInput.setOnFocusChangeListener(listener);
         patronymicInput.setOnFocusChangeListener(listener);
+
+        try {
+            SIDInput.setText(data.getString("SIDNumber"));
+            firstNameInput.setText(data.getString("FirstName"));
+            lastNameInput.setText(data.getString("LastName"));
+            patronymicInput.setText(data.getString("Patronymic"));
+        } catch (NullPointerException e) {}
     }
 
     private class Listener implements View.OnClickListener, View.OnFocusChangeListener {
