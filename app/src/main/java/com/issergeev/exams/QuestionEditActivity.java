@@ -130,6 +130,10 @@ public class QuestionEditActivity extends AppCompatActivity {
                                         Snackbar.LENGTH_SHORT).show();
                                 finish();
                                 break;
+                            case "Question exists" :
+                                Snackbar.make(rootLayout, R.string.question_exists_new,
+                                        Snackbar.LENGTH_SHORT).show();
+                                break;
                             default :
                                 Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
                                 break;

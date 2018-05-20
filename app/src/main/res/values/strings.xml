@@ -117,4 +117,5 @@
     <string name="exit">Exit</string>
     <string name="teacher_updated">The teacher successfully updated</string>
     <string name="teacher_deleted">The teacher successfully deleted</string>
+    <string name="question_exists_new">This question has already been added, please, change the title</string>
 </resources>
