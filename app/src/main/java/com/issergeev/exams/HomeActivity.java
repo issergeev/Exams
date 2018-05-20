@@ -46,14 +46,6 @@ public class HomeActivity extends AppCompatActivity {
     AlertDialog.Builder alert, alert_email;
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        editor.putBoolean("firstStart", true);
-        editor.apply();
-    }
-
-    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_home);
@@ -139,13 +131,8 @@ public class HomeActivity extends AppCompatActivity {
                                         })
                                         .show();
 
-                                editor.putBoolean("firstStart", false);
-                                editor.apply();
                             } else {
                                 new EmailSender().execute(email.getText().toString());
-
-                                editor.putBoolean("firstStart", false);
-                                editor.apply();
                             }
                         }
                     })
@@ -156,6 +143,9 @@ public class HomeActivity extends AppCompatActivity {
                         }
                     })
                     .show();
+
+            editor.putBoolean("firstStart", false);
+            editor.apply();
         }
     }
 

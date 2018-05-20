@@ -1,7 +1,7 @@
 package com.issergeev.exams;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -19,11 +19,7 @@ import android.widget.TextView;
 import android.widget.ProgressBar;
 import android.content.Intent;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -72,7 +72,7 @@
                 android:layout_marginEnd="@dimen/startMargin"
                 android:layout_marginTop="@dimen/startMargin"
                 android:layout_below="@id/heading"
-                app:cardCornerRadius="5dp"
+                app:cardCornerRadius="15dp"
                 style="@style/CardView.Dark"
                 app:cardBackgroundColor="#87c6da">
 
@@ -114,7 +114,7 @@
                 android:layout_marginEnd="@dimen/startMargin"
                 android:layout_marginTop="@dimen/startMargin"
                 android:layout_below="@id/exams_view"
-                app:cardCornerRadius="5dp"
+                app:cardCornerRadius="15dp"
                 style="@style/CardView.Dark"
                 app:cardBackgroundColor="#87c6da">
 
@@ -154,7 +154,7 @@
                 android:layout_below="@id/results_view"
                 android:elevation="@dimen/standardElevation"
                 android:layout_margin="@dimen/startMargin"
-                app:cardCornerRadius="5dp"
+                app:cardCornerRadius="15dp"
                 style="@style/CardView.Dark"
                 app:cardBackgroundColor="#87c6da">
 

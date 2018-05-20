@@ -65,6 +65,9 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
         passwordText = examsData.getString("Password", "");
         login.setText(loginText);
         password.setText(passwordText);
+
+        editor.putBoolean("firstStart", true);
+        editor.apply();
     }
 
     @Override

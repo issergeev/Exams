@@ -170,7 +170,7 @@
                 android:layout_marginEnd="@dimen/startMargin"
                 android:layout_marginTop="@dimen/startMargin"
                 android:layout_below="@id/heading"
-                app:cardCornerRadius="5dp"
+                app:cardCornerRadius="25dp"
                 style="@style/CardView.Dark"
                 app:cardBackgroundColor="#995f22">
 
@@ -210,7 +210,7 @@
                 android:layout_below="@id/exams_view"
                 android:elevation="@dimen/standardElevation"
                 android:layout_margin="@dimen/startMargin"
-                app:cardCornerRadius="5dp"
+                app:cardCornerRadius="25dp"
                 style="@style/CardView.Dark"
                 app:cardBackgroundColor="#995f22">
 
