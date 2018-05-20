@@ -3,6 +3,7 @@ package com.issergeev.exams;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -13,8 +14,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.support.v7.app.AlertDialog;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -30,6 +31,8 @@ public class GroupsFragment extends Fragment {
 
     private GroupsAdapter adapter;
     private ArrayList<Group> groups;
+
+    private AlertDialog.Builder alert;
 
     @Nullable
     @Override
@@ -80,18 +83,31 @@ public class GroupsFragment extends Fragment {
                 public void onResponse(Call<GroupList> call, Response<GroupList> response) {
                     progressBar.setVisibility(View.GONE);
 
-                    try {
-                        groups = response.body().getGroups();
-                        adapter = new GroupsAdapter(parentView.getContext(), groups);
-                        groupList.setAdapter(adapter);
+                    if (response.isSuccessful()) {
+                        try {
+                            groups = response.body().getGroups();
+                            adapter = new GroupsAdapter(parentView.getContext(), groups);
+                            groupList.setAdapter(adapter);
 
-                        if (groups.size() == 0) {
-                            noGroupsLayout.setVisibility(View.VISIBLE);
+                            if (groups.size() == 0) {
+                                noGroupsLayout.setVisibility(View.VISIBLE);
+                            }
+                        } catch (NullPointerException e) {
+                            Snackbar.make(parentView, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+
+                            e.printStackTrace();
                         }
-                    } catch (NullPointerException e) {
-                        Snackbar.make(parentView, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
-
-                        e.printStackTrace();
+                    } else {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            alert = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+                        } else {
+                            alert = new AlertDialog.Builder(getActivity());
+                        }
+                        alert.setCancelable(true)
+                                .setTitle(R.string.warning_title_text)
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setMessage(R.string.connection_error_text)
+                                .setPositiveButton(R.string.accept_text, null).show();
                     }
                 }
 

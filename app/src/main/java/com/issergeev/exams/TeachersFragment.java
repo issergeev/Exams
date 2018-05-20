@@ -2,17 +2,16 @@ package com.issergeev.exams;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -32,6 +31,8 @@ public class TeachersFragment extends Fragment {
 
     private TeachersAdapter adapter;
     private ArrayList<Teacher> teachers;
+
+    private AlertDialog.Builder alert;
 
     @Nullable
     @Override
@@ -78,15 +79,28 @@ public class TeachersFragment extends Fragment {
                         }
                     } catch (NullPointerException e) {
                         Snackbar.make(parentView, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
-
-                        e.printStackTrace();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<TeacherList> call, Throwable t) {
                     progressBar.setVisibility(View.GONE);
-                    Snackbar.make(parentView, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        alert = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+                    } else {
+                        alert = new AlertDialog.Builder(getActivity());
+                    }
+                    alert.setCancelable(true)
+                            .setTitle(R.string.warning_title_text)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setMessage(R.string.connection_error_text)
+                            .setPositiveButton(R.string.accept_text, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            }).show();
                 }
             });
 

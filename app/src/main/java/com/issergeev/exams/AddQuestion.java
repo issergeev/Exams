@@ -45,17 +45,17 @@ public class AddQuestion extends AppCompatActivity {
     private View view;
     private boolean correct;
 
-    RelativeLayout rootLayout, viewHolder;
-    EditText question, answer;
-    Button addButton;
-    Spinner exams;
-    ProgressBar progressBar;
+    private RelativeLayout rootLayout, viewHolder;
+    private EditText question, answer;
+    private Button addButton;
+    private Spinner exams;
+    private ProgressBar progressBar;
 
-    AlertDialog.Builder alert;
+    private AlertDialog.Builder alert;
 
-    Intent intent;
+    private Intent intent;
 
-    Listener listener;
+    private Listener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,9 +206,7 @@ public class AddQuestion extends AppCompatActivity {
                         }
                     }
                 }
-            }, new Response.ErrorListener()
-
-            {
+            }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse (VolleyError error){
                     if (error.networkResponse != null) {

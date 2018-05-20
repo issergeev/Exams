@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -151,16 +150,29 @@ public class AdminMainActivity extends AppCompatActivity {
                     .build();
             final RequestAPI api = retrofit.create(RequestAPI.class);
 
-            final Call<String> resultListCall = api.sendReport(strings[0]);
+            Call<String> resultListCall = api.sendReport(strings[0]);
             resultListCall.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     progressBar.setVisibility(View.GONE);
 
-                    try {
+                    if (response.isSuccessful()) {
+                        try {
 
-                    } catch (Exception e) {
-                        Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+                        }
+                    } else {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            alert = new AlertDialog.Builder(AdminMainActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                        } else {
+                            alert = new AlertDialog.Builder(AdminMainActivity.this);
+                        }
+                        alert.setCancelable(true)
+                                .setTitle(R.string.warning_title_text)
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setMessage(R.string.connection_error_text)
+                                .setPositiveButton(R.string.accept_text, null).show();
                     }
                 }
 

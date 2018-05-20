@@ -3,11 +3,14 @@ package com.issergeev.exams;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,14 +37,16 @@ public class ResultsListFragment extends Fragment {
 
     public static ArrayList<Result> arrayListResults;
 
-    RelativeLayout noResultsLayout;
-    ListView resultsList;
-    CardView heading;
-    TextView examName;
-    ProgressBar progressBar;
+    private RelativeLayout noResultsLayout;
+    private ListView resultsList;
+    private CardView heading;
+    private TextView examName;
+    private ProgressBar progressBar;
 
     public static View parentView;
     private ResultsAdapterTeacher adapter;
+
+    private AlertDialog.Builder alert;
 
     @Nullable
     @Override
@@ -131,7 +136,18 @@ public class ResultsListFragment extends Fragment {
                 @Override
                 public void onFailure(Call<ResultList> call, Throwable t) {
                     progressBar.setVisibility(View.GONE);
-                    Snackbar.make(parentView, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        alert = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+                    } else {
+                        alert = new AlertDialog.Builder(getActivity());
+                    }
+                    alert.setCancelable(true)
+                            .setTitle(R.string.warning_title_text)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setMessage(R.string.connection_error_text)
+                            .setPositiveButton(R.string.accept_text, null)
+                            .show();
                 }
             });
 

@@ -35,12 +35,12 @@ public class LoginTeacherActivity extends AppCompatActivity {
     private static SharedPreferences examsData;
     private static SharedPreferences.Editor editor;
 
-    RelativeLayout rootLayout;
-    EditText login, password;
-    Button loginButton;
-    ProgressBar progressBar;
+    private RelativeLayout rootLayout;
+    private EditText login, password;
+    private Button loginButton;
+    private ProgressBar progressBar;
 
-    AlertDialog.Builder alert;
+    private AlertDialog.Builder alert;
 
     @Override
     protected void onResume() {
@@ -131,7 +131,21 @@ public class LoginTeacherActivity extends AppCompatActivity {
                                 Snackbar.make(rootLayout, R.string.server_sleeping_text, Snackbar.LENGTH_SHORT).show();
                                 break;
                             default :
-                                Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_SHORT).show();
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                    alert = new AlertDialog.Builder(LoginTeacherActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                                } else {
+                                    alert = new AlertDialog.Builder(LoginTeacherActivity.this);
+                                }
+                                alert.setCancelable(true)
+                                        .setTitle(R.string.warning_title_text)
+                                        .setIcon(android.R.drawable.ic_dialog_alert)
+                                        .setMessage(R.string.connection_error_text)
+                                        .setPositiveButton(R.string.accept_text, new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                loginButton.setEnabled(true);
+                                            }
+                                        }).show();
                                 break;
                         }
                     } else {

@@ -11,7 +11,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -41,15 +40,15 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
     private static SharedPreferences examsData;
     private static SharedPreferences.Editor editor;
 
-    RelativeLayout rootLayout;
-    EditText SIDInput, loginInput, passwordInput;
-    Button createButton;
-    ProgressBar progressBar;
+    private RelativeLayout rootLayout;
+    private EditText SIDInput, loginInput, passwordInput;
+    private Button createButton;
+    private ProgressBar progressBar;
 
-    AlertDialog.Builder alert;
+    private AlertDialog.Builder alert;
 
     private TextMask mask;
-    Animation shakeAnimation;
+    private Animation shakeAnimation;
 
     @Override
     protected void onResume() {
@@ -254,7 +253,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
                                 Snackbar.make(rootLayout, R.string.not_such_user, Snackbar.LENGTH_LONG).show();
                                 break;
                             default:
-                                Log.i("net", response);
+                                Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_SHORT).show();
                                 break;
                         }
                     }

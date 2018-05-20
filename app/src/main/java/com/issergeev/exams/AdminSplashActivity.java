@@ -12,7 +12,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.RelativeLayout;
 
 import com.android.volley.Request;
@@ -37,8 +36,8 @@ public class AdminSplashActivity extends AppCompatActivity {
 
     private String loginText, passwordText, firstName, lastName, patronymic, salt;
 
-    RelativeLayout rootLayout;
-    AlertDialog.Builder alert;
+    private RelativeLayout rootLayout;
+    private AlertDialog.Builder alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +53,6 @@ public class AdminSplashActivity extends AppCompatActivity {
         loginText = intent.getStringExtra("Login");
         passwordText = intent.getStringExtra("Password");
         salt = intent.getStringExtra("Salt");
-
-        Log.i("pass", passwordText);
 
         rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
 

@@ -36,16 +36,16 @@ public class PassActivity extends AppCompatActivity {
 
     public static ArrayList<Question> questionArrayList;
 
-    public RelativeLayout rootLayout, noQuestionLayout;
-    TextView heading;
-    ProgressBar progressBar;
+    private RelativeLayout rootLayout, noQuestionLayout;
+    private TextView heading;
+    private ProgressBar progressBar;
 
-    Intent intent;
+    private Intent intent;
 
     public static Fragment fragment;
     public static FragmentManager fragmentManager;
 
-    AlertDialog.Builder alert;
+    private AlertDialog.Builder alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +150,18 @@ public class PassActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<QuestionList> call, Throwable t) {
                     progressBar.setVisibility(View.GONE);
-                    Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        alert = new AlertDialog.Builder(PassActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                    } else {
+                        alert = new AlertDialog.Builder(PassActivity.this);
+                    }
+                    alert.setCancelable(true)
+                            .setTitle(R.string.warning_title_text)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setMessage(R.string.connection_error_text)
+                            .setPositiveButton(R.string.accept_text, null)
+                            .show();
                 }
             });
 

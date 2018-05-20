@@ -43,19 +43,17 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
 
     private Listener listener;
 
-    private SignInChecker signInChecker = new SignInChecker();
+    private AlertDialog.Builder alert;
 
-    AlertDialog.Builder alert;
+    private RelativeLayout rootLayout;
+    private ProgressBar progressBar;
+    private Button createButton, loginButton;
+    private EditText login;
+    private EditText password;
 
-    RelativeLayout rootLayout;
-    ProgressBar progressBar;
-    Button createButton, loginButton;
-    EditText login;
-    EditText password;
-
-    InputMethodManager inputMethodManager;
-    View view;
-    Animation shakeAnimation;
+    private InputMethodManager inputMethodManager;
+    private View view;
+    private Animation shakeAnimation;
 
     @Override
     protected void onResume() {

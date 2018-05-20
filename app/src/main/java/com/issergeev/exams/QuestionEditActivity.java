@@ -30,16 +30,16 @@ public class QuestionEditActivity extends AppCompatActivity {
     private String questionText, answerText;
     private int questionNumber;
 
-    RelativeLayout rootLayout;
-    EditText question, answer;
-    Button updateButton, deleteButton;
-    ProgressBar progressBar;
+    private RelativeLayout rootLayout;
+    private EditText question, answer;
+    private Button updateButton, deleteButton;
+    private ProgressBar progressBar;
 
-    Intent intent;
+    private Intent intent;
 
-    AlertDialog.Builder alert;
+    private AlertDialog.Builder alert;
 
-    Listener listener;
+    private Listener listener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -151,6 +151,18 @@ public class QuestionEditActivity extends AppCompatActivity {
                         } else {
                             Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_SHORT).show();
                         }
+                    } else {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            alert = new AlertDialog.Builder(QuestionEditActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                        } else {
+                            alert = new AlertDialog.Builder(QuestionEditActivity.this);
+                        }
+                        alert.setCancelable(true)
+                                .setTitle(R.string.warning_title_text)
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setMessage(R.string.connection_error_text)
+                                .setPositiveButton(R.string.accept_text, null)
+                                .show();
                     }
 
                     progressBar.setVisibility(View.GONE);
@@ -217,6 +229,18 @@ public class QuestionEditActivity extends AppCompatActivity {
                         } else {
                             Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_SHORT).show();
                         }
+                    } else {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            alert = new AlertDialog.Builder(QuestionEditActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                        } else {
+                            alert = new AlertDialog.Builder(QuestionEditActivity.this);
+                        }
+                        alert.setCancelable(true)
+                                .setTitle(R.string.warning_title_text)
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setMessage(R.string.connection_error_text)
+                                .setPositiveButton(R.string.accept_text, null)
+                                .show();
                     }
 
                     progressBar.setVisibility(View.GONE);

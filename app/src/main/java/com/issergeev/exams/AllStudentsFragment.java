@@ -2,28 +2,21 @@ package com.issergeev.exams;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,12 +30,14 @@ public class AllStudentsFragment extends Fragment {
     private ListView studentsList;
     private View parentView;
 
-    RelativeLayout noStudentsLayout;
-    TextView heading;
-    ProgressBar progressBar;
+    private RelativeLayout noStudentsLayout;
+    private TextView heading;
+    private ProgressBar progressBar;
 
     private ArrayList<Student> arrayListStudent;
     private StudentsAdapter adapter;
+
+    private AlertDialog.Builder alert;
 
     @Nullable
     @Override
@@ -94,16 +89,29 @@ public class AllStudentsFragment extends Fragment {
                 public void onResponse(Call<StudentList> call, Response<StudentList> response) {
                     progressBar.setVisibility(View.GONE);
 
-                    try {
-                        arrayListStudent = response.body().getStudents();
-                        adapter = new StudentsAdapter(parentView.getContext(), arrayListStudent);
-                        studentsList.setAdapter(adapter);
+                    if (response.isSuccessful()) {
+                        try {
+                            arrayListStudent = response.body().getStudents();
+                            adapter = new StudentsAdapter(parentView.getContext(), arrayListStudent);
+                            studentsList.setAdapter(adapter);
 
-                        if (arrayListStudent.size() == 0) {
-                            noStudentsLayout.setVisibility(View.VISIBLE);
+                            if (arrayListStudent.size() == 0) {
+                                noStudentsLayout.setVisibility(View.VISIBLE);
+                            }
+                        } catch (NullPointerException e) {
+                            Snackbar.make(parentView, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
                         }
-                    } catch (NullPointerException e) {
-                        Snackbar.make(parentView, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+                    } else {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            alert = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+                        } else {
+                            alert = new AlertDialog.Builder(getActivity());
+                        }
+                        alert.setCancelable(true)
+                                .setTitle(R.string.warning_title_text)
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setMessage(R.string.connection_error_text)
+                                .setPositiveButton(R.string.accept_text, null).show();
                     }
                 }
 

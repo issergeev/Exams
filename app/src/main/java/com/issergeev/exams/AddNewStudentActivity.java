@@ -10,7 +10,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -41,20 +40,20 @@ public class AddNewStudentActivity extends AppCompatActivity {
     private View view;
     private boolean correct;
 
-    RelativeLayout rootLayout, container;
-    EditText SIDInput, firstNameInput, lastNameInput, patronymicInput;
-    Spinner groupNumberInput;
-    Button addButton;
-    ProgressBar progressBar;
+    private RelativeLayout rootLayout, container;
+    private EditText SIDInput, firstNameInput, lastNameInput, patronymicInput;
+    private Spinner groupNumberInput;
+    private Button addButton;
+    private ProgressBar progressBar;
 
-    AlertDialog.Builder alert;
+    private AlertDialog.Builder alert;
 
-    ArrayList<String> groupsList;
-    ArrayAdapter<String> adapter;
+    private ArrayList<String> groupsList;
+    private ArrayAdapter<String> adapter;
 
-    Intent intent;
+    private Intent intent;
 
-    Listener listener;
+    private Listener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,13 +105,6 @@ public class AddNewStudentActivity extends AppCompatActivity {
         firstNameInput.setOnFocusChangeListener(listener);
         lastNameInput.setOnFocusChangeListener(listener);
         patronymicInput.setOnFocusChangeListener(listener);
-
-        try {
-            SIDInput.setText(data.getString("SIDNumber"));
-            firstNameInput.setText(data.getString("FirstName"));
-            lastNameInput.setText(data.getString("LastName"));
-            patronymicInput.setText(data.getString("Patronymic"));
-        } catch (NullPointerException e) {}
     }
 
     private class Listener implements View.OnClickListener, View.OnFocusChangeListener {
@@ -180,9 +172,6 @@ public class AddNewStudentActivity extends AppCompatActivity {
                     view.getId() != R.id.patronymic) {
                 ((EditText) view).setText("");
                 ((EditText) view).setHintTextColor(getResources().getColor(R.color.colorError));
-
-                Log.i("happy", String.valueOf(view.getId()));
-
                 correct = false;
             }
         }

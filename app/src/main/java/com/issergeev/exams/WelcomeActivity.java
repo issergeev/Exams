@@ -17,8 +17,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private Listener listener;
 
-    Button startButtonStudent, startButtonTeacher;
-    ImageView signinButton;
+    private Button startButtonStudent, startButtonTeacher;
+    private ImageView signinButton;
 
     @Override
     protected void onResume() {

@@ -5,10 +5,13 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -21,7 +24,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -42,14 +44,16 @@ public class StudentsActivity extends AppCompatActivity {
     private SharedPreferences examsData;
     private SharedPreferences.Editor editor;
 
-    RelativeLayout rootLayout, noGroupsLayout;
-    ListView groupList;
-    CardView heading;
-    ProgressBar progressBar;
+    private RelativeLayout rootLayout, noGroupsLayout;
+    private ListView groupList;
+    private CardView heading;
+    private ProgressBar progressBar;
 
-    Fragment fragment;
-    FragmentManager fragmentManager;
-    FragmentTransaction transaction;
+    private Fragment fragment;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction transaction;
+
+    private AlertDialog.Builder alert;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -159,10 +163,19 @@ public class StudentsActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<List<String>> call, Throwable t) {
-                    Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        alert = new AlertDialog.Builder(StudentsActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                    } else {
+                        alert = new AlertDialog.Builder(StudentsActivity.this);
+                    }
+                    alert.setCancelable(true)
+                            .setTitle(R.string.warning_title_text)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setMessage(R.string.connection_error_text)
+                            .setPositiveButton(R.string.accept_text, null)
+                            .show();
                 }
-            }); {
-            }
+            });
 
             return null;
         }

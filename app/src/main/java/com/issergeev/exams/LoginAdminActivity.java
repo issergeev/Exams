@@ -14,7 +14,6 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -44,17 +43,16 @@ public class LoginAdminActivity extends AppCompatActivity implements View.OnLong
 
     private Listener listener;
 
-    AlertDialog.Builder alert;
+    private AlertDialog.Builder alert;
 
-    RelativeLayout rootLayout;
-    ProgressBar progressBar;
-    Button loginButton;
-    EditText login;
-    EditText password;
+    private RelativeLayout rootLayout;
+    private ProgressBar progressBar;
+    private Button loginButton;
+    private EditText login, password;
 
-    InputMethodManager inputMethodManager;
-    View view;
-    Animation shakeAnimation;
+    private InputMethodManager inputMethodManager;
+    private View view;
+    private Animation shakeAnimation;
 
     @Override
     protected void onResume() {
@@ -150,8 +148,6 @@ public class LoginAdminActivity extends AppCompatActivity implements View.OnLong
                     loginButton.setEnabled(true);
                     progressBar.setVisibility(View.GONE);
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
-
-                    Log.i("net", "Salt " + passwordText);
 
                     startActivity(new Intent(LoginAdminActivity.this, AdminSplashActivity.class)
                             .putExtra("Login", loginText)

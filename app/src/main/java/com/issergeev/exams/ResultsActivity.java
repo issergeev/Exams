@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
@@ -29,9 +31,11 @@ public class ResultsActivity extends AppCompatActivity {
 
     private SharedPreferences examsData;
 
-    RelativeLayout rootLayout, noResultsLayout;
-    ListView list;
-    ProgressBar progressBar;
+    private RelativeLayout rootLayout, noResultsLayout;
+    private ListView list;
+    private ProgressBar progressBar;
+
+    private AlertDialog.Builder alert;
 
     @Override
     protected void onCreate (@Nullable Bundle savedInstanceState){
@@ -86,7 +90,18 @@ public class ResultsActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<ResultList> call, Throwable t) {
                     progressBar.setVisibility(View.GONE);
-                    Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        alert = new AlertDialog.Builder(ResultsActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                    } else {
+                        alert = new AlertDialog.Builder(ResultsActivity.this);
+                    }
+                    alert.setCancelable(true)
+                            .setTitle(R.string.warning_title_text)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setMessage(R.string.connection_error_text)
+                            .setPositiveButton(R.string.accept_text, null)
+                            .show();
                 }
             });
 

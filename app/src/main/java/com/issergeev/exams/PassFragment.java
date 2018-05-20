@@ -20,7 +20,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -48,20 +47,20 @@ public class PassFragment extends Fragment {
     private HashMap<String, String> examList;
     private ArrayList<? extends Question> questionArrayList;
 
-    RelativeLayout rootLayout;
-    TextView question;
-    EditText answer;
-    Button next, previous;
-    TextView heading;
-    ImageView progressBar;
+    private RelativeLayout rootLayout;
+    private TextView question;
+    private EditText answer;
+    private Button next, previous;
+    private TextView heading;
+    private ImageView progressBar;
 
-    AlertDialog.Builder alert;
+    private AlertDialog.Builder alert;
 
-    SharedPreferences examsData;
+    private SharedPreferences examsData;
 
-    Animation rotationAnimation;
+    private Animation rotationAnimation;
 
-    Listener listener;
+    private Listener listener;
 
     @Nullable
     @Override
@@ -219,7 +218,6 @@ public class PassFragment extends Fragment {
                             break;
                         default :
                             Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
-                            Log.i("net", response);
                             break;
                     }
 
@@ -239,7 +237,16 @@ public class PassFragment extends Fragment {
                             Snackbar.make(getView().getRootView(), R.string.server_sleeping_text, Snackbar.LENGTH_LONG).show();
                             break;
                         default :
-                            Snackbar.make(getView().getRootView(), R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                alert = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+                            } else {
+                                alert = new AlertDialog.Builder(getActivity());
+                            }
+                            alert.setCancelable(true)
+                                    .setTitle(R.string.warning_title_text)
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .setMessage(R.string.connection_error_text)
+                                    .setPositiveButton(R.string.accept_text, null).show();
                             break;
                     }
 

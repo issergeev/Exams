@@ -3,12 +3,15 @@ package com.issergeev.exams;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,13 +39,15 @@ public class QuestionsListFragment extends Fragment {
     private ListView questionList;
     public static ArrayList<Question> arrayListQuestions;
 
-    RelativeLayout noQuestionLayout;
-    ListView examList;
-    CardView heading;
-    ProgressBar progressBar;
+    private RelativeLayout noQuestionLayout;
+    private ListView examList;
+    private CardView heading;
+    private ProgressBar progressBar;
 
     public static View parentView;
     private QuestionsAdapter adapter;
+
+    private AlertDialog.Builder alert;
 
     @Nullable
     @Override
@@ -57,7 +62,7 @@ public class QuestionsListFragment extends Fragment {
         heading = (CardView) getActivity().findViewById(R.id.heading_activity);
         examList = (ListView) getActivity().findViewById(R.id.resultsList);
         questionList = (ListView) rootView.findViewById(R.id.questions_list);
-//        questionList.setAdapter(adapter);
+
         arrayListQuestions = new ArrayList<>(10);
 
         exam = getArguments().getString("examName");
@@ -146,7 +151,18 @@ public class QuestionsListFragment extends Fragment {
                 @Override
                 public void onFailure(Call<QuestionList> call, Throwable t) {
                     progressBar.setVisibility(View.GONE);
-                    Snackbar.make(parentView, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        alert = new AlertDialog.Builder(getActivity(), android.R.style.Theme_Material_Dialog_Alert);
+                    } else {
+                        alert = new AlertDialog.Builder(getActivity());
+                    }
+                    alert.setCancelable(true)
+                            .setTitle(R.string.warning_title_text)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setMessage(R.string.connection_error_text)
+                            .setPositiveButton(R.string.accept_text, null)
+                            .show();
                 }
             });
 

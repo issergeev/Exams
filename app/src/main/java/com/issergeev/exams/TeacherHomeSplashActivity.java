@@ -37,9 +37,9 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
     private static SharedPreferences examsData;
     private static SharedPreferences.Editor editor;
 
-    RelativeLayout rootLayout;
+    private RelativeLayout rootLayout;
 
-    AlertDialog.Builder alert;
+    private AlertDialog.Builder alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,12 +140,19 @@ public class TeacherHomeSplashActivity extends AppCompatActivity {
                         case 423 :
                             Snackbar.make(rootLayout, R.string.server_sleeping_text, Snackbar.LENGTH_SHORT).show();
                             break;
-                        default :
-                            Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_SHORT).show();
-                            break;
                     }
 
-                    Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        alert = new AlertDialog.Builder(TeacherHomeSplashActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                    } else {
+                        alert = new AlertDialog.Builder(TeacherHomeSplashActivity.this);
+                    }
+                    alert.setCancelable(true)
+                            .setTitle(R.string.warning_title_text)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setMessage(R.string.connection_error_text)
+                            .setPositiveButton(R.string.accept_text, null)
+                            .show();
                 }
             }){
                 @Override

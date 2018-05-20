@@ -5,17 +5,16 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,7 +22,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,20 +35,21 @@ public class ResultsTeacherMainActivity extends AppCompatActivity {
     private static final String DATA_PREFS_NAME = "Data";
 
     private ArrayAdapter<String> adapter;
-    private ArrayList<String> examsList;
 
     private SharedPreferences examsData;
     private SharedPreferences.Editor editor;
 
-    RelativeLayout rootLayout, noExamsLayout;
-    ListView list;
-    CardView heading;
-    ProgressBar progressBar;
+    private RelativeLayout rootLayout, noExamsLayout;
+    private ListView list;
+    private CardView heading;
+    private ProgressBar progressBar;
 
     private static FragmentManager fragmentManager;
     private FragmentTransaction transaction;
 
     private Fragment fragment;
+
+    private AlertDialog.Builder alert;
 
     @Override
     protected void onCreate (@Nullable Bundle savedInstanceState){
@@ -69,7 +68,6 @@ public class ResultsTeacherMainActivity extends AppCompatActivity {
         list = (ListView) findViewById(R.id.resultsList);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        examsList = new ArrayList<>(5);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
 
         list.setAdapter(adapter);
@@ -130,10 +128,19 @@ public class ResultsTeacherMainActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<List<String>> call, Throwable t) {
-                    Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        alert = new AlertDialog.Builder(ResultsTeacherMainActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                    } else {
+                        alert = new AlertDialog.Builder(ResultsTeacherMainActivity.this);
+                    }
+                    alert.setCancelable(true)
+                            .setTitle(R.string.warning_title_text)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setMessage(R.string.connection_error_text)
+                            .setPositiveButton(R.string.accept_text, null)
+                            .show();
                 }
-            }); {
-            }
+            });
 
             return null;
         }

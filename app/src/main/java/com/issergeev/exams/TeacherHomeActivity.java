@@ -22,12 +22,12 @@ public class TeacherHomeActivity extends AppCompatActivity {
 
     private Listener listener;
 
-    RelativeLayout rootLayout;
-    CardView examsCard, resultsCard, studentsCard;
-    FloatingActionButton logoutButton;
-    TextView fullName, patronymic;
+    private RelativeLayout rootLayout;
+    private CardView examsCard, resultsCard, studentsCard;
+    private FloatingActionButton logoutButton;
+    private TextView fullName, patronymic;
 
-    AlertDialog.Builder alert;
+    private AlertDialog.Builder alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

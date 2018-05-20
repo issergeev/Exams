@@ -14,7 +14,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -38,12 +37,12 @@ public class HomeActivity extends AppCompatActivity {
 
     private Listener listener;
 
-    RelativeLayout rootLayout;
-    CardView examsView, resultsView;
-    TextView fullName, patronymic, passedExams, examsToPass;
-    FloatingActionButton logoutButton;
+    private RelativeLayout rootLayout;
+    private CardView examsView, resultsView;
+    private TextView fullName, patronymic, passedExams, examsToPass;
+    private FloatingActionButton logoutButton;
 
-    AlertDialog.Builder alert, alert_email;
+    private AlertDialog.Builder alert, alert_email;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -233,8 +232,6 @@ public class HomeActivity extends AppCompatActivity {
                         Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
                     }
 
-                    Log.i("net", error.getMessage());
-
                     switch (errorCode) {
                         case 302 :
                             Snackbar.make(rootLayout, R.string.hotspot_error, Snackbar.LENGTH_LONG).show();
@@ -243,7 +240,16 @@ public class HomeActivity extends AppCompatActivity {
                             Snackbar.make(rootLayout, R.string.server_sleeping_text, Snackbar.LENGTH_LONG).show();
                             break;
                         default :
-                            Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                alert = new AlertDialog.Builder(HomeActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                            } else {
+                                alert = new AlertDialog.Builder(HomeActivity.this);
+                            }
+                            alert.setCancelable(true)
+                                    .setTitle(R.string.warning_title_text)
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .setMessage(R.string.connection_error_text)
+                                    .setPositiveButton(R.string.accept_text, null).show();
                             break;
                     }
                 }
