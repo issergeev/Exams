@@ -30,6 +30,7 @@
             android:layout_margin="@dimen/minMargin"
             android:layout_below="@id/image"
             android:hint="@string/student_id_number"
+            android:maxLength="9"
             android:textColorHint="@color/colorHint"
             android:inputType="numberDecimal"/>
 

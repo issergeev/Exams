@@ -56,7 +56,7 @@ public class GroupsFragment extends Fragment {
                 AllStudentsFragment studentsFragment = new AllStudentsFragment();
                 studentsFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.groupFragment, studentsFragment)
+                        .add(R.id.groupFragment, studentsFragment)
                         .addToBackStack(null)
                         .commit();
             }

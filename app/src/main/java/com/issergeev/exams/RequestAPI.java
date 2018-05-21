@@ -52,4 +52,7 @@ public interface RequestAPI {
 
     @POST("get_list_of_all_groups.php")
     Call<List<String>> getListOfAllGroups();
+
+    @POST("get_all_groups.php")
+    Call<List<String>> getGroupList();
 }

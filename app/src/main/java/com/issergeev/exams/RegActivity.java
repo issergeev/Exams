@@ -151,6 +151,10 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
         final String[] UNAVALIABLE_LOGINS = new String[] {"administrator", "admin", "webmaster", "login"};
         final String[] UNSAFE_PASSWORDS = new String[] {"qwerty", "password", "p@ssw0rd", "12345"};
 
+        if (SIDText.charAt(0) == '0') {
+            return false;
+        }
+
         if (SIDText.length() != 7) {
             Snackbar.make(rootLayout, R.string.sid_length, Snackbar.LENGTH_LONG).show();
             return false;

@@ -154,7 +154,7 @@ public class StudentsActivity extends AppCompatActivity {
                             adapter.addAll(response.body());
                             adapter.notifyDataSetChanged();
                         } else {
-                        noGroupsLayout.setVisibility(View.VISIBLE);
+                            noGroupsLayout.setVisibility(View.VISIBLE);
                         }
                     } catch (NullPointerException e) {
                         Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();

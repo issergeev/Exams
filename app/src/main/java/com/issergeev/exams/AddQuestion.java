@@ -140,6 +140,8 @@ public class AddQuestion extends AppCompatActivity {
                             progressBar.setVisibility(View.GONE);
                         }
                     }).show();
+
+            progressBar.setVisibility(View.GONE);
         }
     }
 
@@ -148,6 +150,7 @@ public class AddQuestion extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.addButton :
+                    progressBar.setVisibility(View.VISIBLE);
                     correct = true;
                     check();
                     break;
@@ -204,6 +207,8 @@ public class AddQuestion extends AppCompatActivity {
                                 Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
                                 break;
                         }
+
+                        progressBar.setVisibility(View.GONE);
                     }
                 }
             }, new Response.ErrorListener() {

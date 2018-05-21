@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +20,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,16 +41,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.issergeev.exams.StudentsExamsActivity.rootLayout;
-
 public class AdminMainActivity extends AppCompatActivity {
+    private String reportText;
+
+    private RelativeLayout rootLayout;
     private ProgressBar progressBar;
+
+    private BottomNavigationView navigation;
+
+    private FragmentManager fragmentManager;
+    private Fragment groupsFragment, teachersFragment;
 
     private AlertDialog.Builder alert;
 
-    private FragmentManager fragmentManager;
-
-    private Fragment groupsFragment, teachersFragment;
+    private Intent intent;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,15 +62,15 @@ public class AdminMainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.teachers :
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.mainFragment, teachersFragment)
-                                .commit();
+                case R.id.teachers:
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.mainFragment, teachersFragment)
+                            .commit();
                     return true;
-                case R.id.groups :
-                        fragmentManager.beginTransaction()
-                                .replace(R.id.mainFragment, groupsFragment)
-                                .commit();
+                case R.id.groups:
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.mainFragment, groupsFragment)
+                            .commit();
                     return true;
             }
             return false;
@@ -68,7 +87,9 @@ public class AdminMainActivity extends AppCompatActivity {
         groupsFragment = new GroupsFragment();
         teachersFragment = new TeachersFragment();
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        rootLayout = (RelativeLayout) findViewById(R.id.rootLayout);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -88,30 +109,36 @@ public class AdminMainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.reportButton :
+            case R.id.reportButton:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     alert = new AlertDialog.Builder(AdminMainActivity.this, android.R.style.Theme_Material_Dialog_Alert);
                 } else {
                     alert = new AlertDialog.Builder(AdminMainActivity.this);
                 }
-                final EditText email = new EditText(AdminMainActivity.this);
+                final EditText report = new EditText(AdminMainActivity.this);
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                         RelativeLayout.LayoutParams.WRAP_CONTENT);
-                email.setLayoutParams(params);
-                email.setTextColor(getResources().getColor(R.color.colorMain));
-                alert.setCancelable(false)
+                report.setLayoutParams(params);
+                report.setTextColor(getResources().getColor(R.color.colorMain));
+                alert.setCancelable(true)
                         .setTitle(R.string.report)
                         .setMessage(R.string.report_message)
-                        .setView(email)
+                        .setView(report)
                         .setPositiveButton(R.string.send_button_text, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                reportText = report.getText().toString();
 
+                                new ReportSender().execute();
+                            }
+                        })
+                        .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                            @Override
+                            public void onCancel(DialogInterface dialogInterface) {
+                                Snackbar.make(rootLayout, R.string.report_denied, Snackbar.LENGTH_SHORT).show();
                             }
                         })
                         .show();
-
-
                 break;
         }
 
@@ -139,49 +166,64 @@ public class AdminMainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("StaticFieldLeak")
-    private class SendReport extends AsyncTask<String, Void, Void> {
-        private final String BASE_URL = "http://exams-online.online/";
+    private class ReportSender extends AsyncTask<Void, Void, Void> {
 
         @Override
-        protected Void doInBackground(String... strings) {
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            final RequestAPI api = retrofit.create(RequestAPI.class);
-
-            Call<String> resultListCall = api.sendReport(strings[0]);
-            resultListCall.enqueue(new Callback<String>() {
+        protected Void doInBackground(Void... voids) {
+            final String LOGIN_URL = "http://exams-online.online/send_report.php";
+            final RequestQueue request = Volley.newRequestQueue(AdminMainActivity.this);
+            StringRequest query = new StringRequest(Request.Method.POST, LOGIN_URL, new com.android.volley.Response.Listener<String>() {
                 @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    progressBar.setVisibility(View.GONE);
-
-                    if (response.isSuccessful()) {
-                        try {
-
-                        } catch (Exception e) {
-                            Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
-                        }
-                    } else {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            alert = new AlertDialog.Builder(AdminMainActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-                        } else {
-                            alert = new AlertDialog.Builder(AdminMainActivity.this);
-                        }
-                        alert.setCancelable(true)
-                                .setTitle(R.string.warning_title_text)
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setMessage(R.string.connection_error_text)
-                                .setPositiveButton(R.string.accept_text, null).show();
+                public void onResponse(String response) {
+                    switch (response) {
+                        case "Success" :
+                            Snackbar.make(rootLayout, R.string.report_sent, Snackbar.LENGTH_SHORT).show();
+                            break;
+                        case "Error sending response" :
+                            Snackbar.make(rootLayout, R.string.report_error, Snackbar.LENGTH_LONG).show();
+                            break;
+                        default :
+                            Snackbar.make(rootLayout, R.string.unknown_response, Snackbar.LENGTH_LONG).show();
+                            break;
                     }
                 }
-
+            }, new com.android.volley.Response.ErrorListener() {
                 @Override
-                public void onFailure(Call<String> call, Throwable t) {
-                    progressBar.setVisibility(View.GONE);
-                    Snackbar.make(rootLayout, R.string.unknown_error, Snackbar.LENGTH_LONG).show();
+                public void onErrorResponse(VolleyError error) {
+                    int errorCode = error.networkResponse.statusCode;
+
+                    switch (errorCode) {
+                        case 302 :
+                            Snackbar.make(rootLayout, R.string.hotspot_error, Snackbar.LENGTH_SHORT).show();
+                            break;
+                        case 423 :
+                            Snackbar.make(rootLayout, R.string.server_sleeping_text, Snackbar.LENGTH_SHORT).show();
+                            break;
+                        default :
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                alert = new AlertDialog.Builder(AdminMainActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                            } else {
+                                alert = new AlertDialog.Builder(AdminMainActivity.this);
+                            }
+                            alert.setCancelable(true)
+                                    .setTitle(R.string.warning_title_text)
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .setMessage(R.string.connection_error_text)
+                                    .setPositiveButton(R.string.accept_text, null).show();
+                            break;
+                    }
                 }
-            });
+            }){
+                @Override
+                protected Map<String, String> getParams() {
+                    HashMap<String, String> data = new HashMap<>();
+
+                    data.put("report", reportText);
+
+                    return data;
+                }
+            };
+            request.add(query);
 
             return null;
         }

@@ -112,11 +112,12 @@
     <string name="delete_teacher">Удалить учителя</string>
     <string name="update_teachers">Обновить</string>
     <string name="exit">Выйти</string>
-    <string name="teacher_updated">Учитель успешно обновлен</string>
-    <string name="teacher_deleted">Учитель успешно удален</string>
     <string name="no_results_found_teacher">Для ваших групп нет доступных результатов</string>
     <string name="exit_message_advanced">Вы действительно хотите выйти? Все несохраненные данные будут удалены</string>
     <string name="question_exists_new">Этот вопрос уже добвлен, пожалуйста, измените название</string>
+    <string name="report_sent">Ваш отчет выл успешно отправлен</string>
+    <string name="report_error">Произошла ошибка при отпраке отчета</string>
+    <string name="report_denied">Отправка отчета отменена</string>
 
     <string name="todo">TODO</string>
     <string name="exams">Exams</string>

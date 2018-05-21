@@ -32,6 +32,7 @@
                 android:layout_marginTop="@dimen/averageMargin"
                 android:layout_alignParentTop="true"
                 android:hint="@string/student_id_number"
+                android:maxLength="9"
                 android:inputType="numberDecimal"/>
 
             <EditText

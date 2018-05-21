@@ -118,4 +118,8 @@
     <string name="teacher_updated">The teacher successfully updated</string>
     <string name="teacher_deleted">The teacher successfully deleted</string>
     <string name="question_exists_new">This question has already been added, please, change the title</string>
+    <string name="report_sent">Your report has been sent</string>
+    <string name="report_error">Report sending failed</string>
+    <string name="group_added">Group successfully added</string>
+    <string name="report_denied">Report sending denied</string>
 </resources>
