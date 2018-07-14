@@ -205,7 +205,7 @@ public class HomeActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(final String... strings) {
-            final String LOGIN_URL = "http://exams-online.online/add_email.php";
+            final String LOGIN_URL = "http://exams-online.000webhostapp.com/add_email.php";
             final RequestQueue request = Volley.newRequestQueue(HomeActivity.this);
             StringRequest query = new StringRequest(Request.Method.POST, LOGIN_URL, new Response.Listener<String>() {
                 @Override

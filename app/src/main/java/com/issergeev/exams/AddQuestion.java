@@ -185,7 +185,7 @@ public class AddQuestion extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String CREATE_URL = "http://exams-online.online/add_question.php";
+            final String CREATE_URL = "http://exams-online.000webhostapp.com/add_question.php";
 
             RequestQueue request = Volley.newRequestQueue(AddQuestion.this);
             StringRequest query = new StringRequest(Request.Method.POST, CREATE_URL, new Response.Listener<String>() {

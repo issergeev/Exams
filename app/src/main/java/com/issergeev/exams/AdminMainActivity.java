@@ -170,7 +170,7 @@ public class AdminMainActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String LOGIN_URL = "http://exams-online.online/send_report.php";
+            final String LOGIN_URL = "http://exams-online.000webhostapp.com/send_report.php";
             final RequestQueue request = Volley.newRequestQueue(AdminMainActivity.this);
             StringRequest query = new StringRequest(Request.Method.POST, LOGIN_URL, new com.android.volley.Response.Listener<String>() {
                 @Override

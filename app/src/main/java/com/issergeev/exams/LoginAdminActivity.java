@@ -140,7 +140,7 @@ public class LoginAdminActivity extends AppCompatActivity implements View.OnLong
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String APPENDIX_URL = "http://exams-online.online/get_appendix_admin.php";
+            final String APPENDIX_URL = "http://exams-online.000webhostapp.com/get_appendix_admin.php";
             final RequestQueue request = Volley.newRequestQueue(LoginAdminActivity.this);
             StringRequest query = new StringRequest(Request.Method.POST, APPENDIX_URL, new Response.Listener<String>() {
                 @Override

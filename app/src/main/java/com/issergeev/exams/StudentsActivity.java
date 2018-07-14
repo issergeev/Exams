@@ -134,7 +134,7 @@ public class StudentsActivity extends AppCompatActivity {
 
     @SuppressLint("StaticFieldLeak")
     private class LoadGroups extends AsyncTask<Void, Void, Void> {
-        private final String BASE_URL = "http://exams-online.online/";
+        private final String BASE_URL = "http://exams-online.000webhostapp.com/";
 
         @Override
         protected Void doInBackground(Void... voids) {

@@ -147,7 +147,7 @@ public class LoginStudentActivity extends AppCompatActivity implements View.OnLo
 
         @Override
         protected Void doInBackground(Void... voids) {
-                final String APPENDIX_URL = "http://exams-online.online/get_appendix.php";
+                final String APPENDIX_URL = "http://exams-online.000webhostapp.com/get_appendix.php";
                 final RequestQueue request = Volley.newRequestQueue(LoginStudentActivity.this);
                 StringRequest query = new StringRequest(Request.Method.POST, APPENDIX_URL, new Response.Listener<String>() {
                     @Override

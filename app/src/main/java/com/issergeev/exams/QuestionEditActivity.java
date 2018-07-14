@@ -112,7 +112,7 @@ public class QuestionEditActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String CREATE_URL = "http://exams-online.online/update_question.php";
+            final String CREATE_URL = "http://exams-online.000webhostapp.com/update_question.php";
 
             RequestQueue request = Volley.newRequestQueue(QuestionEditActivity.this);
             StringRequest query = new StringRequest(Request.Method.POST, CREATE_URL,
@@ -197,7 +197,7 @@ public class QuestionEditActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String CREATE_URL = "http://exams-online.online/delete_question.php";
+            final String CREATE_URL = "http://exams-online.000webhostapp.com/delete_question.php";
 
             final RequestQueue request = Volley.newRequestQueue(QuestionEditActivity.this);
             StringRequest query = new StringRequest(Request.Method.POST, CREATE_URL,

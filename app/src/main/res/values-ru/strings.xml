@@ -123,4 +123,7 @@
     <string name="exams">Exams</string>
     <string name="full_name">Full Name</string>
     <string name="email">Email</string>
+    <string name="teacher_updated">The teacher successfully updated</string>
+    <string name="teacher_deleted">The teacher successfully deleted</string>
+    <string name="group_added">Group successfully added</string>
 </resources>

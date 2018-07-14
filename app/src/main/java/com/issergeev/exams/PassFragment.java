@@ -205,7 +205,7 @@ public class PassFragment extends Fragment {
 
         @Override
         protected Void doInBackground(final String... strings) {
-            final String LOGIN_URL = "http://exams-online.online/save_results.php";
+            final String LOGIN_URL = "http://exams-online.000webhostapp.com/save_results.php";
             final RequestQueue request = Volley.newRequestQueue(getActivity());
             StringRequest query = new StringRequest(Request.Method.POST, LOGIN_URL, new Response.Listener<String>() {
                 @Override

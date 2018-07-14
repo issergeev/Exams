@@ -100,7 +100,7 @@ public class LoginTeacherActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String APPENDIX_URL = "http://exams-online.online/get_appendix_teacher.php";
+            final String APPENDIX_URL = "http://exams-online.000webhostapp.com/get_appendix_teacher.php";
             final RequestQueue request = Volley.newRequestQueue(LoginTeacherActivity.this);
             StringRequest query = new StringRequest(Request.Method.POST, APPENDIX_URL, new Response.Listener<String>() {
                 @Override

@@ -226,7 +226,7 @@ public class RegActivity extends AppCompatActivity implements View.OnLongClickLi
 
         @Override
         protected Void doInBackground(Void... voids) {
-            final String createURL = "http://exams-online.online/add_new_user.php";
+            final String createURL = "http://exams-online.000webhostapp.com/add_new_user.php";
 
             RequestQueue request = Volley.newRequestQueue(RegActivity.this);
             StringRequest query = new StringRequest(Request.Method.POST, createURL, new Response.Listener<String>() {
